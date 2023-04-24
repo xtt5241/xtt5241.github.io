@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>KeyPoint | Xtt的碎碎念</title><meta name="author" content="Xtt"><meta name="copyright" content="Xtt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="只能用全局函数重载：  左移运算符 右移运算符   前置++返回引用，后置++返回值并加const  用new创建对象时要调用构造函数  内联函数在 编译 时将该函数的目标代码插入每个调用此函数的地方  静态成员函数没有this指针引用可以引用变量，但不可以引用常量和表达式  类指针创建时不会调用构造函数  构造函数可以重载，析构函数不能重载  s1&#x3D;s2在初始化和语句中的不同  ex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KeyPoint">
+<meta property="og:url" content="http://xtt5241.github.io/2023/04/24/KeyPoint/index.html">
+<meta property="og:site_name" content="Xtt的碎碎念">
+<meta property="og:description" content="只能用全局函数重载：  左移运算符 右移运算符   前置++返回引用，后置++返回值并加const  用new创建对象时要调用构造函数  内联函数在 编译 时将该函数的目标代码插入每个调用此函数的地方  静态成员函数没有this指针引用可以引用变量，但不可以引用常量和表达式  类指针创建时不会调用构造函数  构造函数可以重载，析构函数不能重载  s1&#x3D;s2在初始化和语句中的不同  ex">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xtt5241.github.io/img/avatar.png">
+<meta property="article:published_time" content="2023-04-24T11:45:55.000Z">
+<meta property="article:modified_time" content="2023-04-24T12:27:49.591Z">
+<meta property="article:author" content="Xtt">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xtt5241.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xtt5241.github.io/2023/04/24/KeyPoint/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'KeyPoint',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-24 20:27:49'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/></div></div><div class="canvas-container" id="canvas"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Xtt的碎碎念"><span class="site-name">Xtt的碎碎念</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">KeyPoint</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-24T11:45:55.000Z" title="发表于 2023-04-24 19:45:55">2023-04-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-24T12:27:49.591Z" title="更新于 2023-04-24 20:27:49">2023-04-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="KeyPoint"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ol>
+<li><p>只能用全局函数重载：</p>
+<ol>
+<li>左移运算符</li>
+<li>右移运算符</li>
+</ol>
+</li>
+<li><p>前置++返回引用，后置++返回值并加const</p>
+</li>
+<li><p>用new创建对象时要调用构造函数</p>
+</li>
+<li><p>内联函数在 编译 时将该函数的目标代码插入每个调用此函数的地方</p>
+</li>
+<li><p>静态成员函数没有this指针<br>引用可以引用变量，但不可以引用常量和表达式</p>
+</li>
+<li><p>类指针创建时不会调用构造函数</p>
+</li>
+<li><p>构造函数可以重载，析构函数不能重载</p>
+</li>
+<li><p>s1&#x3D;s2在初始化和语句中的不同</p>
+</li>
+<li><p>explicit operator double()     (complex类的成员函数，重载double，使其强制转换为double类型)</p>
+<p>类的前置声明</p>
+</li>
+<li><p>const可以作为函数重载的区分</p>
+<p>f()<br>f() const<br>这两个可以重载</p>
+</li>
+<li><p>两个对象之间，互相转换  ——&gt;互相重载<br>1.一个构造函数，一个强制类型转换<br>2.两个都强制类型转换</p>
+</li>
+<li><p>断言 &#x2F;&#x2F;不太好，应该像上级反映报错，一层一层向上，直到main，甚至操作系统<br>assert()&#x3D;&#x3D;if()exit(0)</p>
+</li>
+<li><p>一个类定义中，只要有一个函数模板，这个类就是类模板</p>
+</li>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全局变量（堆） </span></span><br><span class="line"><span class="type">int</span> m;</span><br><span class="line">cin&gt;&gt;m;</span><br><span class="line"><span class="type">int</span> arry[m];<span class="comment">//不行</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//局部变量（栈）</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">cin&gt;&gt;n;</span><br><span class="line"><span class="type">int</span> arry[n];<span class="comment">//可以</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="返回引用和返回值"><a href="#返回引用和返回值" class="headerlink" title="返回引用和返回值"></a>返回引用和返回值</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person <span class="keyword">operator</span>+(Person &amp;p1,Person&amp;p2)</span><br><span class="line">&#123;</span><br><span class="line">    Person temp;</span><br><span class="line">    temp.m_A=p1.m_A+p2.m_A;</span><br><span class="line">    temp.m_B=p1.m_B+p2.m_B;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果返回Person&amp;会怎么样</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">返回引用是对一个临时变量的返回，函数结束后，这个对象被销毁，引用变成空指针，会报错</span><br><span class="line">	所以返回引用要在原有变量的基础上，使用或修改这个变量后，再返回，</span><br><span class="line">	使用场景在重载前置++时，返回引用，可以保证一直修改同一个变量，且可以多次输出、</span><br><span class="line">		ex:++(++a)这是合法的</span><br><span class="line">返回值</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//++a返回的是对象的引用，是可修改的左值</span></span><br><span class="line">++(++a)<span class="comment">//合法</span></span><br><span class="line">(++a)++<span class="comment">//合法</span></span><br><span class="line"><span class="comment">//a++返回的是对象的拷贝，是不可修改的右值</span></span><br><span class="line">++(a++)<span class="comment">//不合法</span></span><br><span class="line">(a++)++<span class="comment">//不合法</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果返回Person&amp;，则返回的是一个临时对象的引用，也就是temp对象的引用，在函数外部使用时，由于这个引用指向的是临时对象，在函数结束后，临时对象会被销毁，这个引用就会变成悬空指针，导致不可预期的结果或错误，所以不建议返回Person&amp;。</p>
+<h1 id="继承中的静态变量处理"><a href="#继承中的静态变量处理" class="headerlink" title="继承中的静态变量处理"></a>继承中的静态变量处理</h1><p>在继承中，静态成员的处理有以下几种情况：</p>
+<ol>
+<li>基类静态成员变量在派生类中仍为基类的静态成员变量。派生类通过类名或者对象名访问基类的静态成员变量时，将直接使用基类的静态成员变量。也就是说，派生类中不会产生一个新的静态成员变量。</li>
+<li>基类静态成员函数在派生类中仍为基类的静态成员函数。派生类通过类名或者对象名调用基类的静态成员函数时，将直接调用基类的静态成员函数。</li>
+<li>派生类中可以定义自己的静态成员变量和静态成员函数。派生类的静态成员变量和静态成员函数与基类的静态成员变量和静态成员函数是相互独立的，它们互不影响。</li>
+<li>如果派生类中定义了与基类同名的静态成员变量或静态成员函数，并且它们的类型也相同，则会隐藏基类的静态成员变量或静态成员函数。这时候，如果想要访问基类的静态成员，可以通过作用域解析运算符(::)来访问。例如，基类中定义了一个静态成员变量a，派生类中也定义了一个同名的静态成员变量a，那么可以通过Base::a来访问基类的静态成员变量a。</li>
+</ol>
+<h1 id="什么是虚继承"><a href="#什么是虚继承" class="headerlink" title="什么是虚继承"></a>什么是虚继承</h1><p>虚继承是C++中的一种继承方式，在多重继承中由于有多个父类，可能会产生二义性或者浪费内存等问题。虚继承可以解决这些问题，避免出现多个父类的同名成员或者重复继承的问题。</p>
+<p>虚继承的语法格式为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span>: <span class="keyword">virtual</span> 访问限制 基类名</span><br></pre></td></tr></table></figure>
+
+<p>在虚继承的语法中，关键词<code>virtual</code>表示虚继承。由于采用虚继承，导致派生类的对象内存中只保留了一份虚基类对象的副本，虚基类子对象的成员在派生类中只保留了一份拷贝，从而避免了多余的存储空间和不必要的复制。</p>
+<p>虚继承的实现原理是：在继承体系中的类继承虚基类时，不会直接继承虚基类的成员，而是继承一个指向虚基类的指针，虚基类的成员只存储在虚基类中，而不是在派生类中。</p>
+<p>需要注意的是，虚继承不能确保消除所有二义性，只是限制了虚基类的访问路径，但在派生类中若存在非虚基类同名成员，则仍会发生二义性。此外，虚继承也可能会带来额外的运行时开销。因此，在使用虚继承时需要注意权衡和考虑实际需要。</p>
+<h1 id="虚基类和抽象类的关系"><a href="#虚基类和抽象类的关系" class="headerlink" title="虚基类和抽象类的关系"></a>虚基类和抽象类的关系</h1><ol>
+<li>虚基类</li>
+</ol>
+<p>虚基类是C++中的一种继承方式，在多重继承中通过使用虚继承可以避免产生二义性或者浪费内存的问题。虚基类是一种抽象的概念，它主要的特点是：</p>
+<ul>
+<li>被虚继承的基类叫做虚基类；</li>
+<li>虚基类在派生类对象中只有一份副本；</li>
+<li>所有对虚基类的访问都通过这个副本进行。</li>
+</ul>
+<ol>
+<li>抽象类</li>
+</ol>
+<p>抽象类是C++中面向对象编程的概念之一，它是一种特殊的类：它不能被实例化，只能用来作为其他类的基类，它的主要特点是：</p>
+<ul>
+<li>包含至少一个纯虚函数的类就是抽象类；</li>
+<li>抽象类不能实例化；</li>
+<li>派生类必须实现基类的纯虚函数才能够实例化。</li>
+</ul>
+<ol>
+<li>关系</li>
+</ol>
+<p>虚基类和抽象类是两个不同的概念，但是在实践中，虚继承经常用于表示一种概念上的抽象关系。比如，在一个抽象类的派生类中，如果多个继承路径上都有相同的基类，我们可以通过虚继承来避免多次继承造成的二义性或者冗余问题。</p>
+<p>因此，虚继承可以被看作一种用于实现抽象类的技术，而抽象类则是一种设计模式，用于实现某种抽象概念。虚继承可以解决多继承中的一些问题，而抽象类则是面向对象编程中的重要概念之一，用于表示一些抽象的概念，可以提高程序的可扩展性和灵活性</p>
+<h1 id="static赋初值"><a href="#static赋初值" class="headerlink" title="static赋初值"></a>static赋初值</h1><p>在C++中，我们可以在定义静态变量或静态成员变量时为其指定初始值。有两种方式可以实现静态变量或静态成员变量的初始化：</p>
+<ol>
+<li>在定义时直接赋值</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line">c++复制代码</span><br></pre></td></tr></table></figure>
+
+<p>这种方式可以直接给静态变量或静态成员变量赋值，不需要再用别的函数或语句去初始化它，比较方便。</p>
+<ol>
+<li>在类外使用作用域解析运算符指定初始值</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> num;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> Example::num = <span class="number">10</span>;</span><br><span class="line">c++复制代码</span><br></pre></td></tr></table></figure>
+
+<p>这种方式可以在类外用作用域解析运算符指定静态成员变量的初始值，也比较方便，不需要再定义静态成员初始化函数了。</p>
+<p>无论哪种方式，只要为静态变量或静态成员变量指定了初始值，就会在程序运行时进行初始化。需要注意的是，静态变量或静态成员变量的初始化只会在程序中出现的第一个实例化对象中进行，在后续实例化对象中不会再次初始化。</p>
+<h2 id="类内可以定义静态成员变量吗"><a href="#类内可以定义静态成员变量吗" class="headerlink" title="类内可以定义静态成员变量吗"></a>类内可以定义静态成员变量吗</h2><p>是的，类内可以定义静态成员变量。在类内部定义的静态成员变量，相当于是一个声明，需要在类外部另行定义并初始化该静态成员变量。</p>
+<p>在类内定义静态成员变量的方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Example</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> num;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> Example::num = <span class="number">0</span>; <span class="comment">// 静态成员变量在类外定义并初始化</span></span><br><span class="line">c++复制代码</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，<code>Example</code>类内定义了一个静态成员变量<code>num</code>，初始值设为0，但是类内不能直接初始化该静态成员变量。需要在类的外部使用类名和作用域解析运算符（::）来定义该静态成员变量，并且需要进行初始化。</p>
+<p>需要注意的是，类内定义静态成员变量时，并不会为该成员变量分配内存空间，只是告诉编译器这个静态成员变量存在，并且在程序执行时需要分配内存空间。需要在类外部定义和初始化该静态成员变量后，才会真正分配内存空间。</p>
+<h2 id="如果在类外定义并初始化了静态成员变量后，分配空间是在编译阶段吗"><a href="#如果在类外定义并初始化了静态成员变量后，分配空间是在编译阶段吗" class="headerlink" title="如果在类外定义并初始化了静态成员变量后，分配空间是在编译阶段吗"></a>如果在类外定义并初始化了静态成员变量后，分配空间是在编译阶段吗</h2><p>不是，在类外定义和初始化了静态成员变量后，分配空间和初始化是在程序的运行阶段进行的。</p>
+<p>一般情况下，编译器会在编译时给静态变量或静态成员变量分配内存空间，但是对于类的静态成员变量来说，所需的内存空间大小可能取决于用户的设定，此时编译器无法预先确定所需要的内存空间大小，因此会在程序运行阶段才为静态成员变量分配内存。</p>
+<p>具体来说，当程序启动时，操作系统为程序分配一块内存，包括了全局变量、全局常量、静态变量、静态常量、代码段等等。在其中，静态变量和静态常量存放在数据段或者BSS段（未初始化的全局变量或静态变量会被存放在这个段中），内存分配和初始化是由运行时库在程序运行时动态完成的。</p>
+<p>所以，即使在类外定义和初始化静态成员变量，程序在运行时仍然需要进行内存分配和初始化。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://xtt5241.github.io">Xtt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://xtt5241.github.io/2023/04/24/KeyPoint/">http://xtt5241.github.io/2023/04/24/KeyPoint/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://xtt5241.github.io" target="_blank">Xtt的碎碎念</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/03/26/StudentManagement/" title="学生管理系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">学生管理系统</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/24/C++/" title="C++"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-24</div><div class="title">C++</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xtt</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog<i class="fas fa-bullhorn card-announcement-animation"></i></div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%BC%95%E7%94%A8%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">1.</span> <span class="toc-text">返回引用和返回值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">继承中的静态变量处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E7%BB%A7%E6%89%BF"><span class="toc-number">3.</span> <span class="toc-text">什么是虚继承</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E5%9F%BA%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.</span> <span class="toc-text">虚基类和抽象类的关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#static%E8%B5%8B%E5%88%9D%E5%80%BC"><span class="toc-number">5.</span> <span class="toc-text">static赋初值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%86%85%E5%8F%AF%E4%BB%A5%E5%AE%9A%E4%B9%89%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%90%97"><span class="toc-number">5.1.</span> <span class="toc-text">类内可以定义静态成员变量吗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E5%9C%A8%E7%B1%BB%E5%A4%96%E5%AE%9A%E4%B9%89%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BA%86%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%90%8E%EF%BC%8C%E5%88%86%E9%85%8D%E7%A9%BA%E9%97%B4%E6%98%AF%E5%9C%A8%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5%E5%90%97"><span class="toc-number">5.2.</span> <span class="toc-text">如果在类外定义并初始化了静态成员变量后，分配空间是在编译阶段吗</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/24/KeyPoint/" title="KeyPoint">KeyPoint</a><time datetime="2023-04-24T11:45:55.000Z" title="发表于 2023-04-24 19:45:55">2023-04-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/26/StudentManagement/" title="学生管理系统">学生管理系统</a><time datetime="2023-03-26T12:15:12.000Z" title="发表于 2023-03-26 20:15:12">2023-03-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/18/DataStructure/" title="DataStructure">DataStructure</a><time datetime="2023-03-18T07:07:23.000Z" title="发表于 2023-03-18 15:07:23">2023-03-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/04/Game01/" title="贪吃蛇">贪吃蛇</a><time datetime="2023-03-04T13:17:49.000Z" title="发表于 2023-03-04 21:17:49">2023-03-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/24/C++/" title="C++">C++</a><time datetime="2023-02-24T14:57:48.000Z" title="发表于 2023-02-24 22:57:48">2023-02-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Xtt</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(\img\1.jpg);"> <a class="categoryBar-list-link" href="categories/学习/">学习</a><span class="categoryBar-list-count">3</span><span class="categoryBar-list-descr">笔记</span></li><li class="categoryBar-list-item" style="background:url(\img\2.jpg);"> <a class="categoryBar-list-link" href="categories/项目/">项目</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">生活</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-20},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
