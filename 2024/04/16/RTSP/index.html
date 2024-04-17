@@ -1,0 +1,701 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>音视频开发 | Xtt的碎碎念</title><meta name="author" content="Xtt"><meta name="copyright" content="Xtt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="音视频开发合集音视频开发成长之路与音视频知识总结_海思支持opus-CSDN博客 2023年音视频开发知识技术合集（基础入门到高级进阶） - 知乎 (zhihu.com)   一文搞懂音视频开发技术点及职业发展方向 - 知乎 (zhihu.com) 华为：岗位职责:1、视频&#x2F;图像编解码:负责H266、H265、SCC、XR编码、AI编码、轻压缩等视频多媒体编解码2、编码传输联动:负责音视">
+<meta property="og:type" content="article">
+<meta property="og:title" content="音视频开发">
+<meta property="og:url" content="http://xtt5241.github.io/2024/04/16/RTSP/index.html">
+<meta property="og:site_name" content="Xtt的碎碎念">
+<meta property="og:description" content="音视频开发合集音视频开发成长之路与音视频知识总结_海思支持opus-CSDN博客 2023年音视频开发知识技术合集（基础入门到高级进阶） - 知乎 (zhihu.com)   一文搞懂音视频开发技术点及职业发展方向 - 知乎 (zhihu.com) 华为：岗位职责:1、视频&#x2F;图像编解码:负责H266、H265、SCC、XR编码、AI编码、轻压缩等视频多媒体编解码2、编码传输联动:负责音视">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xtt5241.github.io/img/avatar.png">
+<meta property="article:published_time" content="2024-04-16T14:57:48.000Z">
+<meta property="article:modified_time" content="2024-04-17T03:06:11.450Z">
+<meta property="article:author" content="Xtt">
+<meta property="article:tag" content="音视频">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xtt5241.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xtt5241.github.io/2024/04/16/RTSP/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '音视频开发',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-17 11:06:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> XTT</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="canvas-container" id="canvas"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Xtt的碎碎念"><span class="site-name">Xtt的碎碎念</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> XTT</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">音视频开发</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-16T14:57:48.000Z" title="发表于 2024-04-16 22:57:48">2024-04-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-17T03:06:11.450Z" title="更新于 2024-04-17 11:06:11">2024-04-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="音视频开发"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="音视频开发合集"><a href="#音视频开发合集" class="headerlink" title="音视频开发合集"></a>音视频开发合集</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011686167/article/details/122464692">音视频开发成长之路与音视频知识总结_海思支持opus-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/656951363">2023年音视频开发知识技术合集（基础入门到高级进阶） - 知乎 (zhihu.com)</a></p>
+<p><img src="/./assets/v2-a8d0de89c0b729f3b104ec58da124537_r.jpg" alt="img"></p>
+<p><img src="/./assets/v2-64fb425624fcdccb3695a8124d4f95d2_r.jpg" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/407959730">一文搞懂音视频开发技术点及职业发展方向 - 知乎 (zhihu.com)</a></p>
+<h1 id="华为："><a href="#华为：" class="headerlink" title="华为："></a>华为：</h1><p>岗位职责:<br>1、视频&#x2F;图像编解码:负责H266、H265、SCC、XR编码、AI编码、轻压缩等视频多媒体编解码<br>2、编码传输联动:负责音视频编码和传输协<br>同、实现端到端体验增强<br>任职要求:<br>1、计算机、软件工程等相关专业，熟悉C、C++编程;<br>2、熟悉视频编解码原理，熟悉H.264、H.265AV1等常见编解码标准:<br>3、有编解码算法优化、视频压缩等相关经验者优先考虑;</p>
+<h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><h2 id="基础-面试"><a href="#基础-面试" class="headerlink" title="基础+面试"></a>基础+面试</h2><p>不用想，看小林就完事了</p>
+<p><a target="_blank" rel="noopener" href="https://xiaolincoding.com/network/3_tcp/tcp_interview.html#%E4%BB%80%E4%B9%88%E6%98%AF-tcp-%E8%BF%9E%E6%8E%A5">4.1 TCP 三次握手与四次挥手面试题 | 小林coding (xiaolincoding.com)</a></p>
+<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p><a href="read://https_blog.csdn.net/?url=https%3A%2F%2Fblog.csdn.net%2Ffuhanghang%2Farticle%2Fdetails%2F114528098">socket技术详解（看清socket编程） (csdn.net)</a></p>
+<p><code>Socket（套接字）</code>是计算机网络编程中的一种通信机制，它允许不同计算机上的程序通过网络进行通信。</p>
+<p>Socket允许客户端和服务器之间在网络上进行数据交换。它通过一种类似于文件I&#x2F;O的方式，提供了一种通用的编程接口，使得开发者可以方便地在网络上发送和接收数据。</p>
+<p>在Socket编程中，有两种常用的通信模式：</p>
+<ul>
+<li>TCP（传输控制协议）和UDP（用户数据报协议）。</li>
+<li>TCP提供可靠的、面向连接的通信服务，数据传输过程中会进行差错检测和重传；</li>
+</ul>
+<p>而UDP则是一种无连接的通信服务，它更加轻量级，适用于一些实时性要求较高、对数据完整性要求不那么严格的场景。</p>
+<p>Socket编程在网络应用开发中非常常见，它可以用于构建各种类型的网络应用，包括Web服务器、聊天程序、游戏服务器等。</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1><h3 id="OSI和TCP-x2F-IP对比"><a href="#OSI和TCP-x2F-IP对比" class="headerlink" title="OSI和TCP&#x2F;IP对比"></a>OSI和TCP&#x2F;IP对比</h3><p><img src="/./assets/v2-c29b86bf577e18f4c94bef7b84d590e9_r.jpg" alt="img"></p>
+<h3 id="Socker层位置"><a href="#Socker层位置" class="headerlink" title="Socker层位置"></a>Socker层位置</h3><p> <img src="/./assets/Center-1713247324141-11.png" alt="img"></p>
+<p>在tcp&#x2F;ip协议中，tcp通过三次握手建立起一个tcp的链接，大致如下：</p>
+<ul>
+<li>第一次握手：客户端尝试连接服务器，向服务器发送syn包，syn&#x3D;j，客户端进入SYN_SEND状态等待服务器确认。</li>
+<li>第二次握手：服务器接收客户端syn包并确认（ack&#x3D;j+1），同时向客户端发送一个SYN包（syn&#x3D;k），即SYN+ACK包，此时服务器进入SYN_RECV状态。</li>
+<li>第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack&#x3D;k+1），此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</li>
+</ul>
+<p><img src="/./assets/Center-1713247838207-22.jpeg" alt="img"></p>
+<p>根据tcp的三次握手，socket也定义了三次握手，也许是参考tcp的三次握手，一些计算机大神们画出了socket的三次握手的模型图</p>
+<p><img src="/./assets/Center-1713247854498-25.png" alt="img"></p>
+<h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span>              </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//SOCKET前的一些检查，检查协议库的版本，为了避免别的版本的socket，并且通过</span></span><br><span class="line">	<span class="comment">//WSAStartup启动对应的版本，WSAStartup的参数一个是版本信息，一个是一些详细的细节，注意高低位</span></span><br><span class="line">	<span class="comment">//WSAStartup与WSACleanup对应</span></span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	WORD versionRequired;</span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">	versionRequired=<span class="built_in">MAKEWORD</span>(<span class="number">1</span>,<span class="number">1</span>);     </span><br><span class="line">	err=<span class="built_in">WSAStartup</span>(versionRequired,&amp;wsaData);<span class="comment">//协议库的版本信息</span></span><br><span class="line"> </span><br><span class="line">	<span class="comment">//通过WSACleanup的返回值来确定socket协议是否启动</span></span><br><span class="line">	<span class="keyword">if</span> (!err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;客户端嵌套字已经打开!\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;客户端的嵌套字打开失败!\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//结束</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//创建socket这个关键词，这里想一下那个图形中的socket抽象层</span></span><br><span class="line">	<span class="comment">//注意socket这个函数，他三个参数定义了socket的所处的系统，socket的类型，以及一些其他信息</span></span><br><span class="line">	SOCKET clientSocket=<span class="built_in">socket</span>(AF_INET,SOCK_STREAM,<span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//socket编程中，它定义了一个结构体SOCKADDR_IN来存计算机的一些信息，像socket的系统，</span></span><br><span class="line">	<span class="comment">//端口号，ip地址等信息，这里存储的是服务器端的计算机的信息</span></span><br><span class="line">	SOCKADDR_IN clientsock_in;</span><br><span class="line">	clientsock_in.sin_addr.S_un.S_addr=<span class="built_in">inet_addr</span>(<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">	clientsock_in.sin_family=AF_INET;</span><br><span class="line">	clientsock_in.sin_port=<span class="built_in">htons</span>(<span class="number">6000</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//前期定义了套接字，定义了服务器端的计算机的一些信息存储在clientsock_in中，</span></span><br><span class="line">	<span class="comment">//准备工作完成后，然后开始将这个套接字链接到远程的计算机</span></span><br><span class="line">	<span class="comment">//也就是第一次握手</span></span><br><span class="line"> </span><br><span class="line">	<span class="built_in">connect</span>(clientSocket,(SOCKADDR*)&amp;clientsock_in,<span class="built_in">sizeof</span>(SOCKADDR));<span class="comment">//开始连接</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">	<span class="type">char</span> receiveBuf[<span class="number">100</span>];</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//解释socket里面的内容</span></span><br><span class="line">	<span class="built_in">recv</span>(clientSocket,receiveBuf,<span class="number">101</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,receiveBuf);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//发送socket数据</span></span><br><span class="line">	<span class="built_in">send</span>(clientSocket,<span class="string">&quot;hello,this is client&quot;</span>,<span class="built_in">strlen</span>(<span class="string">&quot;hello,this is client&quot;</span>)+<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//关闭套接字</span></span><br><span class="line">	<span class="built_in">closesocket</span>(clientSocket);</span><br><span class="line">	<span class="comment">//关闭服务</span></span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="服务端代码"><a href="#服务端代码" class="headerlink" title="服务端代码"></a>服务端代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">       <span class="comment">//创建套接字，socket前的一些检查工作，包括服务的启动</span></span><br><span class="line">       WORD myVersionRequest;</span><br><span class="line">       WSADATA wsaData;</span><br><span class="line">       myVersionRequest=<span class="built_in">MAKEWORD</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">       <span class="type">int</span> err;</span><br><span class="line">       err=<span class="built_in">WSAStartup</span>(myVersionRequest,&amp;wsaData);</span><br><span class="line">       <span class="keyword">if</span> (!err)</span><br><span class="line">       &#123;</span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;已打开套接字\n&quot;</span>);            </span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">       &#123;</span><br><span class="line">              <span class="comment">//进一步绑定套接字</span></span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;嵌套字未打开!&quot;</span>);</span><br><span class="line">              <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       SOCKET serSocket=<span class="built_in">socket</span>(AF_INET,SOCK_STREAM,<span class="number">0</span>);<span class="comment">//创建了可识别套接字</span></span><br><span class="line">       <span class="comment">//需要绑定的参数，主要是本地的socket的一些信息。</span></span><br><span class="line">       SOCKADDR_IN addr;</span><br><span class="line">       addr.sin_family=AF_INET;</span><br><span class="line">       addr.sin_addr.S_un.S_addr=<span class="built_in">htonl</span>(INADDR_ANY);<span class="comment">//ip地址</span></span><br><span class="line">       addr.sin_port=<span class="built_in">htons</span>(<span class="number">6000</span>);<span class="comment">//绑定端口</span></span><br><span class="line"> </span><br><span class="line">       <span class="built_in">bind</span>(serSocket,(SOCKADDR*)&amp;addr,<span class="built_in">sizeof</span>(SOCKADDR));<span class="comment">//绑定完成</span></span><br><span class="line">       <span class="built_in">listen</span>(serSocket,<span class="number">5</span>);<span class="comment">//其中第二个参数代表能够接收的最多的连接数</span></span><br><span class="line"> </span><br><span class="line">       SOCKADDR_IN clientsocket;</span><br><span class="line">       <span class="type">int</span> len=<span class="built_in">sizeof</span>(SOCKADDR);</span><br><span class="line">       <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">       &#123;</span><br><span class="line">	      <span class="comment">//第二次握手，通过accept来接受对方的套接字的信息</span></span><br><span class="line">              SOCKET serConn=<span class="built_in">accept</span>(serSocket,(SOCKADDR*)&amp;clientsocket,&amp;len);<span class="comment">//如果这里不是accept而是conection的话。。就会不断的监听</span></span><br><span class="line">              <span class="type">char</span> sendBuf[<span class="number">100</span>];</span><br><span class="line">              <span class="built_in">sprintf</span>(sendBuf,<span class="string">&quot;welcome %s to bejing&quot;</span>,<span class="built_in">inet_ntoa</span>(clientsocket.sin_addr));<span class="comment">//找对对应的IP并且将这行字打印到那里</span></span><br><span class="line">              <span class="comment">//发送信息</span></span><br><span class="line">	      <span class="built_in">send</span>(serConn,sendBuf,<span class="built_in">strlen</span>(sendBuf)+<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">              <span class="type">char</span> receiveBuf[<span class="number">100</span>];<span class="comment">//接收</span></span><br><span class="line">              <span class="built_in">recv</span>(serConn,receiveBuf,<span class="built_in">strlen</span>(receiveBuf)+<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,receiveBuf);</span><br><span class="line">              <span class="built_in">closesocket</span>(serConn);<span class="comment">//关闭</span></span><br><span class="line">              <span class="built_in">WSACleanup</span>();<span class="comment">//释放资源的操作</span></span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><p><strong>服务器端：</strong></p>
+<p>其过程是<strong>首先服务器方要先启动</strong>，并根据请求提供相应服务：</p>
+<p>（1）打开一通信通道并告知本地主机，它愿意在某一公认地址上的某端口（如FTP的端口可能为21）接收客户请求；</p>
+<p>（2）等待客户请求到达该端口；</p>
+<p>（3）接收到客户端的服务请求时，处理该请求并发送应答信号。接收到并发服务请求，要激活一新进程来处理这个客户请求（如UNIX系统中用fork、exec）。新进程处理此客户请求，并不需要对其它请求作出应答。服务完成后，关闭此新进程与客户的通信链路，并终止。</p>
+<p>（4）返回第（2）步，等待另一客户请求。</p>
+<p>（5）关闭服务器</p>
+<p><strong>客户端：</strong></p>
+<p>（1）打开一通信通道，并连接到服务器所在主机的特定端口；</p>
+<p>（2）向服务器发服务请求报文，等待并接收应答；继续提出请求……</p>
+<p>（3）请求结束后关闭通信通道并终止。</p>
+<p><strong>从上面所描述过程可知：</strong></p>
+<p>（1）客户与服务器进程的作用是非对称的，因此代码不同。</p>
+<p>（2）服务器进程一般是先启动的。只要系统运行，该服务进程一直存在，直到正常或强迫终止。</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><h4 id="创建套接字──socket"><a href="#创建套接字──socket" class="headerlink" title="创建套接字──socket()"></a><strong>创建套接字──socket()</strong></h4><p>应用程序在使用套接字前，首先必须拥有一个套接字，系统调用socket()向应用程序提供创建套接字的手段，其调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SOCKET PASCAL FAR <span class="title">socket</span><span class="params">(<span class="type">int</span> af, <span class="type">int</span> type, <span class="type">int</span> protocol)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>该调用要接收三个参数：af、type、protocol。</p>
+<p><strong>参数</strong></p>
+<p><code>af</code>指定通信发生的区域：AF_UNIX、AF_INET、AF_NS等，而DOS、WINDOWS中仅支持AF_INET，它是网际网区域。因此，地址族与协议族相同。</p>
+<p><code>type</code> 描述要建立的套接字的类型。这里分三种：</p>
+<p>（1）一是TCP流式套接字(SOCK_STREAM)提供了一个面向连接、可靠的数据传输服务，数据无差错、无重复地发送，且按发送顺序接收。内设流量控制，避免数据流超限；数据被看作是字节流，无长度限制。文件传送协议（FTP）即使用流式套接字。</p>
+<p>（2）二是数据报式套接字(SOCK_DGRAM)提供了一个无连接服务。数据包以独立包形式被发送，不提供无错保证，数据可能丢失或重复，并且接收顺序混乱。网络文件系统（NFS）使用数据报式套接字。</p>
+<p>（3）三是原始式套接字(SOCK_RAW)该接口允许对较低层协议，如IP、ICMP直接访问。常用于检验新的协议实现或访问现有服务中配置的新设备。</p>
+<p><code>protocol</code>说明该套接字使用的特定协议，如果调用者不希望特别指定使用的协议，则置为0，使用默认的连接模式。</p>
+<p><strong>返回</strong></p>
+<p>根据这三个参数建立一个套接字，并将相应的资源分配给它，同时返回一个整型套接字号。因此，socket()系统调用实际上指定了相关五元组中的“协议”这一元。</p>
+<h4 id="指定本地地址──bind"><a href="#指定本地地址──bind" class="headerlink" title="指定本地地址──bind()"></a><strong>指定本地地址──bind()</strong></h4><p>当一个套接字用socket()创建后，存在一个名字空间(地址族)，但它没有被命名。bind()将套接字地址（包括本地主机地址和本地端口地址）与所创建的套接字号联系起来，即将名字赋予套接字，以指定本地半相关。其调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">bind</span><span class="params">(SOCKET s, <span class="type">const</span> <span class="keyword">struct</span> sockaddr FAR * name, <span class="type">int</span> namelen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>s</code>是由socket()调用返回的并且未作连接的套接字描述符(套接字号)。</p>
+<p><code>name</code> 是赋给套接字s的本地地址（名字），其长度可变，结构随通信域的不同而不同。</p>
+<p><code>namelen</code>表明了name的长度。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，bind()返回0。否则返回SOCKET_ERROR。</p>
+<h4 id="建立套接字连接──connect-与accept"><a href="#建立套接字连接──connect-与accept" class="headerlink" title="建立套接字连接──connect()与accept()"></a>建立套接字连接──connect()与accept()</h4><p>这两个系统调用用于完成一个完整相关的建立，其中connect()用于建立连接。accept()用于使服务器等待来自某客户进程的实际连接。</p>
+<h5 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">connect</span><span class="params">(SOCKET s, <span class="type">const</span> <span class="keyword">struct</span> sockaddr FAR * name, <span class="type">int</span> namelen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong><br><code>s</code>是欲建立连接的本地套接字描述符。</p>
+<p><code>name</code>指出说明对方套接字地址结构的指针。</p>
+<p><code>namelen</code>指出对方套接字地址长度。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，connect()返回0。否则返回值SOCKET_ERROR。在面向连接的协议中，该调用导致本地系统和外部系统之间连接实际建立。</p>
+<p>由于地址族总被包含在套接字地址结构的前两个字节中，并通过socket()调用与某个协议族相关。因此bind()和connect()无须协议作为参数。</p>
+<h5 id="accept"><a href="#accept" class="headerlink" title="accept()"></a>accept()</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SOCKET PASCAL FAR <span class="title">accept</span><span class="params">(SOCKET s, <span class="keyword">struct</span> sockaddr FAR* addr, <span class="type">int</span> FAR* addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>s</code>为本地套接字描述符，在用做accept()调用的参数前应该先调用过listen()。</p>
+<p><code>addr</code> 指向客户方套接字地址结构的指针，用来接收连接实体的地址。addr的确切格式由套接字创建时建立的地址族决定。</p>
+<p><code>addrlen</code> 为客户方套接字地址的长度（字节数）。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，accept()返回一个SOCKET类型的值，表示接收到的套接字的描述符。否则返回值<code>INVALID_SOCKET</code>。</p>
+<p>accept()用于面向连接服务器。参数addr和addrlen存放客户方的地址信息。</p>
+<p>调用前，参数addr 指向一个初始值为空的地址结构，而addrlen 的初始值为0；</p>
+<p>调用后，服务器等待从编号为s的套接字上接受客户连接请求，而连接请求是由客户方的connect()调用发出的。</p>
+<p>当有连接请求到达时，accept()调用将请求连接队列上的第一个客户方套接字地址及长度放入addr 和addrlen，并创建一个与s有相同特性的新套接字号。</p>
+<p>套接字可用于处理服务器并发请求。</p>
+<p>四个套接字系统调用，socket()、bind()、connect()、accept()，可以完成一个完全五元相关的建立。socket()指定五元组中的协议元，它的用法与是否为客户或服务器、是否面向连接无关。bind()指定五元组中的本地二元，即本地主机地址和端口号，其用法与是否面向连接有关：在服务器方，无论是否面向连接，均要调用bind()，若采用面向连接，则可以不调用bind()，而通过connect()自动完成。若采用无连接，客户方必须使用bind()以获得一个唯一的地址。</p>
+<h4 id="监听连接──listen"><a href="#监听连接──listen" class="headerlink" title="监听连接──listen()"></a>监听连接──listen()</h4><p>此调用用于面向连接服务器，表明它愿意接收连接。listen()需在accept()之前调用，其调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">listen</span><span class="params">(SOCKET s, <span class="type">int</span> backlog)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>s</code>标识一个本地已建立、尚未连接的套接字号，服务器愿意从它上面接收请求。</p>
+<p><code>backlog</code>表示请求连接队列的最大长度，用于限制排队请求的个数，目前允许的最大值为5。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，listen()返回0。否则它返回SOCKET_ERROR。</p>
+<p>listen()在执行调用过程中可为没有调用过bind()的套接字s完成所必须的连接，并建立长度为backlog的请求连接队列。</p>
+<p>调用listen()是服务器接收一个连接请求的四个步骤中的第三步。它在调用socket()分配一个流套接字，且调用bind()给s赋于一个名字之后调用，而且一定要在accept()之前调用。</p>
+<h4 id="数据传输──send-与recv"><a href="#数据传输──send-与recv" class="headerlink" title="数据传输──send()与recv()"></a>数据传输──send()与recv()</h4><p>当一个连接建立以后，就可以传输数据了。常用的系统调用有send()和recv()。</p>
+<h5 id="send"><a href="#send" class="headerlink" title="send()"></a>send()</h5><p>调用用于s指定的已连接的数据报或流套接字上发送输出数据，格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">send</span><span class="params">(SOCKET s, <span class="type">const</span> <span class="type">char</span> FAR *buf, <span class="type">int</span> len, <span class="type">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>s</code>为已连接的本地套接字描述符。</p>
+<p><code>buf</code> 指向存有发送数据的缓冲区的指针，其长度由len 指定。</p>
+<p><code>flags</code> 指定传输控制方式，如是否发送带外数据等。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，send()返回总共发送的字节数。否则它返回SOCKET_ERROR。</p>
+<h5 id="recv"><a href="#recv" class="headerlink" title="recv()"></a>recv()</h5><p>调用用于s指定的已连接的数据报或流套接字上接收输入数据，格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">recv</span><span class="params">(SOCKET s, <span class="type">char</span> FAR *buf, <span class="type">int</span> len, <span class="type">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong><br><code>s</code>为已连接的套接字描述符。</p>
+<p><code>buf</code>指向接收输入数据缓冲区的指针，其长度由len 指定。</p>
+<p><code>flags</code> 指定传输控制方式，如是否接收带外数据等。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，recv()返回总共接收的字节数。如果连接被关闭，返回0。否则它返回SOCKET_ERROR。</p>
+<h4 id="输入-x2F-输出多路复用──select"><a href="#输入-x2F-输出多路复用──select" class="headerlink" title="输入&#x2F;输出多路复用──select()"></a>输入&#x2F;输出多路复用──select()</h4><p>select()调用用来检测一个或多个套接字的状态。对每一个套接字来说，这个调用可以请求读、写或错误状态方面的信息。请求给定状态的套接字集合由一个fd_set结构指示。在返回时，此结构被更新，以反映那些满足特定条件的套接字的子集，同时， select()调用返回满足条件的套接字的数目，其调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">select</span><span class="params">(<span class="type">int</span> nfds, fd_set FAR * readfds, fd_set FAR * writefds, fd_set FAR * exceptfds, <span class="type">const</span> <span class="keyword">struct</span> timeval FAR * timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>nfds</code>指明被检查的套接字描述符的值域，此变量一般被忽略。</p>
+<p><code>readfds</code>指向要做读检测的套接字描述符集合的指针，调用者希望从中读取数据。</p>
+<p><code>writefds</code> 指向要做写检测的套接字描述符集合的指针。</p>
+<p><code>exceptfds</code>指向要检测是否出错的套接字描述符集合的指针。</p>
+<p><code>timeout</code>指向select()函数等待的最大时间，如果设为NULL则为阻塞操作。</p>
+<p><strong>返回</strong></p>
+<p>select()返回包含在fd_set结构中已准备好的套接字描述符的总数目，或者是发生错误则返回SOCKET_ERROR。</p>
+<h4 id="关闭套接字──closesocket"><a href="#关闭套接字──closesocket" class="headerlink" title="关闭套接字──closesocket()"></a>关闭套接字──closesocket()</h4><p>closesocket()关闭套接字s，并释放分配给该套接字的资源；如果s涉及一个打开的TCP连接，则该连接被释放。closesocket()的调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL PASCAL FAR <span class="title">closesocket</span><span class="params">(SOCKET s)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>s</code>待关闭的套接字描述符。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，closesocket()返回0。否则返回值SOCKET_ERROR。</p>
+<h1 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h1><h2 id="零、RTSP"><a href="#零、RTSP" class="headerlink" title="零、RTSP"></a>零、RTSP</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>RTSP是一个实时传输流协议，是一个应用层的协议。通常说的RTSP 包括RTSP协议、RTP协议、RTCP协议，对于这些协议的作用简单的理解如下</p>
+<h4 id="RTSP协议："><a href="#RTSP协议：" class="headerlink" title="RTSP协议："></a>RTSP协议：</h4><p>负责服务器与客户端之间的请求与响应</p>
+<h4 id="RTP协议："><a href="#RTP协议：" class="headerlink" title="RTP协议："></a>RTP协议：</h4><p> 负责服务器与客户端之间传输媒体数据</p>
+<h4 id="RTCP协议："><a href="#RTCP协议：" class="headerlink" title="RTCP协议："></a>RTCP协议：</h4><p>负责提供有关RTP传输质量的反馈，就是确保RTP传输的质量</p>
+<h4 id="三者的关系："><a href="#三者的关系：" class="headerlink" title="三者的关系："></a>三者的关系：</h4><ul>
+<li>RTSP并不会发送媒体数据，只是完成服务器和客户端之间的信令交互</li>
+<li>RTP协议负责媒体数据传输，RTCP负责RTP数据包的监视和反馈。</li>
+<li>RTP和RTCP并没有规定传输层的类型，可以选择udp和tcp。RTSP的传输层则要求是基于TCP。</li>
+</ul>
+<h2 id="一、RTP封装"><a href="#一、RTP封装" class="headerlink" title="一、RTP封装"></a>一、RTP封装</h2><p><img src="/./assets/image-20240415220506025.png" alt="image-20240415220506025"></p>
+<h3 id="RTP头的结构体"><a href="#RTP头的结构体" class="headerlink" title="RTP头的结构体"></a>RTP头的结构体</h3> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">RtpHeader</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* byte 0 */</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint8_t</span> csrcLen : <span class="number">4</span>;<span class="comment">//CSRC计数器，占4位，指示CSRC 标识符的个数。</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint8_t</span> extension : <span class="number">1</span>;<span class="comment">//占1位，如果X=1，则在RTP报头后跟有一个扩展报头。</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint8_t</span> padding : <span class="number">1</span>;<span class="comment">//填充标志，占1位，如果P=1，则在该报文的尾部填充一个或多个额外的八位组，它们不是有效载荷的一部分。</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint8_t</span> version : <span class="number">2</span>;<span class="comment">//RTP协议的版本号，占2位，当前协议版本号为2。</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="comment">/* byte 1 */</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint8_t</span> payloadType : <span class="number">7</span>;<span class="comment">//有效载荷类型，占7位，用于说明RTP报文中有效载荷的类型，如GSM音频、JPEM图像等。</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint8_t</span> marker : <span class="number">1</span>;<span class="comment">//标记，占1位，不同的有效载荷有不同的含义，对于视频，标记一帧的结束；对于音频，标记会话的开始。</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="comment">/* bytes 2,3 */</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint16_t</span> seq;<span class="comment">//占16位，用于标识发送者所发送的RTP报文的序列号，每发送一个报文，序列号增1。接收者通过序列号来检测报文丢失情况，重新排序报文，恢复数据。</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="comment">/* bytes 4-7 */</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint32_t</span> timestamp;<span class="comment">//占32位，时戳反映了该RTP报文的第一个八位组的采样时刻。接收者使用时戳来计算延迟和延迟抖动，并进行同步控制。</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="comment">/* bytes 8-11 */</span></span><br><span class="line"></span><br><span class="line">  <span class="type">uint32_t</span> ssrc;<span class="comment">//占32位，用于标识同步信源。该标识符是随机选择的，参加同一视频会议的两个同步信源不能有相同的SSRC。</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="comment">/*标准的RTP Header 还可能存在 0-15个特约信源(CSRC)标识符</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  每个CSRC标识符占32位，可以有0～15个。每个CSRC标识了包含在该RTP报文有效载荷中的所有特约信源</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="RTP包的结构体"><a href="#RTP包的结构体" class="headerlink" title="RTP包的结构体"></a>RTP包的结构体</h3> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">RtpPacket</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">RtpHeader</span> rtpHeader;</span><br><span class="line"></span><br><span class="line">  <span class="type">uint8_t</span> payload[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 包含一个RTP头部和RTP载荷</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="二、H-264结构"><a href="#二、H-264结构" class="headerlink" title="二、H.264结构"></a>二、H.264结构</h2><p>H.264由一个一个的NALU组成，每个NALU之间使用<code>00 00 00 01</code>或<code>00 00 01</code>分隔开，每个NALU的第一次字节都有特殊的含义,</p>
+<h3 id="两层功能"><a href="#两层功能" class="headerlink" title="两层功能"></a>两层功能</h3><h5 id="VCL"><a href="#VCL" class="headerlink" title="VCL"></a><code>VCL</code></h5><p>(Video Codeing Layer)：视频编码层，负责的是视频内容的处理，重点在编解码算法；</p>
+<h5 id="NAL"><a href="#NAL" class="headerlink" title="NAL"></a><code>NAL</code></h5><p>(Network Abstraction Layer)：网络抽象层，负责将编码后的数据以网络要求的格式进行打包和传输；</p>
+<p><img src="/./assets/image-20240415220528859.png" alt="image-20240415220528859"><img src="/./assets/image-20240415220535041.png" alt="image-20240415220535041"></p>
+<ul>
+<li>F(forbiden):禁止位，占用NAL头的第一个位，当禁止位值为1时表示语法错误；</li>
+<li>NRI:参考级别，占用NAL头的第二到第三个位；值越大，该NAL越重要。</li>
+<li>Type:Nal单元数据类型，也就是标识该NAL单元的数据类型是哪种，占用NAL头的第四到第8个位；</li>
+</ul>
+<h2 id="三、常用Nalu-type："><a href="#三、常用Nalu-type：" class="headerlink" title="三、常用Nalu_type："></a>三、常用Nalu_type：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">0x06 (0 00 00110) SEI   type = 6</span><br><span class="line"></span><br><span class="line">0x67 (0 11 00111) SPS   type = 7</span><br><span class="line"></span><br><span class="line">0x68 (0 11 01000) PPS   type = 8</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">0x65 (0 11 00101) IDR   type = 5</span><br><span class="line"></span><br><span class="line">0x65 (0 10 00101) IDR   type = 5</span><br><span class="line"></span><br><span class="line">0x65 (0 01 00101) IDR   type = 5</span><br><span class="line"></span><br><span class="line">0x65 (0 00 00101) IDR   type = 5</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">0x61 (0 11 00001) I帧   type = 1</span><br><span class="line"></span><br><span class="line">0x41 (0 10 00001) P帧   type = 1</span><br><span class="line"></span><br><span class="line">0x01 (0 00 00001) B帧   type = 1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="参数类型"><a href="#参数类型" class="headerlink" title="参数类型"></a>参数类型</h3><h4 id="序列参数集（SPS）"><a href="#序列参数集（SPS）" class="headerlink" title="序列参数集（SPS）"></a>序列参数集（SPS）</h4><p><code>Sequence Paramater Set</code>——<code>序列参数集</code></p>
+<p>SPS中保存了一组编码视频序列(Coded video sequence)的全局参数。所谓的<code>编码视频序列</code>即原始视频的一帧一帧的像素数据经过编码之后的结构组成的序列。而每一帧的编码后数据所依赖的参数保存于图像参数集中。</p>
+<ul>
+<li><strong>视频编码层级（Profile &amp; Level）</strong>：定义了使用哪些编码工具和约束，这影响到解码器必须支持哪些功能。</li>
+<li><strong>图像尺寸和格式</strong>：包括宽度和高度，以及像素的宽高比。</li>
+<li><strong>编码帧序列的方式</strong>：例如帧编码间隔、参考帧的数量等。</li>
+<li><strong>时间尺度和帧率</strong>：定义视频的时间基准和帧的显示时间。</li>
+</ul>
+<h4 id="图像参数集（PPS）"><a href="#图像参数集（PPS）" class="headerlink" title="图像参数集（PPS）"></a>图像参数集（PPS）</h4><p><code>Picture ParamaterSet</code>——<code>图像参数集</code></p>
+<p>图像参数集（PPS）包含了影响单个图像或图像组（GOP，一组连续的帧）的参数，这些参数是解码器在解码具体一组图像时需要用到的。</p>
+<ul>
+<li><strong>熵编码模式</strong>：指定用于编码切片数据的熵编码类型，例如CABAC（上下文自适应二进制算术编码）或CAVLC（上下文自适应变长编码）。</li>
+<li><strong>切片组的配置</strong>：如何将图像分为多个切片，切片可以独立解码。</li>
+<li><strong>权重预测参数</strong>：在预测帧时使用的加权因子，这对于场景转换时的平滑有重要作用。</li>
+<li><strong>去块滤波的设置</strong>：去块滤波有助于减少压缩引起的块状伪影。</li>
+</ul>
+<h4 id="辅助增强信息（SEI）"><a href="#辅助增强信息（SEI）" class="headerlink" title="辅助增强信息（SEI）"></a>辅助增强信息（SEI）</h4><p><code>Supplemental Enhancement Information</code>——<code>辅助增强信息</code></p>
+<p>是H.264和其他视频编解码器中的一种元数据类型，用于在视频流中携带附加信息。SEI主要用于在视频传输和存储过程中提供额外的信息，以增强视频质量、提供额外的控制或者传递一些额外的信息。</p>
+<ol>
+<li><strong>视频参数集（VUI参数集）</strong>：提供有关视频时序信息（如宽高比、色度空间等）的附加信息。</li>
+<li><strong>图像截图</strong>：包含视频中某一时刻的截图图像，用于生成视频预览或者缩略图。</li>
+<li><strong>用户数据</strong>：允许开发者在视频流中插入自定义的数据，用于传递额外的信息，例如版权信息、广告等。</li>
+<li><strong>场景信息</strong>：描述视频中的特定场景，如场景切换、光线变化等。</li>
+<li><strong>错误恢复信息</strong>：提供视频帧丢失或损坏时的错误恢复策略。</li>
+</ol>
+<p>SEI消息通常附加在视频码流中的某些特定位置，例如帧头、片头或GOP（Group of Pictures）头部。接收器在解码视频时可以解析这些SEI消息，并根据其中的信息进行相应的处理。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>一般情况SPS和PPS的NALU通常位于整个码流的<code>起始位置</code>。</p>
+<p>但在某些特殊情况下，在码流中间也可能出现这两种结构，主要原因可能为：</p>
+<ul>
+<li>解码器需要在码流中间开始解码；</li>
+<li>编码器在编码的过程中改变了码流的参数（如图像分辨率等）；</li>
+</ul>
+<p>在做视频播放器时，为了让后续的解码过程可以使用SPS中包含的参数，必须对其中的数据进行解析。</p>
+<h3 id="帧类型"><a href="#帧类型" class="headerlink" title="帧类型"></a>帧类型</h3><h4 id="I帧"><a href="#I帧" class="headerlink" title="I帧"></a>I帧</h4><p>（Intra-coded Picture）</p>
+<ul>
+<li><strong>描述</strong>：I帧是关键帧，也称为帧内编码帧。</li>
+<li><strong>特点</strong>：每个I帧都是独立编码的，不依赖于其他帧。它包含完整的图像信息，通常用于视频的开始或者关键场景。</li>
+<li><strong>优点</strong>：提供了高质量的图像，但文件大小通常比其他类型的帧要大。</li>
+<li><strong>用途</strong>：通常用作视频的开始或者在场景发生较大变化时使用。</li>
+</ul>
+<h4 id="P帧"><a href="#P帧" class="headerlink" title="P帧"></a>P帧</h4><p>（Predictive-coded Picture）</p>
+<ul>
+<li><strong>描述</strong>：P帧是预测编码帧。</li>
+<li><strong>特点</strong>：P帧依赖于之前的I帧或P帧进行编码，通过差异编码来表示图像的变化。</li>
+<li><strong>优点</strong>：相比I帧，P帧的文件大小通常较小。</li>
+<li><strong>用途</strong>：用于表示场景中的运动或者变化。</li>
+</ul>
+<h4 id="B帧"><a href="#B帧" class="headerlink" title="B帧"></a>B帧</h4><p>（Bidirectional-coded Picture）</p>
+<ul>
+<li><strong>描述</strong>：B帧是双向预测编码帧。</li>
+<li><strong>特点</strong>：B帧既依赖于之前的I帧或P帧，也依赖于之后的P帧或I帧。它可以表示两个参考帧之间的运动或变化。</li>
+<li><strong>优点</strong>：通常可以进一步减小文件大小，因为它可以利用前后两个参考帧进行编码。</li>
+<li><strong>用途</strong>：用于表示更复杂的运动或者变化。</li>
+</ul>
+<h4 id="IDR帧"><a href="#IDR帧" class="headerlink" title="IDR帧"></a>IDR帧</h4><p>（Instantaneous Decoding Refresh）</p>
+<ul>
+<li><strong>描述</strong>：IDR帧是关键I帧。</li>
+<li><strong>特点</strong>：IDR帧独立编码，不依赖于之前的任何帧。与普通的I帧相比，IDR帧更加关键，它会刷新解码器的参考图像。</li>
+<li><strong>优点</strong>：提供了一个清晰的参考点，可以用于错误恢复或者随机访问。</li>
+<li><strong>用途</strong>：通常用于关键的场景或者视频的开始，或者用于错误恢复。</li>
+</ul>
+<h2 id="四、H264码流进行RTP封装"><a href="#四、H264码流进行RTP封装" class="headerlink" title="四、H264码流进行RTP封装"></a>四、H264码流进行RTP封装</h2><h3 id="H264的三种RTP打包方式"><a href="#H264的三种RTP打包方式" class="headerlink" title="H264的三种RTP打包方式"></a>H264的三种RTP打包方式</h3><ul>
+<li>单NALU打包： 一个RTP包包含一个完整的NALU</li>
+<li>聚合打包：对于较小的NALU，一个RTP包可包含多个完整的NALU</li>
+<li>分片打包：对于较大的NALU，一个NALU可以分为多个RTP包发送</li>
+</ul>
+<p><strong>注意</strong>：这里要区分好概念，每一个RTP包都包含一个RTP头部和RTP荷载，这是固定的。而H.264发送数据可支持三种RTP打包方式</p>
+<h4 id="单NALU打包"><a href="#单NALU打包" class="headerlink" title="单NALU打包"></a>单NALU打包</h4><p>所谓单NALU打包就是将一整个NALU的数据放入RTP包的载荷中，这是最简单的一种方式。</p>
+<h4 id="分片打包"><a href="#分片打包" class="headerlink" title="分片打包"></a>分片打包</h4><p>RTP有MTU限制，MTU通常小于NALU的大小，所以需要分片打包</p>
+<p>每个RTP包都有大小限制的，因为RTP一般都是使用UDP发送，UDP没有流量控制，所以要限制每一次发送的大小，所以如果一个NALU的太大，就需要分成多个RTP包发送，至于如何分成多个RTP包，如下：</p>
+<h3 id="RTP包结构"><a href="#RTP包结构" class="headerlink" title="RTP包结构"></a>RTP包结构</h3><p>首先要明确，RTP包的格式是绝不会变的，永远多是RTP头+RTP载荷</p>
+<p><img src="/./assets/image-20240415220550312.png" alt="image-20240415220550312"></p>
+<p>RTP头部是固定的，那么只能在RTP载荷中去添加额外信息来说明这个RTP包是表示同一个NALU</p>
+<p>如果是分片打包的话，那么在RTP<strong>载荷</strong>开始有两个字节的信息，然后再是NALU的内容</p>
+<p><img src="/./assets/image-20240415220557612.png" alt="image-20240415220557612"></p>
+<h4 id="RTP载荷"><a href="#RTP载荷" class="headerlink" title="RTP载荷"></a><strong>RTP载荷</strong></h4><h5 id="第一个字节位FU-Indicator"><a href="#第一个字节位FU-Indicator" class="headerlink" title="第一个字节位FU Indicator"></a><strong>第一个字节位</strong><code>FU Indicator</code></h5><p><img src="/./assets/image-20240415220608784.png" alt="image-20240415220608784"></p>
+<p>高三位：与NALU第一个字节的高三位相同</p>
+<p>Type：28，表示该RTP包一个分片，为什么是28？因为H.264的规范中定义的，此外还有许多其他Type，这里不详讲</p>
+<h5 id="第二个字节位FU-Header"><a href="#第二个字节位FU-Header" class="headerlink" title="第二个字节位FU Header"></a><strong>第二个字节位</strong><code>FU Header</code></h5><p><img src="/./assets/image-20240415220617951.png" alt="image-20240415220617951"></p>
+<p>S：标记该分片打包的第一个RTP包</p>
+<p>E：比较该分片打包的最后一个RTP包</p>
+<p>Type：NALU的Type</p>
+<h5 id="NALU-Data"><a href="#NALU-Data" class="headerlink" title="NALU_Data"></a>NALU_Data</h5><h1 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/SagKanon/article/details/8248583?ops_request_misc=%7B%22request_id%22:%22171308310516800182169630%22,%22scm%22:%2220140713.130102334.pc_all.%22%7D&request_id=171308310516800182169630&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-8248583-null-null.142%5Ev100%5Epc_search_result_base6&utm_term=6632564&spm=1018.2226.3001.4187">音视频编码_音视频编码 csdn-CSDN博客</a></p>
+<h2 id="一、音频简介"><a href="#一、音频简介" class="headerlink" title="一、音频简介"></a>一、音频简介</h2><p>经常见到这样的描述: 44100HZ 16bit stereo 或者 22050HZ 8bit mono 等等.</p>
+<p>44100HZ 16bit stereo: 每秒钟有 44100 次采样, 采样数据用 16 位(2字节)记录, 双声道(立体声);</p>
+<p>22050HZ 8bit mono: 每秒钟有 22050 次采样, 采样数据用 8 位(1字节)记录, 单声道;</p>
+<p>当然也可以有 16bit 的单声道或 8bit 的立体声, 等等。</p>
+<p>采样率是指：声音信号在“模→数”转换过程中单位时间内采样的次数。采样值是指每一次采样周期内声音模拟信号的积分值。</p>
+<p>对于单声道声音文件，采样数据为八位的短整数（short int 00H-FFH）；</p>
+<p>而对于双声道立体声声音文件，每次采样数据为一个16位的整数（int），高八位(左声道)和低八位(右声道)分别代表两个声道。</p>
+<p>人对频率的识别范围是 20HZ - 20000HZ, 如果每秒钟能对声音做 20000 个采样, 回放时就足可以满足人耳的需求. 所以 22050 的采样频率是常用的, 44100已是CD音质, 超过48000的采样对人耳已经没有意义。这和电影的每秒 24 帧图片的道理差不多。</p>
+<p>每个采样数据记录的是振幅, 采样精度取决于储存空间的大小:</p>
+<p>1 字节(也就是8bit) 只能记录 256 个数, 也就是只能将振幅划分成 256 个等级;</p>
+<p>2 字节(也就是16bit) 可以细到 65536 个数, 这已是 CD 标准了;</p>
+<p>4 字节(也就是32bit) 能把振幅细分到 4294967296 个等级, 实在是没必要了.</p>
+<p>如果是双声道(stereo), 采样就是双份的, 文件也差不多要大一倍.</p>
+<p>这样我们就可以根据一个 wav 文件的大小、采样频率和采样大小估算出一个 wav 文件的播放长度。</p>
+<p>譬如 “Windows XP 启动.wav” 的文件长度是 424,644 字节, 它是 “22050HZ &#x2F; 16bit &#x2F; 立体声” 格式(这可以从其 “属性-&gt;摘要” 里看到),</p>
+<p>那么它的每秒的传输速率(位速, 也叫比特率、取样率)是 22050<em>16</em>2 &#x3D; 705600(bit&#x2F;s), 换算成字节单位就是 705600&#x2F;8 &#x3D; 88200(字节&#x2F;秒),<br>播放时间：424644(总字节数) &#x2F; 88200(每秒字节数) ≈ 4.8145578(秒)。</p>
+<p>但是这还不够精确, 包装标准的 PCM 格式的 WAVE 文件(<em>.wav)中至少带有 42 个字节的头信息, 在计算播放时间时应该将其去掉,<br>所以就有：(424644-42) &#x2F; (22050</em>16*2&#x2F;8) ≈ 4.8140816(秒). 这样就比较精确了.</p>
+<p>关于声音文件还有一个概念: “位速”, 也有叫做比特率、取样率, 譬如上面文件的位速是 705.6kbps 或 705600bps, 其中的 b 是 bit, ps 是每秒的意思;</p>
+<p>压缩的音频文件常常用位速来表示, 譬如达到 CD 音质的 MP3 是: 128kbps &#x2F; 44100HZ.</p>
+<h2 id="二、PCM数据格式"><a href="#二、PCM数据格式" class="headerlink" title="二、PCM数据格式"></a><strong>二、PCM数据格式</strong></h2><p> (Pulse Code Modulation)—— 脉码编码调制。</p>
+<p>PCM中的声音数据没有被压缩，如果是单声道的文件，采样数据按时间的先后顺序依次存入。(它的基本组织单位是BYTE(8bit)或WORD(16bit))</p>
+<p><em><strong>*一般情况下，一帧PCM是由2048次采样组成的*</strong></em>( 参考 <em><a target="_blank" rel="noopener" href="http://discussion.forum.nokia.com/forum/showthread.php?129458-%E8%AF%B7%E9%97%AEPCM%E6%A0%BC%E5%BC%8F%E7%9A%84%E9%9F%B3%E9%A2%91%E6%B5%81%EF%BC%8C%E6%AF%8F%E6%AC%A1%E8%AF%BB%E5%85%A5%E6%88%96%E8%BE%93%E5%87%BA%E7%9A%84%E5%9D%97%E7%9A%84%E5%A4%A7%E5%B0%8F%E6%98%AF%E5%BF%85%E9%A1%BB%E5%9B%BA%E5%AE%9A%E4%B8%BA4096B%E4%B9%88&s=e79e9dd1707157281e3725a163844c49">http://discussion.forum.nokia.com/forum/showthread.php?129458-请问PCM格式的音频流，每次读入或输出的块的大小是必须固定为4096B么&amp;s=e79e9dd1707157281e3725a163844c49</a></em> )。</p>
+<p>如果是双声道的文件，采样数据按时间先后顺序交叉地存入。如图所示:</p>
+<p><img src="/./assets/image-20240415222150721.png" alt="image-20240415222150721"></p>
+<h2 id="三、AAC"><a href="#三、AAC" class="headerlink" title="三、AAC"></a>三、AAC</h2><h3 id="1-两种音频格式："><a href="#1-两种音频格式：" class="headerlink" title="1. 两种音频格式："></a>1. 两种音频格式：</h3><h5 id="ADIF"><a href="#ADIF" class="headerlink" title="ADIF"></a>ADIF</h5><p>(Audio Data Interchage Format)——音视数据传输流</p>
+<p>只有一个统一的头，必须得到所有数据后解码，适用于本地文件。</p>
+<h5 id="ADTS"><a href="#ADTS" class="headerlink" title="ADTS"></a>ADTS</h5><p>(Audio Data Transport Stream)——音视数据传输流</p>
+<p>每一帧都有头信息，任意帧解码，适用于传输流。</p>
+<h3 id="2-原理说明"><a href="#2-原理说明" class="headerlink" title="2. 原理说明"></a>2. 原理说明</h3><p>adts的结构是每一帧都带adts头部，头部后面跟着是aac的原始流（aac es），结构如下：<br><img src="/./assets/062ae6176df749399932c2c35a63fcfa.png" alt="在这里插入图片描述"></p>
+<h3 id="3-ADTS的头结构"><a href="#3-ADTS的头结构" class="headerlink" title="3.ADTS的头结构"></a>3.ADTS的头结构</h3><p>ADTS的头部一共有15个字段，共7字节，如果有校验位则会在尾部增加2字节CRC校验。具体如下：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>字段</th>
+<th>长度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>synword</td>
+<td>12bit</td>
+<td>同步头，总是0xFFF，代表着⼀个ADTS帧的开始。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>id</td>
+<td>1bit</td>
+<td>设置MPEG标识符，1bit，0标识MPEG-4，1标识MPEG-2。</td>
+</tr>
+<tr>
+<td>3</td>
+<td>layer</td>
+<td>2bit</td>
+<td>总是00。</td>
+</tr>
+<tr>
+<td>4</td>
+<td>protection_absent</td>
+<td>1bit</td>
+<td>误码校验，标识是否进行误码校验。0表示有CRC校验，1表示没有CRC校验。为0时头部7bytes后面+2bytesCRC检验位。</td>
+</tr>
+<tr>
+<td>5</td>
+<td>profile</td>
+<td>2bit</td>
+<td>AAC级别，比如AAC LC&#x3D;1。profile的值等于Audio Object Type的值减1。</td>
+</tr>
+<tr>
+<td>6</td>
+<td>sampling_frequency_index</td>
+<td>4bit</td>
+<td>采样率下标，下标对应的采样率如下 。 0: 96000 Hz 1: 88200 Hz 2 : 64000 Hz 3 : 48000 Hz 4 : 44100 Hz 5 : 32000 Hz 6 : 24000 Hz 7 : 22050 Hz 8 : 16000 Hz 9 : 12000 Hz 10 : 11025 Hz 11 : 8000 Hz 12 : 7350 Hz 13 : Reserved 14 : Reserved 15 : frequency is written explictly</td>
+</tr>
+<tr>
+<td>7</td>
+<td>private_bit</td>
+<td>1bit</td>
+<td>私有位，编码时设置为0，解码时忽略。</td>
+</tr>
+<tr>
+<td>8</td>
+<td>channel_configuration</td>
+<td>3bit</td>
+<td>声道数。 0: Defined in AOT Specifc Config 1: 1 channel : front - center 2 : 2 channels : front - left, front - right 3 : 3 channels : front - center, front - left, front - right 4 : 4 channels : front - center, front - left, front - right, back - center 5 : 5 channels : front - center, front - left, front - right, back - left, back - right 6 : 6 channels : front - center, front - left, front - right, back - left, back - right, LFE - channel 7 : 8 channels : front - center, front - left, front - right, side - left, side - right, back - left, back - right, LFE - channel 8 - 15 : Reserved</td>
+</tr>
+<tr>
+<td>9</td>
+<td>orininal_copy</td>
+<td>1bit</td>
+<td>编码时设置为0，解码时忽略。</td>
+</tr>
+<tr>
+<td>10</td>
+<td>home</td>
+<td>1bit</td>
+<td>编码时设置为0，解码时忽略。</td>
+</tr>
+<tr>
+<td>11</td>
+<td>copyrigth_identification_bit</td>
+<td>1bit</td>
+<td>编码时设置为0，解码时忽略。</td>
+</tr>
+<tr>
+<td>12</td>
+<td>copyrigth_identification_stat</td>
+<td>1bit</td>
+<td>编码时设置为0，解码时忽略。</td>
+</tr>
+<tr>
+<td>13</td>
+<td>aac_frame_length</td>
+<td>13bit</td>
+<td>一个ADTS帧的⻓度，包括ADTS头和AAC原始流。</td>
+</tr>
+<tr>
+<td>14</td>
+<td>adts_bufferfullness</td>
+<td>11bit</td>
+<td>缓冲区充满度，0x7FF说明是码率可变的码流，不需要此字段。CBR可能需要此字段，不同编码器使用情况不同。具体查看附录。</td>
+</tr>
+<tr>
+<td>15</td>
+<td>number_of_raw_data_blocks_in_frame</td>
+<td>2bit</td>
+<td>表示ADTS帧中有number_of_raw_data_blocks_in_frame + 1个AAC原始帧，为0表示说ADTS帧中只有一个AAC数据.</td>
+</tr>
+</tbody></table>
+<p>一个具体的例子如下：<br><img src="/./assets/d74fcdbb377241b68ea5e801cf14cb70.png" alt="在这里插入图片描述"><br>上面的数据对应的值如下</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>字段</th>
+<th>长度</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>synword</td>
+<td>12bit</td>
+<td>111111111111</td>
+</tr>
+<tr>
+<td>2</td>
+<td>id</td>
+<td>1bit</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>layer</td>
+<td>2bit</td>
+<td>00</td>
+</tr>
+<tr>
+<td>4</td>
+<td>protection_absent</td>
+<td>1bit</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>profile</td>
+<td>2bit</td>
+<td>01</td>
+</tr>
+<tr>
+<td>6</td>
+<td>sampling_frequency_index</td>
+<td>4bit</td>
+<td>0100（十进制4）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>private_bit</td>
+<td>1bit</td>
+<td>0</td>
+</tr>
+<tr>
+<td>8</td>
+<td>channel_configuration</td>
+<td>3bit</td>
+<td>010 （十进制2）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>orininal_copy</td>
+<td>1bit</td>
+<td>0</td>
+</tr>
+<tr>
+<td>10</td>
+<td>home</td>
+<td>1bit</td>
+<td>0</td>
+</tr>
+<tr>
+<td>11</td>
+<td>copyrigth_identification_bit</td>
+<td>1bit</td>
+<td>0</td>
+</tr>
+<tr>
+<td>12</td>
+<td>copyrigth_identification_stat</td>
+<td>1bit</td>
+<td>0</td>
+</tr>
+<tr>
+<td>13</td>
+<td>aac_frame_length</td>
+<td>13bit</td>
+<td>0000101111100（十进制380）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>adts_bufferfullness</td>
+<td>11bit</td>
+<td>00010010000</td>
+</tr>
+<tr>
+<td>15</td>
+<td>number_of_raw_data_blocks_in_frame</td>
+<td>2bit</td>
+<td>00</td>
+</tr>
+</tbody></table>
+<h4 id="profile"><a href="#profile" class="headerlink" title="profile"></a>profile</h4><p>在ADTS头部中，profile字段用于指示AAC音频的编码配置文件。这个profile字段是两位的，其中第一个位表示主要配置（Main Profile），第二个位表示扩展配置（Extended Profile）。</p>
+<p>这两位的组合可以表示不同的AAC编码配置文件，从而支持不同的音频编码特性和性能。AAC编码器可以选择不同的配置文件来平衡音频质量、压缩效率和设备兼容性。下面是一些常见的AAC配置文件：</p>
+<ol>
+<li>Main Profile (00)：主要配置文件，提供了基本的AAC编码特性，适用于大多数应用场景。</li>
+<li>LC (Low Complexity) Profile (01)：低复杂度配置文件，相比于Main Profile，具有更低的计算复杂度和更高的压缩效率，适合于低功耗设备和带宽受限环境。</li>
+<li>SSR (Scalable Sample Rate) Profile (10)：可扩展采样率配置文件，支持不同的采样率，适用于需要动态调整采样率的场景。</li>
+<li>LTP (Long Term Prediction) Profile (11)：长期预测配置文件，通过长期预测技术提高了编码效率，适合于高质量音频的编码。</li>
+<li>LD (Low Delay) Profile：低延迟配置文件，用于对实时性要求较高的应用，如音视频通话等。</li>
+</ol>
+<p>其他配置文件还包括了针对特定应用场景或者特殊需求的配置，这些配置文件都由对应的profile字段来表示。通过这种方式，AAC可以提供灵活性和扩展性，以满足不同应用场景下的需求。</p>
+<h3 id="4-相关ffmpeg命令"><a href="#4-相关ffmpeg命令" class="headerlink" title="4. 相关ffmpeg命令"></a>4. 相关ffmpeg命令</h3><h5 id="从mp4视频文件提取aac-音频文件"><a href="#从mp4视频文件提取aac-音频文件" class="headerlink" title="从mp4视频文件提取aac 音频文件"></a>从mp4视频文件提取aac 音频文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i test.mp4 -vn -acodec aac test.aac</span><br></pre></td></tr></table></figure>
+
+<p>备注：</p>
+<ul>
+<li><code>-i</code> 表示输入文件 </li>
+<li><code>-vm </code>disable video &#x2F; 丢掉视频</li>
+<li><code>-acodec</code> 设置音频编码格式</li>
+</ul>
+<h5 id="从aac音频文件解码为pcm音频文件"><a href="#从aac音频文件解码为pcm音频文件" class="headerlink" title="从aac音频文件解码为pcm音频文件"></a>从aac音频文件解码为pcm音频文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i test.aac -f s16le test.pcm</span><br></pre></td></tr></table></figure>
+
+<p>备注：</p>
+<p>​	<code>-i</code> 表示输入文件 </p>
+<p>   <code>-f</code> 表示输出格式</p>
+<h5 id="ffplay-播放-pcm音频文件"><a href="#ffplay-播放-pcm音频文件" class="headerlink" title="ffplay 播放.pcm音频文件"></a>ffplay 播放.pcm音频文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffplay -ar 44100 -ac 2 -f s16le -i test.pcm</span><br></pre></td></tr></table></figure>
+
+<p>备注：</p>
+<p>​	<code>-i</code> 表示指定的输入文件</p>
+<p>   <code>-f</code> 表示强制使用的格式</p>
+<p>   <code>-ar</code>表示播放的音频数据的采样率</p>
+<p>   <code>-ac</code> 表示播放的音频数据的通道数</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://xtt5241.github.io">Xtt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://xtt5241.github.io/2024/04/16/RTSP/">http://xtt5241.github.io/2024/04/16/RTSP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://xtt5241.github.io" target="_blank">Xtt的碎碎念</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/07/15/web/" title="前端"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">前端</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xtt</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog<i class="fas fa-bullhorn card-announcement-animation"></i></div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E5%90%88%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">音视频开发合集</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%8E%E4%B8%BA%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">华为：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80-%E9%9D%A2%E8%AF%95"><span class="toc-number">3.1.</span> <span class="toc-text">基础+面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket"><span class="toc-number">3.2.</span> <span class="toc-text">Socket</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">3.2.1.</span> <span class="toc-text">流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TODO"><span class="toc-number">4.</span> <span class="toc-text">TODO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI%E5%92%8CTCP-x2F-IP%E5%AF%B9%E6%AF%94"><span class="toc-number">4.0.1.</span> <span class="toc-text">OSI和TCP&#x2F;IP对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Socker%E5%B1%82%E4%BD%8D%E7%BD%AE"><span class="toc-number">4.0.2.</span> <span class="toc-text">Socker层位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">4.0.3.</span> <span class="toc-text">客户端代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">4.0.4.</span> <span class="toc-text">服务端代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">4.0.5.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-number">4.0.6.</span> <span class="toc-text">API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%A5%97%E6%8E%A5%E5%AD%97%E2%94%80%E2%94%80socket"><span class="toc-number">4.0.6.1.</span> <span class="toc-text">创建套接字──socket()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80%E2%94%80%E2%94%80bind"><span class="toc-number">4.0.6.2.</span> <span class="toc-text">指定本地地址──bind()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%A5%97%E6%8E%A5%E5%AD%97%E8%BF%9E%E6%8E%A5%E2%94%80%E2%94%80connect-%E4%B8%8Eaccept"><span class="toc-number">4.0.6.3.</span> <span class="toc-text">建立套接字连接──connect()与accept()</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#connect"><span class="toc-number">4.0.6.3.1.</span> <span class="toc-text">connect()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#accept"><span class="toc-number">4.0.6.3.2.</span> <span class="toc-text">accept()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E8%BF%9E%E6%8E%A5%E2%94%80%E2%94%80listen"><span class="toc-number">4.0.6.4.</span> <span class="toc-text">监听连接──listen()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E2%94%80%E2%94%80send-%E4%B8%8Erecv"><span class="toc-number">4.0.6.5.</span> <span class="toc-text">数据传输──send()与recv()</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#send"><span class="toc-number">4.0.6.5.1.</span> <span class="toc-text">send()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#recv"><span class="toc-number">4.0.6.5.2.</span> <span class="toc-text">recv()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-x2F-%E8%BE%93%E5%87%BA%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E2%94%80%E2%94%80select"><span class="toc-number">4.0.6.6.</span> <span class="toc-text">输入&#x2F;输出多路复用──select()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E5%A5%97%E6%8E%A5%E5%AD%97%E2%94%80%E2%94%80closesocket"><span class="toc-number">4.0.6.7.</span> <span class="toc-text">关闭套接字──closesocket()</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%86%E9%A2%91"><span class="toc-number">5.</span> <span class="toc-text">视频</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%B6%E3%80%81RTSP"><span class="toc-number">5.1.</span> <span class="toc-text">零、RTSP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">5.1.1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTSP%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">5.1.1.1.</span> <span class="toc-text">RTSP协议：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RTP%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">5.1.1.2.</span> <span class="toc-text">RTP协议：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RTCP%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">5.1.1.3.</span> <span class="toc-text">RTCP协议：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E8%80%85%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-number">5.1.1.4.</span> <span class="toc-text">三者的关系：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81RTP%E5%B0%81%E8%A3%85"><span class="toc-number">5.2.</span> <span class="toc-text">一、RTP封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP%E5%A4%B4%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">5.2.1.</span> <span class="toc-text">RTP头的结构体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP%E5%8C%85%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">5.2.2.</span> <span class="toc-text">RTP包的结构体</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81H-264%E7%BB%93%E6%9E%84"><span class="toc-number">5.3.</span> <span class="toc-text">二、H.264结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E5%B1%82%E5%8A%9F%E8%83%BD"><span class="toc-number">5.3.1.</span> <span class="toc-text">两层功能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#VCL"><span class="toc-number">5.3.1.0.1.</span> <span class="toc-text">VCL</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NAL"><span class="toc-number">5.3.1.0.2.</span> <span class="toc-text">NAL</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%B8%B8%E7%94%A8Nalu-type%EF%BC%9A"><span class="toc-number">5.4.</span> <span class="toc-text">三、常用Nalu_type：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.4.1.</span> <span class="toc-text">参数类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8F%82%E6%95%B0%E9%9B%86%EF%BC%88SPS%EF%BC%89"><span class="toc-number">5.4.1.1.</span> <span class="toc-text">序列参数集（SPS）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%8F%82%E6%95%B0%E9%9B%86%EF%BC%88PPS%EF%BC%89"><span class="toc-number">5.4.1.2.</span> <span class="toc-text">图像参数集（PPS）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%E5%A2%9E%E5%BC%BA%E4%BF%A1%E6%81%AF%EF%BC%88SEI%EF%BC%89"><span class="toc-number">5.4.1.3.</span> <span class="toc-text">辅助增强信息（SEI）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">5.4.1.4.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A7%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.4.2.</span> <span class="toc-text">帧类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#I%E5%B8%A7"><span class="toc-number">5.4.2.1.</span> <span class="toc-text">I帧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P%E5%B8%A7"><span class="toc-number">5.4.2.2.</span> <span class="toc-text">P帧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B%E5%B8%A7"><span class="toc-number">5.4.2.3.</span> <span class="toc-text">B帧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IDR%E5%B8%A7"><span class="toc-number">5.4.2.4.</span> <span class="toc-text">IDR帧</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81H264%E7%A0%81%E6%B5%81%E8%BF%9B%E8%A1%8CRTP%E5%B0%81%E8%A3%85"><span class="toc-number">5.5.</span> <span class="toc-text">四、H264码流进行RTP封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#H264%E7%9A%84%E4%B8%89%E7%A7%8DRTP%E6%89%93%E5%8C%85%E6%96%B9%E5%BC%8F"><span class="toc-number">5.5.1.</span> <span class="toc-text">H264的三种RTP打包方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95NALU%E6%89%93%E5%8C%85"><span class="toc-number">5.5.1.1.</span> <span class="toc-text">单NALU打包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%89%87%E6%89%93%E5%8C%85"><span class="toc-number">5.5.1.2.</span> <span class="toc-text">分片打包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP%E5%8C%85%E7%BB%93%E6%9E%84"><span class="toc-number">5.5.2.</span> <span class="toc-text">RTP包结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTP%E8%BD%BD%E8%8D%B7"><span class="toc-number">5.5.2.1.</span> <span class="toc-text">RTP载荷</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AD%97%E8%8A%82%E4%BD%8DFU-Indicator"><span class="toc-number">5.5.2.1.1.</span> <span class="toc-text">第一个字节位FU Indicator</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%AD%97%E8%8A%82%E4%BD%8DFU-Header"><span class="toc-number">5.5.2.1.2.</span> <span class="toc-text">第二个字节位FU Header</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NALU-Data"><span class="toc-number">5.5.2.1.3.</span> <span class="toc-text">NALU_Data</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91"><span class="toc-number">6.</span> <span class="toc-text">音频</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%9F%B3%E9%A2%91%E7%AE%80%E4%BB%8B"><span class="toc-number">6.1.</span> <span class="toc-text">一、音频简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81PCM%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">6.2.</span> <span class="toc-text">二、PCM数据格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81AAC"><span class="toc-number">6.3.</span> <span class="toc-text">三、AAC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%A4%E7%A7%8D%E9%9F%B3%E9%A2%91%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-number">6.3.1.</span> <span class="toc-text">1. 两种音频格式：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ADIF"><span class="toc-number">6.3.1.0.1.</span> <span class="toc-text">ADIF</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ADTS"><span class="toc-number">6.3.1.0.2.</span> <span class="toc-text">ADTS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8E%9F%E7%90%86%E8%AF%B4%E6%98%8E"><span class="toc-number">6.3.2.</span> <span class="toc-text">2. 原理说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ADTS%E7%9A%84%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="toc-number">6.3.3.</span> <span class="toc-text">3.ADTS的头结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#profile"><span class="toc-number">6.3.3.1.</span> <span class="toc-text">profile</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%9B%B8%E5%85%B3ffmpeg%E5%91%BD%E4%BB%A4"><span class="toc-number">6.3.4.</span> <span class="toc-text">4. 相关ffmpeg命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8Emp4%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E6%8F%90%E5%8F%96aac-%E9%9F%B3%E9%A2%91%E6%96%87%E4%BB%B6"><span class="toc-number">6.3.4.0.1.</span> <span class="toc-text">从mp4视频文件提取aac 音频文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8Eaac%E9%9F%B3%E9%A2%91%E6%96%87%E4%BB%B6%E8%A7%A3%E7%A0%81%E4%B8%BApcm%E9%9F%B3%E9%A2%91%E6%96%87%E4%BB%B6"><span class="toc-number">6.3.4.0.2.</span> <span class="toc-text">从aac音频文件解码为pcm音频文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ffplay-%E6%92%AD%E6%94%BE-pcm%E9%9F%B3%E9%A2%91%E6%96%87%E4%BB%B6"><span class="toc-number">6.3.4.0.3.</span> <span class="toc-text">ffplay 播放.pcm音频文件</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/16/RTSP/" title="音视频开发">音视频开发</a><time datetime="2024-04-16T14:57:48.000Z" title="发表于 2024-04-16 22:57:48">2024-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/15/web/" title="前端">前端</a><time datetime="2023-07-15T14:57:48.000Z" title="发表于 2023-07-15 22:57:48">2023-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/24/KeyPoint/" title="C++KeyPoint">C++KeyPoint</a><time datetime="2023-04-24T11:45:55.000Z" title="发表于 2023-04-24 19:45:55">2023-04-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/26/StudentManagement/" title="学生管理系统">学生管理系统</a><time datetime="2023-03-26T12:15:12.000Z" title="发表于 2023-03-26 20:15:12">2023-03-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/04/Game01/" title="贪吃蛇">贪吃蛇</a><time datetime="2023-03-04T13:17:49.000Z" title="发表于 2023-03-04 21:17:49">2023-03-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Xtt</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(\img\1.jpg);"> <a class="categoryBar-list-link" href="categories/项目/">项目</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">笔记</span></li><li class="categoryBar-list-item" style="background:url(\img\2.jpg);"> <a class="categoryBar-list-link" href="categories/学习/">学习</a><span class="categoryBar-list-count">4</span><span class="categoryBar-list-descr">生活</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-20},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
