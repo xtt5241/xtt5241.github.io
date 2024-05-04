@@ -1,0 +1,676 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>网络编程 | Xtt的碎碎念</title><meta name="author" content="Xtt"><meta name="copyright" content="Xtt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="网络编程基础+面试不用想，看小林就完事了 4.1 TCP 三次握手与四次挥手面试题 | 小林coding (xiaolincoding.com) I&#x2F;O多路复用把一堆需要处理的文件描述符丢给内核，当其中任何一个文件描述符背后的文件具备读写条件时就把这些文件描述符筛选出来处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络编程">
+<meta property="og:url" content="http://xtt5241.github.io/2024/05/01/networkProgramming/index.html">
+<meta property="og:site_name" content="Xtt的碎碎念">
+<meta property="og:description" content="网络编程基础+面试不用想，看小林就完事了 4.1 TCP 三次握手与四次挥手面试题 | 小林coding (xiaolincoding.com) I&#x2F;O多路复用把一堆需要处理的文件描述符丢给内核，当其中任何一个文件描述符背后的文件具备读写条件时就把这些文件描述符筛选出来处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xtt5241.github.io/img/avatar.png">
+<meta property="article:published_time" content="2024-05-01T14:57:48.000Z">
+<meta property="article:modified_time" content="2024-05-04T10:52:22.550Z">
+<meta property="article:author" content="Xtt">
+<meta property="article:tag" content="网络编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xtt5241.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xtt5241.github.io/2024/05/01/networkProgramming/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '网络编程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-04 18:52:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> XTT</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 目录</span></a></div></div></div></div><div class="canvas-container" id="canvas"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Xtt的碎碎念"><span class="site-name">Xtt的碎碎念</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> XTT</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 目录</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">网络编程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-01T14:57:48.000Z" title="发表于 2024-05-01 22:57:48">2024-05-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-04T10:52:22.550Z" title="更新于 2024-05-04 18:52:22">2024-05-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="网络编程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><h2 id="基础-面试"><a href="#基础-面试" class="headerlink" title="基础+面试"></a>基础+面试</h2><p>不用想，看小林就完事了</p>
+<p><a target="_blank" rel="noopener" href="https://xiaolincoding.com/network/3_tcp/tcp_interview.html#%E4%BB%80%E4%B9%88%E6%98%AF-tcp-%E8%BF%9E%E6%8E%A5">4.1 TCP 三次握手与四次挥手面试题 | 小林coding (xiaolincoding.com)</a></p>
+<h2 id="I-x2F-O多路复用"><a href="#I-x2F-O多路复用" class="headerlink" title="I&#x2F;O多路复用"></a>I&#x2F;O多路复用</h2><p>把一堆需要处理的文件描述符丢给内核，当其中任何一个文件描述符背后的文件具备读写条件时就把这些文件描述符筛选出来处理</p>
+<img src="/2024/05/01/networkProgramming/fdf79a14a5ca6992dc136d748fb266e.png" class="" title="fdf79a14a5ca6992dc136d748fb266e">
+
+
+
+<img src="/2024/05/01/networkProgramming/0797276902e0d384b2c718c862f3688.png" class="" title="0797276902e0d384b2c718c862f3688">
+
+
+
+
+
+<img src="/2024/05/01/networkProgramming/a196bc99e025ae782ba0b0a3fcbc106.png" class="" title="a196bc99e025ae782ba0b0a3fcbc106">
+
+
+
+
+
+<img src="/2024/05/01/networkProgramming/bbe7b16ce66ab7c0c631925e5f83e80.png" class="" title="bbe7b16ce66ab7c0c631925e5f83e80">
+
+
+
+<img src="/2024/05/01/networkProgramming/19354ae8db20dd2d1f94b0b9b0d7077.png" class="" title="19354ae8db20dd2d1f94b0b9b0d7077">
+
+
+
+
+
+<img src="/2024/05/01/networkProgramming/1250850615b114397c2ee665c427b4d.png" class="" title="1250850615b114397c2ee665c427b4d">
+
+
+
+
+
+<img src="/2024/05/01/networkProgramming/c6677418256a9b8ef8fc749002f9359.png" class="" title="c6677418256a9b8ef8fc749002f9359">
+
+
+
+
+
+<img src="/2024/05/01/networkProgramming/94de8ad741c3990491a99eb7242dd35.png" class="" title="94de8ad741c3990491a99eb7242dd35">
+
+
+
+<img src="/2024/05/01/networkProgramming/f4fae700fd6546614773168d229ff1d.png" class="" title="f4fae700fd6546614773168d229ff1d">
+
+
+
+
+
+<img src="/2024/05/01/networkProgramming/183105fdd5baf378f000f2bb0690bca.png" class="" title="183105fdd5baf378f000f2bb0690bca">
+
+
+
+<img src="/2024/05/01/networkProgramming/ac894091eeed5616205ed07a6294179.png" class="" title="ac894091eeed5616205ed07a6294179">
+
+
+
+<img src="/2024/05/01/networkProgramming/3e13db1642e402b28a2c3737a5f515c.png" class="" title="3e13db1642e402b28a2c3737a5f515c">
+
+
+
+<img src="/2024/05/01/networkProgramming/7e1e9400aa7a73bd4b106bcfc5f4112.png" class="" title="7e1e9400aa7a73bd4b106bcfc5f4112">
+
+
+
+<img src="/2024/05/01/networkProgramming/image-20240504184436666.png" class="" title="image-20240504184436666">
+
+
+
+<img src="/2024/05/01/networkProgramming/29055496c957c624a261caf3a6900e6.png" class="" title="29055496c957c624a261caf3a6900e6">
+
+
+
+<img src="/2024/05/01/networkProgramming/45a6822d86c3da200eeae511bfac20c.png" class="" title="45a6822d86c3da200eeae511bfac20c">
+
+
+
+<img src="/2024/05/01/networkProgramming/01e1bfd692499993c4931b1b64119fd.png" class="" title="01e1bfd692499993c4931b1b64119fd">
+
+
+
+<img src="/2024/05/01/networkProgramming/56a0e8a596e376161a8b00b3a2e1b4e.png" class="" title="56a0e8a596e376161a8b00b3a2e1b4e">
+
+
+
+
+
+
+
+
+
+<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p><a href="read://https_blog.csdn.net/?url=https%3A%2F%2Fblog.csdn.net%2Ffuhanghang%2Farticle%2Fdetails%2F114528098">socket技术详解（看清socket编程） (csdn.net)</a></p>
+<p><code>Socket（套接字）</code>是计算机networkProgramming中的一种通信机制，它允许不同计算机上的程序通过网络进行通信。</p>
+<p>Socket允许客户端和服务器之间在网络上进行数据交换。它通过一种类似于文件I&#x2F;O的方式，提供了一种通用的编程接口，使得开发者可以方便地在网络上发送和接收数据。</p>
+<p>在Socket编程中，有两种常用的通信模式：</p>
+<ul>
+<li>TCP（传输控制协议）和UDP（用户数据报协议）。</li>
+<li>TCP提供可靠的、面向连接的通信服务，数据传输过程中会进行差错检测和重传；</li>
+</ul>
+<p>而UDP则是一种无连接的通信服务，它更加轻量级，适用于一些实时性要求较高、对数据完整性要求不那么严格的场景。</p>
+<p>Socket编程在网络应用开发中非常常见，它可以用于构建各种类型的网络应用，包括Web服务器、聊天程序、游戏服务器等。</p>
+<h3 id="Winsock"><a href="#Winsock" class="headerlink" title="Winsock"></a>Winsock</h3><p>Winsock（Windows Sockets）库是用于在Microsoft Windows操作系统上进行网络编程的API集合。它提供了一种标准的方法，使开发者能够创建网络应用程序，实现数据传输、通信和网络管理等功能。下面是对Winsock库的详细解释：</p>
+<h4 id="1-发展历史"><a href="#1-发展历史" class="headerlink" title="1. 发展历史"></a>1. 发展历史</h4><ul>
+<li><strong>Winsock 1.0</strong>：于1992年发布，提供了基本的套接字支持，但功能有限。</li>
+<li><strong>Winsock 2.0</strong>：1995年发布，引入了更多功能，包括多线程支持、异步I&#x2F;O和更好的错误处理。</li>
+<li><strong>Winsock 2.2</strong>：也称为Winsock2，是最常用的版本，支持IPv6、Quality of Service（QoS）和安全套接字层（SSL）等功能。</li>
+</ul>
+<h4 id="2-功能特点"><a href="#2-功能特点" class="headerlink" title="2. 功能特点"></a>2. 功能特点</h4><ul>
+<li><strong>套接字（Socket）</strong>：提供了创建、连接、发送和接收数据的接口。</li>
+<li><strong>协议支持</strong>：支持多种网络协议，如TCP、UDP、IP等。</li>
+<li><strong>异步操作</strong>：支持异步I&#x2F;O操作，可提高程序的性能和响应速度。</li>
+<li><strong>多线程支持</strong>：能够在多线程环境下安全地使用，实现并发处理。</li>
+<li><strong>错误处理</strong>：提供了丰富的错误处理机制，便于开发者诊断和修复问题。</li>
+<li><strong>IPv6支持</strong>：能够处理IPv6网络，适应未来网络的发展。</li>
+</ul>
+<h4 id="3-常用函数"><a href="#3-常用函数" class="headerlink" title="3. 常用函数"></a>3. 常用函数</h4><ul>
+<li>**socket()**：创建套接字。</li>
+<li>**bind()**：将套接字绑定到特定的地址和端口。</li>
+<li>**listen()**：开始监听连接请求。</li>
+<li>**accept()**：接受客户端的连接请求。</li>
+<li>**connect()**：与服务器建立连接。</li>
+<li>**send()**和**recv()**：发送和接收数据。</li>
+<li>**closesocket()**：关闭套接字。</li>
+<li>**getaddrinfo()**和**getnameinfo()**：用于地址解析。</li>
+</ul>
+<h4 id="4-使用步骤"><a href="#4-使用步骤" class="headerlink" title="4. 使用步骤"></a>4. 使用步骤</h4><ul>
+<li><strong>初始化</strong>：调用WSAStartup()函数初始化Winsock库。</li>
+<li><strong>创建套接字</strong>：使用socket()函数创建套接字。</li>
+<li><strong>绑定地址</strong>：使用bind()函数将套接字绑定到本地地址和端口。</li>
+<li><strong>监听连接</strong>：如果是服务器，调用listen()函数开始监听连接请求。</li>
+<li><strong>接受连接</strong>：使用accept()函数接受客户端的连接请求。</li>
+<li><strong>发送和接收数据</strong>：使用send()和recv()函数进行数据传输。</li>
+<li><strong>关闭套接字</strong>：使用closesocket()函数关闭套接字。</li>
+<li><strong>清理资源</strong>：在程序结束时调用WSACleanup()函数释放Winsock库所占用的资源。</li>
+</ul>
+<h4 id="5-示例代码"><a href="#5-示例代码" class="headerlink" title="5. 示例代码"></a>5. 示例代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ws2tcpip.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    WSADATA wsaData;</span><br><span class="line">    SOCKET serverSocket;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">sockaddr_in</span> serverAddr;</span><br><span class="line">    <span class="type">int</span> iResult;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Initialize Winsock</span></span><br><span class="line">    iResult = <span class="built_in">WSAStartup</span>(<span class="built_in">MAKEWORD</span>(<span class="number">2</span>,<span class="number">2</span>), &amp;wsaData);</span><br><span class="line">    <span class="keyword">if</span> (iResult != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;WSAStartup failed: %d\n&quot;</span>, iResult);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Create a socket</span></span><br><span class="line">    serverSocket = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line">    <span class="keyword">if</span> (serverSocket == INVALID_SOCKET) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error at socket(): %ld\n&quot;</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">        <span class="built_in">WSACleanup</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Bind the socket</span></span><br><span class="line">    serverAddr.sin_family = AF_INET;</span><br><span class="line">    serverAddr.sin_addr.s_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line">    serverAddr.sin_port = <span class="built_in">htons</span>(<span class="number">27015</span>);</span><br><span class="line">    iResult = <span class="built_in">bind</span>(serverSocket, (<span class="keyword">struct</span> sockaddr*)&amp;serverAddr, <span class="built_in">sizeof</span>(serverAddr));</span><br><span class="line">    <span class="keyword">if</span> (iResult == SOCKET_ERROR) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;bind failed with error: %d\n&quot;</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">        <span class="built_in">closesocket</span>(serverSocket);</span><br><span class="line">        <span class="built_in">WSACleanup</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Listening on the socket</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">listen</span>(serverSocket, SOMAXCONN) == SOCKET_ERROR) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Listen failed with error: %ld\n&quot;</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">        <span class="built_in">closesocket</span>(serverSocket);</span><br><span class="line">        <span class="built_in">WSACleanup</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Server is listening...\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Clean up</span></span><br><span class="line">    <span class="built_in">closesocket</span>(serverSocket);</span><br><span class="line">    <span class="built_in">WSACleanup</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是一个简单的服务器示例，演示了如何使用Winsock库创建一个监听连接的服务器。你可以根据需要修改和扩展这个示例来实现更复杂的网络应用程序。</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>套接字（Socket）是在网络通信中进行数据交换的一种方式，其流程通常包括以下几个步骤：</p>
+<ol>
+<li><p><strong>创建套接字（Socket Creation）</strong>：</p>
+<ul>
+<li>在通信的两端（通常是客户端和服务器端）分别创建套接字。这些套接字可以是基于流（TCP）或数据报（UDP）的，取决于所需的通信方式。</li>
+</ul>
+</li>
+<li><p><strong>绑定地址（Bind）</strong>（可选）：</p>
+<ul>
+<li>服务器端通常需要将套接字与一个特定的地址（IP地址和端口号）绑定在一起，以便客户端能够连接到该地址。客户端通常不需要绑定地址，而是直接连接到服务器。</li>
+</ul>
+</li>
+<li><p><strong>监听连接请求（Listen）</strong>（仅服务器端）：</p>
+<ul>
+<li>服务器端在准备好接受连接之后，调用<code>listen</code>函数开始监听连接请求。此时，服务器进入等待连接的状态。</li>
+</ul>
+</li>
+<li><p><strong>接受连接（Accept）</strong>（仅服务器端）：</p>
+<ul>
+<li>当客户端发送连接请求时，服务器调用<code>accept</code>函数来接受该连接。一旦连接建立成功，服务器会创建一个新的套接字用于与客户端进行通信，并返回该套接字的描述符。</li>
+</ul>
+</li>
+<li><p><strong>发起连接（Connect）</strong>（仅客户端）：</p>
+<ul>
+<li>客户端通过调用<code>connect</code>函数向服务器端发起连接请求。在成功建立连接之后，客户端也会创建一个新的套接字用于与服务器进行通信。</li>
+</ul>
+</li>
+<li><p><strong>数据交换（Data Exchange）</strong>：</p>
+<ul>
+<li>一旦连接建立成功，客户端和服务器端就可以通过各自的套接字进行数据交换。对于基于TCP的通信，数据以流的形式进行传输，保证了数据的顺序和可靠性；而对于基于UDP的通信，数据以数据报的形式进行传输，更加轻量但不保证数据的顺序和可靠性。</li>
+</ul>
+</li>
+<li><p><strong>关闭连接（Close Connection）</strong>：</p>
+<ul>
+<li>当通信结束时，客户端和服务器端分别调用<code>close</code>函数关闭套接字，释放资源并结束通信。</li>
+</ul>
+</li>
+</ol>
+<p>总的来说，套接字的流程包括创建套接字、绑定地址（可选）、监听连接请求（仅服务器端）、接受连接（仅服务器端）、发起连接（仅客户端）、数据交换以及关闭连接。这些步骤构成了网络通信中的基本流程。</p>
+<h3 id="OSI和TCP-x2F-IP对比"><a href="#OSI和TCP-x2F-IP对比" class="headerlink" title="OSI和TCP&#x2F;IP对比"></a>OSI和TCP&#x2F;IP对比</h3><img src="/2024/05/01/networkProgramming/v2-c29b86bf577e18f4c94bef7b84d590e9_r.jpg" class="" title="img">
+
+
+
+
+
+<h3 id="Socker层位置"><a href="#Socker层位置" class="headerlink" title="Socker层位置"></a>Socker层位置</h3> <img src="/2024/05/01/networkProgramming/Center-1713247324141-11.png" class="" title="img">
+
+
+
+<p>在tcp&#x2F;ip协议中，tcp通过三次握手建立起一个tcp的链接，大致如下：</p>
+<ul>
+<li>第一次握手：客户端尝试连接服务器，向服务器发送syn包，syn&#x3D;j，客户端进入SYN_SEND状态等待服务器确认。</li>
+<li>第二次握手：服务器接收客户端syn包并确认（ack&#x3D;j+1），同时向客户端发送一个SYN包（syn&#x3D;k），即SYN+ACK包，此时服务器进入SYN_RECV状态。</li>
+<li>第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack&#x3D;k+1），此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</li>
+</ul>
+<img src="/2024/05/01/networkProgramming/Center-1713247838207-22.jpeg" class="" title="img">
+
+<p>根据tcp的三次握手，socket也定义了三次握手，也许是参考tcp的三次握手，一些计算机大神们画出了socket的三次握手的模型图</p>
+<img src="/2024/05/01/networkProgramming/Center-1713247854498-25.png" class="" title="img">
+
+
+
+<h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span>              </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//SOCKET前的一些检查，检查协议库的版本，为了避免别的版本的socket，并且通过</span></span><br><span class="line">	<span class="comment">//WSAStartup启动对应的版本，WSAStartup的参数一个是版本信息，一个是一些详细的细节，注意高低位</span></span><br><span class="line">	<span class="comment">//WSAStartup与WSACleanup对应</span></span><br><span class="line">	<span class="type">int</span> err;</span><br><span class="line">	WORD versionRequired;</span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">    <span class="comment">// MAKEWORD(1, 1) 是一个宏，用于将两个字节合并成一个字</span></span><br><span class="line">	<span class="comment">// 创建一个 WORD 类型的值，其中高字节是 1，低字节也是 1，即 1.1</span></span><br><span class="line">    <span class="comment">// 如果是MAKEWORD(2, 1)，则2代表高字节，而1代表低字节。组合成了一个WORD类型的值0x0201。</span></span><br><span class="line">	versionRequired=<span class="built_in">MAKEWORD</span>(<span class="number">1</span>,<span class="number">1</span>);     </span><br><span class="line">	err=<span class="built_in">WSAStartup</span>(versionRequired,&amp;wsaData);<span class="comment">//协议库的版本信息</span></span><br><span class="line"> </span><br><span class="line">	<span class="comment">//通过WSACleanup的返回值来确定socket协议是否启动</span></span><br><span class="line">	<span class="keyword">if</span> (!err)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;客户端嵌套字已经打开!\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;客户端的嵌套字打开失败!\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//结束</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//创建socket这个关键词，这里想一下那个图形中的socket抽象层</span></span><br><span class="line">	<span class="comment">//注意socket这个函数，他三个参数定义了socket的所处的系统，socket的类型，以及一些其他信息</span></span><br><span class="line">	SOCKET clientSocket=<span class="built_in">socket</span>(AF_INET,SOCK_STREAM,<span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//socket编程中，它定义了一个结构体SOCKADDR_IN来存计算机的一些信息，像socket的系统，</span></span><br><span class="line">	<span class="comment">//端口号，ip地址等信息，这里存储的是服务器端的计算机的信息</span></span><br><span class="line">	SOCKADDR_IN clientsock_in;</span><br><span class="line">	clientsock_in.sin_addr.S_un.S_addr=<span class="built_in">inet_addr</span>(<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">	clientsock_in.sin_family=AF_INET;</span><br><span class="line">	clientsock_in.sin_port=<span class="built_in">htons</span>(<span class="number">6000</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//前期定义了套接字，定义了服务器端的计算机的一些信息存储在clientsock_in中，</span></span><br><span class="line">	<span class="comment">//准备工作完成后，然后开始将这个套接字链接到远程的计算机</span></span><br><span class="line">	<span class="comment">//也就是第一次握手</span></span><br><span class="line"> </span><br><span class="line">	<span class="built_in">connect</span>(clientSocket,(SOCKADDR*)&amp;clientsock_in,<span class="built_in">sizeof</span>(SOCKADDR));<span class="comment">//开始连接</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">	<span class="type">char</span> receiveBuf[<span class="number">100</span>];</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//解释socket里面的内容</span></span><br><span class="line">	<span class="built_in">recv</span>(clientSocket,receiveBuf,<span class="number">101</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,receiveBuf);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//发送socket数据</span></span><br><span class="line">	<span class="built_in">send</span>(clientSocket,<span class="string">&quot;hello,this is client&quot;</span>,<span class="built_in">strlen</span>(<span class="string">&quot;hello,this is client&quot;</span>)+<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">//关闭套接字</span></span><br><span class="line">	<span class="built_in">closesocket</span>(clientSocket);</span><br><span class="line">	<span class="comment">//关闭服务</span></span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="服务端代码"><a href="#服务端代码" class="headerlink" title="服务端代码"></a>服务端代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">       <span class="comment">//创建套接字，socket前的一些检查工作，包括服务的启动</span></span><br><span class="line">       WORD myVersionRequest;</span><br><span class="line">       WSADATA wsaData;</span><br><span class="line">       myVersionRequest=<span class="built_in">MAKEWORD</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">       <span class="type">int</span> err;</span><br><span class="line">       err=<span class="built_in">WSAStartup</span>(myVersionRequest,&amp;wsaData);</span><br><span class="line">       <span class="keyword">if</span> (!err)</span><br><span class="line">       &#123;</span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;已打开套接字\n&quot;</span>);            </span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">       &#123;</span><br><span class="line">              <span class="comment">//进一步绑定套接字</span></span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;嵌套字未打开!&quot;</span>);</span><br><span class="line">              <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       SOCKET serSocket=<span class="built_in">socket</span>(AF_INET,SOCK_STREAM,<span class="number">0</span>);<span class="comment">//创建了可识别套接字</span></span><br><span class="line">       <span class="comment">//需要绑定的参数，主要是本地的socket的一些信息。</span></span><br><span class="line">       SOCKADDR_IN addr;</span><br><span class="line">       addr.sin_family=AF_INET;</span><br><span class="line">       <span class="comment">//将套接字地址结构中的 IP 地址部分设置为接受任意传入的连接</span></span><br><span class="line">       addr.sin_addr.S_un.S_addr=<span class="built_in">htonl</span>(INADDR_ANY);<span class="comment">//ip地址</span></span><br><span class="line">       <span class="comment">// 则将套接字地址结构中的 IP 地址部分设置为通过点分十进制字符串表示的具体 IP 地址。</span></span><br><span class="line">       <span class="comment">//addr.sin_addr.s_addr = inet_addr(ip); </span></span><br><span class="line">       addr.sin_port=<span class="built_in">htons</span>(<span class="number">6000</span>);<span class="comment">//绑定端口</span></span><br><span class="line"> </span><br><span class="line">       <span class="built_in">bind</span>(serSocket,(SOCKADDR*)&amp;addr,<span class="built_in">sizeof</span>(SOCKADDR));<span class="comment">//绑定完成</span></span><br><span class="line">       <span class="built_in">listen</span>(serSocket,<span class="number">5</span>);<span class="comment">//其中第二个参数代表能够接收的最多的连接数</span></span><br><span class="line"> </span><br><span class="line">       SOCKADDR_IN clientsocket;</span><br><span class="line">       <span class="type">int</span> len=<span class="built_in">sizeof</span>(SOCKADDR);</span><br><span class="line">       <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">       &#123;</span><br><span class="line">	      <span class="comment">//第二次握手，通过accept来接受对方的套接字的信息</span></span><br><span class="line">              SOCKET serConn=<span class="built_in">accept</span>(serSocket,(SOCKADDR*)&amp;clientsocket,&amp;len);<span class="comment">//如果这里不是accept而是conection的话。。就会不断的监听</span></span><br><span class="line">              <span class="type">char</span> sendBuf[<span class="number">100</span>];</span><br><span class="line">              <span class="built_in">sprintf</span>(sendBuf,<span class="string">&quot;welcome %s to bejing&quot;</span>,<span class="built_in">inet_ntoa</span>(clientsocket.sin_addr));<span class="comment">//找对对应的IP并且将这行字打印到那里</span></span><br><span class="line">              <span class="comment">//发送信息</span></span><br><span class="line">	      <span class="built_in">send</span>(serConn,sendBuf,<span class="built_in">strlen</span>(sendBuf)+<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">              <span class="type">char</span> receiveBuf[<span class="number">100</span>];<span class="comment">//接收</span></span><br><span class="line">              <span class="built_in">recv</span>(serConn,receiveBuf,<span class="built_in">strlen</span>(receiveBuf)+<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,receiveBuf);</span><br><span class="line">              <span class="built_in">closesocket</span>(serConn);<span class="comment">//关闭</span></span><br><span class="line">              <span class="built_in">WSACleanup</span>();<span class="comment">//释放资源的操作</span></span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><p><strong>服务器端：</strong></p>
+<p>其过程是<strong>首先服务器方要先启动</strong>，并根据请求提供相应服务：</p>
+<p>（1）打开一通信通道并告知本地主机，它愿意在某一公认地址上的某端口（如FTP的端口可能为21）接收客户请求；</p>
+<p>（2）等待客户请求到达该端口；</p>
+<p>（3）接收到客户端的服务请求时，处理该请求并发送应答信号。接收到并发服务请求，要激活一新进程来处理这个客户请求（如UNIX系统中用fork、exec）。新进程处理此客户请求，并不需要对其它请求作出应答。服务完成后，关闭此新进程与客户的通信链路，并终止。</p>
+<p>（4）返回第（2）步，等待另一客户请求。</p>
+<p>（5）关闭服务器</p>
+<p><strong>客户端：</strong></p>
+<p>（1）打开一通信通道，并连接到服务器所在主机的特定端口；</p>
+<p>（2）向服务器发服务请求报文，等待并接收应答；继续提出请求……</p>
+<p>（3）请求结束后关闭通信通道并终止。</p>
+<p><strong>从上面所描述过程可知：</strong></p>
+<p>（1）客户与服务器进程的作用是非对称的，因此代码不同。</p>
+<p>（2）服务器进程一般是先启动的。只要系统运行，该服务进程一直存在，直到正常或强迫终止。</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><h4 id="创建套接字──socket"><a href="#创建套接字──socket" class="headerlink" title="创建套接字──socket()"></a><strong>创建套接字──socket()</strong></h4><p>应用程序在使用套接字前，首先必须拥有一个套接字，系统调用socket()向应用程序提供创建套接字的手段，其调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SOCKET PASCAL FAR <span class="title">socket</span><span class="params">(<span class="type">int</span> af, <span class="type">int</span> type, <span class="type">int</span> protocol)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>该调用要接收三个参数：af、type、protocol。</p>
+<p><strong>参数</strong></p>
+<p><code>af</code>指定通信发生的区域：AF_UNIX、AF_INET、AF_NS等，而DOS、WINDOWS中仅支持AF_INET，它是网际网区域。因此，地址族与协议族相同。</p>
+<p><code>type</code> 描述要建立的套接字的类型。这里分三种：</p>
+<p>（1）一是TCP流式套接字(SOCK_STREAM)提供了一个面向连接、可靠的数据传输服务，数据无差错、无重复地发送，且按发送顺序接收。内设流量控制，避免数据流超限；数据被看作是字节流，无长度限制。文件传送协议（FTP）即使用流式套接字。</p>
+<p>（2）二是数据报式套接字(SOCK_DGRAM)提供了一个无连接服务。数据包以独立包形式被发送，不提供无错保证，数据可能丢失或重复，并且接收顺序混乱。网络文件系统（NFS）使用数据报式套接字。</p>
+<p>（3）三是原始式套接字(SOCK_RAW)该接口允许对较低层协议，如IP、ICMP直接访问。常用于检验新的协议实现或访问现有服务中配置的新设备。</p>
+<p><code>protocol</code>说明该套接字使用的特定协议，如果调用者不希望特别指定使用的协议，则置为0，使用默认的连接模式。</p>
+<p><strong>返回</strong></p>
+<p>根据这三个参数建立一个套接字，并将相应的资源分配给它，同时返回一个整型套接字号。因此，socket()系统调用实际上指定了相关五元组中的“协议”这一元。</p>
+<h4 id="设置套接字选项——setsockopt"><a href="#设置套接字选项——setsockopt" class="headerlink" title="设置套接字选项——setsockopt()"></a>设置套接字选项——setsockopt()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">setsockopt</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">int</span> level, <span class="type">int</span> optname, <span class="type">const</span> <span class="type">void</span> *optval, <span class="type">socklen_t</span> optlen)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>参数</code></p>
+<ul>
+<li><strong>sockfd</strong>：指定需要设置选项的套接字文件描述符。</li>
+<li><strong>level</strong>：指定选项所在的协议层或者协议族。常见的值包括：<ul>
+<li><strong>SOL_SOCKET</strong>：通用套接字选项，适用于所有套接字类型。</li>
+<li><strong>IPPROTO_TCP</strong>：TCP协议特定选项。</li>
+<li><strong>IPPROTO_IP</strong>：IP协议特定选项。</li>
+<li>其他特定协议的选项层级。</li>
+</ul>
+</li>
+<li><strong>optname</strong>：指定需要设置的选项名称，是一个整数常量。常见的选项名称包括：<ul>
+<li><strong>SO_REUSEADDR</strong>：允许重用地址。</li>
+<li><strong>SO_KEEPALIVE</strong>：启用或禁用保活功能。</li>
+<li><strong>SO_LINGER</strong>：控制close()行为。</li>
+<li><strong>SO_RCVBUF</strong>、<strong>SO_SNDBUF</strong>：设置接收缓冲区和发送缓冲区大小。</li>
+<li>其他协议特定的选项。</li>
+</ul>
+</li>
+<li><strong>optval</strong>：指向包含选项值的缓冲区的指针，类型为void*。选项的值可以是任何类型，通常是一个特定的结构体，根据选项的不同而不同。</li>
+<li><strong>optlen</strong>：指定选项值的长度。</li>
+</ul>
+<p><code>setsockopt()</code>函数的作用是将指定套接字的选项设置为特定的值，以便控制套接字的行为。根据选项的不同，可以控制套接字的重用、保活机制、缓冲区大小等。</p>
+<p>一般来说，<code>setsockopt()</code>函数的返回值为0表示设置成功，-1表示设置失败，具体的错误信息可以通过<code>errno</code>全局变量获取。</p>
+<h4 id="SOCKADDR-IN——定义地址结构体"><a href="#SOCKADDR-IN——定义地址结构体" class="headerlink" title="SOCKADDR_IN——定义地址结构体"></a>SOCKADDR_IN——定义地址结构体</h4><p><code>SOCKADDR_IN</code> 是 Winsock 库中用于表示 IPv4 地址和端口号的结构体，通常用于套接字编程。以下是 <code>SOCKADDR_IN</code> 结构体的成员和用法解释：</p>
+<ol>
+<li><p><strong><code>sin_family</code>：</strong></p>
+<ul>
+<li>表示地址族（Address Family），通常设置为 <code>AF_INET</code>，表示 IPv4 地址族。</li>
+</ul>
+</li>
+<li><p><strong><code>sin_port</code>：</strong></p>
+<ul>
+<li>表示端口号，使用网络字节序（大端字节序）表示，即端口号在存储时采用的字节顺序。</li>
+</ul>
+</li>
+<li><p><strong><code>sin_addr</code>：</strong></p>
+<ul>
+<li>表示 IPv4 地址的结构体，通常包含在 <code>in_addr</code> 结构体中。</li>
+<li><code>sin_addr</code> 中的具体成员根据不同的操作系统和库的实现而有所不同：<ul>
+<li>在 Windows 平台上，通常使用 <code>S_un</code> 联合体来访问 IPv4 地址，具体有 <code>S_addr</code> 和 <code>S_un_b</code> 等成员，用于存储 IP 地址的不同表示形式。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>sin_zero</code>：</strong></p>
+<ul>
+<li>用于填充结构体，使其与 <code>SOCKADDR</code> 结构的大小相同。</li>
+<li>在实际编程中，通常可以将其设置为0，因为它们没有实际意义。</li>
+</ul>
+</li>
+</ol>
+<p>使用 <code>SOCKADDR_IN</code> 结构体时，通常的做法是：</p>
+<ul>
+<li>创建一个 <code>SOCKADDR_IN</code> 结构体对象，并初始化其成员，包括设置地址族、端口号和 IPv4 地址。</li>
+<li>将该结构体传递给套接字相关的函数，如 <code>bind()</code>、<code>connect()</code>、<code>sendto()</code>、<code>recvfrom()</code> 等，以指定套接字的地址信息。</li>
+</ul>
+<p>下面是一个简单的示例代码，演示了如何使用 <code>SOCKADDR_IN</code> 结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ws2tcpip.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    WSADATA wsaData;</span><br><span class="line">    <span class="type">int</span> result = WSAStartup(MAKEWORD(<span class="number">2</span>, <span class="number">2</span>), &amp;wsaData);</span><br><span class="line">    <span class="keyword">if</span> (result != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;WSAStartup failed: %d\n&quot;</span>, result);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个 SOCKADDR_IN 结构体对象，并初始化其成员</span></span><br><span class="line">    SOCKADDR_IN serverAddr;</span><br><span class="line">    serverAddr.sin_family = AF_INET;                    <span class="comment">// IPv4 地址族</span></span><br><span class="line">    serverAddr.sin_port = htons(<span class="number">12345</span>);                 <span class="comment">// 端口号，转换为网络字节序</span></span><br><span class="line">    serverAddr.sin_addr.s_addr = inet_addr(<span class="string">&quot;127.0.0.1&quot;</span>); <span class="comment">// IPv4 地址</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用 serverAddr 连接套接字等操作...</span></span><br><span class="line">    </span><br><span class="line">    WSACleanup(); <span class="comment">// 清理 Winsock 环境</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我们创建了一个 <code>SOCKADDR_IN</code> 结构体对象 <code>serverAddr</code>，并初始化了其成员，然后可以将其传递给 Winsock 相关的函数来使用。</p>
+<h4 id="指定本地地址──bind"><a href="#指定本地地址──bind" class="headerlink" title="指定本地地址──bind()"></a><strong>指定本地地址──bind()</strong></h4><p>当一个套接字用socket()创建后，存在一个名字空间(地址族)，但它没有被命名。bind()将套接字地址（包括本地主机地址和本地端口地址）与所创建的套接字号联系起来，即将名字赋予套接字，以指定本地半相关。其调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">bind</span><span class="params">(SOCKET s, <span class="type">const</span> <span class="keyword">struct</span> sockaddr FAR * name, <span class="type">int</span> namelen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>s</code>是由socket()调用返回的并且未作连接的套接字描述符(套接字号)。</p>
+<p><code>name</code> 是赋给套接字s的本地地址（名字），其长度可变，结构随通信域的不同而不同。</p>
+<p><code>namelen</code>表明了name的长度。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，bind()返回0。否则返回SOCKET_ERROR。</p>
+<h4 id="监听连接──listen"><a href="#监听连接──listen" class="headerlink" title="监听连接──listen()"></a>监听连接──listen()</h4><p>此调用用于面向连接服务器，表明它愿意接收连接。listen()需在accept()之前调用，其调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">listen</span><span class="params">(SOCKET s, <span class="type">int</span> backlog)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>s</code>标识一个本地已建立、尚未连接的套接字号，服务器愿意从它上面接收请求。</p>
+<p><code>backlog</code>表示请求连接队列的最大长度，用于限制排队请求的个数，目前允许的最大值为5。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，listen()返回0。否则它返回SOCKET_ERROR。</p>
+<p>listen()在执行调用过程中可为没有调用过bind()的套接字s完成所必须的连接，并建立长度为backlog的请求连接队列。</p>
+<p>调用listen()是服务器接收一个连接请求的四个步骤中的第三步。它在调用socket()分配一个流套接字，且调用bind()给s赋于一个名字之后调用，而且一定要在accept()之前调用。</p>
+<h4 id="建立套接字连接──connect-与accept"><a href="#建立套接字连接──connect-与accept" class="headerlink" title="建立套接字连接──connect()与accept()"></a>建立套接字连接──connect()与accept()</h4><p>这两个系统调用用于完成一个完整相关的建立，其中connect()用于建立连接。accept()用于使服务器等待来自某客户进程的实际连接。</p>
+<h5 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">connect</span><span class="params">(SOCKET s, <span class="type">const</span> <span class="keyword">struct</span> sockaddr FAR * name, <span class="type">int</span> namelen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong><br><code>s</code>是欲建立连接的本地套接字描述符。</p>
+<p><code>name</code>指出说明对方套接字地址结构的指针。</p>
+<p><code>namelen</code>指出对方套接字地址长度。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，connect()返回0。否则返回值SOCKET_ERROR。在面向连接的协议中，该调用导致本地系统和外部系统之间连接实际建立。</p>
+<p>由于地址族总被包含在套接字地址结构的前两个字节中，并通过socket()调用与某个协议族相关。因此bind()和connect()无须协议作为参数。</p>
+<h5 id="accept"><a href="#accept" class="headerlink" title="accept()"></a>accept()</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SOCKET PASCAL FAR <span class="title">accept</span><span class="params">(SOCKET s, <span class="keyword">struct</span> sockaddr FAR* addr, <span class="type">int</span> FAR* addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>s</code>为本地套接字描述符，在用做accept()调用的参数前应该先调用过listen()。</p>
+<p><code>addr</code> 指向客户方套接字地址结构的指针，用来接收连接实体的地址。addr的确切格式由套接字创建时建立的地址族决定。</p>
+<p><code>addrlen</code> 为客户方套接字地址的长度（字节数）。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，accept()返回一个SOCKET类型的值，表示接收到的套接字的描述符。否则返回值<code>INVALID_SOCKET</code>。</p>
+<p>accept()用于面向连接服务器。参数addr和addrlen存放客户方的地址信息。</p>
+<p>调用前，参数addr 指向一个初始值为空的地址结构，而addrlen 的初始值为0；</p>
+<p>调用后，服务器等待从编号为s的套接字上接受客户连接请求，而连接请求是由客户方的connect()调用发出的。</p>
+<p>当有连接请求到达时，accept()调用将请求连接队列上的第一个客户方套接字地址及长度放入addr 和addrlen，并创建一个与s有相同特性的新套接字号。</p>
+<p>套接字可用于处理服务器并发请求。</p>
+<p>四个套接字系统调用，socket()、bind()、connect()、accept()，可以完成一个完全五元相关的建立。socket()指定五元组中的协议元，它的用法与是否为客户或服务器、是否面向连接无关。bind()指定五元组中的本地二元，即本地主机地址和端口号，其用法与是否面向连接有关：在服务器方，无论是否面向连接，均要调用bind()，若采用面向连接，则可以不调用bind()，而通过connect()自动完成。若采用无连接，客户方必须使用bind()以获得一个唯一的地址。</p>
+<h4 id="数据传输──send-与recv"><a href="#数据传输──send-与recv" class="headerlink" title="数据传输──send()与recv()"></a>数据传输──send()与recv()</h4><p>当一个连接建立以后，就可以传输数据了。常用的系统调用有send()和recv()。</p>
+<h5 id="send"><a href="#send" class="headerlink" title="send()"></a>send()</h5><p>调用用于s指定的已连接的数据报或流套接字上发送输出数据，格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">send</span><span class="params">(SOCKET s, <span class="type">const</span> <span class="type">char</span> FAR *buf, <span class="type">int</span> len, <span class="type">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>s</code>为已连接的本地套接字描述符。</p>
+<p><code>buf</code> 指向存有发送数据的缓冲区的指针，其长度由len 指定。</p>
+<p><code>len</code>指定缓冲区大小</p>
+<p><code>flags</code> 指定传输控制方式，如是否发送带外数据等。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，send()返回总共发送的字节数。否则它返回SOCKET_ERROR。</p>
+<h5 id="recv"><a href="#recv" class="headerlink" title="recv()"></a>recv()</h5><p>调用用于s指定的已连接的数据报或流套接字上接收输入数据，格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">recv</span><span class="params">(SOCKET s, <span class="type">char</span> FAR *buf, <span class="type">int</span> len, <span class="type">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong><br><code>s</code>为已连接的套接字描述符。</p>
+<p><code>buf</code>指向接收输入数据缓冲区的指针，其长度由len 指定。</p>
+<p><code>len</code>指定缓冲区大小</p>
+<p><code>flags</code> 指定传输控制方式，如是否接收带外数据等。通常可以设置为0，表示使用默认行为。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，recv()返回总共接收的字节数。如果连接被关闭，返回0。否则它返回SOCKET_ERROR。</p>
+<h4 id="输入-x2F-输出多路复用──select"><a href="#输入-x2F-输出多路复用──select" class="headerlink" title="输入&#x2F;输出多路复用──select()"></a>输入&#x2F;输出多路复用──select()</h4><p>select()调用用来检测一个或多个套接字的状态。对每一个套接字来说，这个调用可以请求读、写或错误状态方面的信息。请求给定状态的套接字集合由一个fd_set结构指示。在返回时，此结构被更新，以反映那些满足特定条件的套接字的子集，同时， select()调用返回满足条件的套接字的数目，其调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> PASCAL FAR <span class="title">select</span><span class="params">(<span class="type">int</span> nfds, fd_set FAR * readfds, fd_set FAR * writefds, fd_set FAR * exceptfds, <span class="type">const</span> <span class="keyword">struct</span> timeval FAR * timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>nfds</code>指明被检查的套接字描述符的值域，此变量一般被忽略。</p>
+<p><code>readfds</code>指向要做读检测的套接字描述符集合的指针，调用者希望从中读取数据。</p>
+<p><code>writefds</code> 指向要做写检测的套接字描述符集合的指针。</p>
+<p><code>exceptfds</code>指向要检测是否出错的套接字描述符集合的指针。</p>
+<p><code>timeout</code>指向select()函数等待的最大时间，如果设为NULL则为阻塞操作。</p>
+<p><strong>返回</strong></p>
+<p>select()返回包含在fd_set结构中已准备好的套接字描述符的总数目，或者是发生错误则返回SOCKET_ERROR。</p>
+<h4 id="关闭套接字──closesocket"><a href="#关闭套接字──closesocket" class="headerlink" title="关闭套接字──closesocket()"></a>关闭套接字──closesocket()</h4><p>closesocket()关闭套接字s，并释放分配给该套接字的资源；如果s涉及一个打开的TCP连接，则该连接被释放。closesocket()的调用格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL PASCAL FAR <span class="title">closesocket</span><span class="params">(SOCKET s)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<p><code>s</code>待关闭的套接字描述符。</p>
+<p><strong>返回</strong></p>
+<p>如果没有错误发生，closesocket()返回0。否则返回值SOCKET_ERROR。</p>
+<h1 id="IO待整合"><a href="#IO待整合" class="headerlink" title="IO待整合"></a>IO待整合</h1><h1 id="网络-IO-演变发展过程和模型介绍"><a href="#网络-IO-演变发展过程和模型介绍" class="headerlink" title="网络 IO 演变发展过程和模型介绍"></a>网络 IO 演变发展过程和模型介绍</h1><p><img src="https://mmbiz.qlogo.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEcVZF17utSMXAeKssAsWZaHTbS8vRyKuGhfzRL10ZMcRYsPKvKoN81w/0?wx_fmt=jpeg" alt="cover_image"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/j3gficicyOvasIjZpiaTNIPReJVWEJf7UGpmokI3LL4NbQDb8fO48fYROmYPXUhXFN8IdDqPcI1gA6OfSLsQHxB4w/640?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>作者：jaydenwen，腾讯 pcg 后台开发工程师</p>
+<p>在互联网中提起网络，我们都会避免不了讨论高并发、百万连接。而此处的百万连接的实现，脱离不了网络 IO 的选择，因此本文作为一篇个人学习的笔记，特此进行记录一下整个网络 IO 的发展演变过程。以及目前广泛使用的网络模型。</p>
+<h3 id="1-网络-IO-的发展"><a href="#1-网络-IO-的发展" class="headerlink" title="1.网络 IO 的发展"></a>1.网络 IO 的发展</h3><p>在本节内容中，我们将一步一步介绍网络 IO 的演变发展过程。介绍完发展过程后，再对网络 IO 中几组容易混淆的概念进行对比、分析。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HETu42nzJ6nvmrltaxMIlZJdXr2TaY9pPbZoSMASuG5NhCh4sQzIXPDA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="1-1-网络-IO-的各个发展阶段"><a href="#1-1-网络-IO-的各个发展阶段" class="headerlink" title="1.1 网络 IO 的各个发展阶段"></a>1.1 网络 IO 的各个发展阶段</h4><p>通常，我们在此讨论的网络 IO 一般都是针对 linux 操作系统而言。网络 IO 的发展过程是随着 linux 的内核演变而变化，因此网络 IO 大致可以分为如下几个阶段：</p>
+<p><strong>1. 阻塞 IO(BIO)</strong><br><strong>2. 非阻塞 IO(NIO)</strong><br><strong>3. IO 多路复用第一版(select&#x2F;poll)</strong><br><strong>4. IO 多路复用第二版(epoll)</strong><br><strong>5. 异步 IO(AIO)</strong></p>
+<p>而每一个阶段，都是因为当前的网络有一些缺陷，因此又在不断改进该缺陷。这是<strong>网络 IO 一直演变过程中的本质</strong>。下面将对上述几个阶段进行介绍，并对每个阶段的网络 IO 解决了哪些问题、优点、缺点进行剖析。</p>
+<p>1.2 网络的两个阶段</p>
+<p>在网络中，我们通常可以将其广义上划分为以下两个阶段：</p>
+<p><strong>第一阶段：硬件接口到内核态</strong><br><strong>第二阶段：内核态到用户态</strong></p>
+<p>本人理解：我们通常上网，大部分数据都是通过网线传递的。因此对于两台计算机而言，要进行网络通信，其数据都是先从应用程序传递到传输层(TCP&#x2F;UDP)到达内核态，然后再到网络层、数据链路层、物理层，接着数据传递到硬件网卡，最后通过网络传输介质传递到对端机器的网卡，然后再一步一步数据从网卡传递到内核态，最后再拷贝到用户态。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEZDwwibVibDL8RCj0Vhia4xMMbO5FqvRcdIEicjYyjQSpBe4kanbfFbRrRg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="1-3-阻塞-IO-和非阻塞-IO-的区别"><a href="#1-3-阻塞-IO-和非阻塞-IO-的区别" class="headerlink" title="1.3 阻塞 IO 和非阻塞 IO 的区别"></a>1.3 阻塞 IO 和非阻塞 IO 的区别</h4><p>根据 1.2 节的内容，我们可以知道，网络中的数据传输从网络传输介质到达目的机器，需要如上两个阶段。此处我们把从<strong>硬件到内核态</strong>这一阶段，是否发生阻塞等待，可以将网络分为<strong>阻塞 IO</strong>和<strong>非阻塞 IO</strong>。如果用户发起了读写请求，但内核态数据还未准备就绪，该阶段不会阻塞用户操作，内核立马返回，则称为非阻塞 IO。如果该阶段一直阻塞用户操作。直到内核态数据准备就绪，才返回。这种方式称为阻塞 IO。</p>
+<p>因此，区分阻塞 IO 和非阻塞 IO 主要看第一阶段是否阻塞用户操作。</p>
+<h4 id="1-4-同步-IO-和异步-IO-的区别"><a href="#1-4-同步-IO-和异步-IO-的区别" class="headerlink" title="1.4 同步 IO 和异步 IO 的区别"></a>1.4 同步 IO 和异步 IO 的区别</h4><p>从前面我们知道了，数据的传递需要两个阶段，在此处只要任何一个阶段会阻塞用户请求，都将其称为同步 IO，两个阶段都不阻塞，则称为异步 IO。</p>
+<p>在目前所有的操作系统中，linux 中的 epoll、mac 的 kqueue 都属于同步 IO，因为其在第二阶段(数据从内核态到用户态)都会发生拷贝阻塞。而只有 windows 中的 IOCP 才真正属于异步 IO，即 AIO。</p>
+<h3 id="2-阻塞-IO"><a href="#2-阻塞-IO" class="headerlink" title="2.阻塞 IO"></a>2.阻塞 IO</h3><p>在本节，我们将介绍最初的阻塞 IO，阻塞 IO 英文为 blocking IO，又称为 BIO。根据前面的介绍，阻塞 IO 主要指的是第一阶段(硬件网卡到内核态)。</p>
+<h4 id="2-1-阻塞-IO-的概念"><a href="#2-1-阻塞-IO-的概念" class="headerlink" title="2.1 阻塞 IO 的概念"></a>2.1 阻塞 IO 的概念</h4><p>阻塞 IO，顾名思义当用户发生了系统调用后，如果数据未从网卡到达内核态，内核态数据未准备好，此时会一直阻塞。直到数据就绪，然后从内核态拷贝到用户态再返回。具体过程可以参考 2.2 的图示。</p>
+<h4 id="2-2-阻塞-IO-的过程"><a href="#2-2-阻塞-IO-的过程" class="headerlink" title="2.2 阻塞 IO 的过程"></a>2.2 阻塞 IO 的过程</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEGibuyiacHXVXK7gdQ95jEUAwSuy3s6G5v61Tms5R368FXesWOhiajiaq4A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="2-3-阻塞-IO-的缺点"><a href="#2-3-阻塞-IO-的缺点" class="headerlink" title="2.3 阻塞 IO 的缺点"></a>2.3 阻塞 IO 的缺点</h4><p>在一般使用阻塞 IO 时，都需要配置多线程来使用，最常见的模型是<strong>阻塞 IO+多线程</strong>，每个连接一个单独的线程进行处理。</p>
+<p><strong>我们知道，一般一个程序可以开辟的线程是有限的，而且开辟线程的开销也是比较大的。也正是这种方式，会导致一个应用程序可以处理的客户端请求受限。面对百万连接的情况，是无法处理。</strong></p>
+<p>既然发现了问题，分析了问题，那就得解决问题。既然阻塞 IO 有问题，本质是由于其阻塞导致的，因此自然而然引出了下面即将介绍的主角：<strong>非阻塞 IO</strong></p>
+<h3 id="3-非阻塞-IO"><a href="#3-非阻塞-IO" class="headerlink" title="3.非阻塞 IO"></a>3.非阻塞 IO</h3><p>非阻塞 IO 是为了解决前面提到的阻塞 IO 的缺陷而引出的，下面我们将介绍非阻塞 IO 的过程。</p>
+<h4 id="3-1-非阻塞-IO-的概念"><a href="#3-1-非阻塞-IO-的概念" class="headerlink" title="3.1 非阻塞 IO 的概念"></a>3.1 非阻塞 IO 的概念</h4><p>非阻塞 IO：见名知意，就是在第一阶段(网卡-内核态)数据未到达时不等待，然后直接返回。因此非阻塞 IO 需要不断的用户发起请求，询问内核数据好了没，好了没。</p>
+<h4 id="3-2-非阻塞-IO-的过程"><a href="#3-2-非阻塞-IO-的过程" class="headerlink" title="3.2 非阻塞 IO 的过程"></a>3.2 非阻塞 IO 的过程</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HESdhj8nSKbRFuZ6U6GuoT5gnyttj1uic3YcC0LQy2kHC45s3jSC82aXA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>非阻塞 IO 是需要系统内核支持的，在创建了连接后，可以调用 setsockop 设置 noblocking</p>
+<h4 id="3-3-非阻塞-IO-的优点"><a href="#3-3-非阻塞-IO-的优点" class="headerlink" title="3.3 非阻塞 IO 的优点"></a>3.3 非阻塞 IO 的优点</h4><p>正如前面提到的，非阻塞 IO 解决了阻塞 IO<strong>每个连接一个线程处理的问题</strong>，所以其最大的优点就是 <strong>一个线程可以处理多个连接</strong>，这也是其非阻塞决定的。</p>
+<h4 id="3-4-非阻塞-IO-的缺点"><a href="#3-4-非阻塞-IO-的缺点" class="headerlink" title="3.4 非阻塞 IO 的缺点"></a>3.4 非阻塞 IO 的缺点</h4><p>但这种模式，也有一个问题，就是需要用户多次发起系统调用。<strong>频繁的系统调用</strong>是比较消耗系统资源的。</p>
+<p>因此，既然存在这样的问题，那么自然而然我们就需要解决该问题：<strong>保留非阻塞 IO 的优点的前提下，减少系统调用</strong></p>
+<h3 id="4-IO-多路复用第一版"><a href="#4-IO-多路复用第一版" class="headerlink" title="4.IO 多路复用第一版"></a>4.IO 多路复用第一版</h3><p>为了解决非阻塞 IO 存在的频繁的系统调用这个问题，随着内核的发展，出现了 IO 多路复用模型。那么我们就需要搞懂几个问题：</p>
+<ol>
+<li>IO 多路复用到底复用什么？</li>
+<li>IO 多路复用如何复用？</li>
+</ol>
+<p><strong>IO 多路复用：</strong> 很多人都说，IO 多路复用是用一个线程来管理多个网络连接，但本人不太认可，因为在非阻塞 IO 时，就已经可以实现一个线程处理多个网络连接了，这个是由于其非阻塞而决定的。</p>
+<p><strong>在此处，个人观点，多路复用主要复用的是通过有限次的系统调用来实现管理多个网络连接。最简单来说，我目前有 10 个连接，我可以通过一次系统调用将这 10 个连接都丢给内核，让内核告诉我，哪些连接上面数据准备好了，然后我再去读取每个就绪的连接上的数据。因此，IO 多路复用，复用的是系统调用。通过有限次系统调用判断海量连接是否数据准备好了</strong></p>
+<p><strong>无论下面的 select、poll、epoll，其都是这种思想实现的，不过在实现上，select&#x2F;poll 可以看做是第一版，而 epoll 是第二版</strong></p>
+<h4 id="4-1IO-多路复用第一版的概念"><a href="#4-1IO-多路复用第一版的概念" class="headerlink" title="4.1IO 多路复用第一版的概念"></a>4.1IO 多路复用第一版的概念</h4><p><strong>IO 多路复用第一版，这个概念是本人想出来的，主要是方便将 select&#x2F;poll 和 epoll 进行区分</strong></p>
+<p>所以此处 IO 多路复用第一版，主要特指 select 和 poll 这两个。</p>
+<p>select 的 api</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// readfds:关心读的fd集合；writefds：关心写的fd集合；excepttfds：异常的fd集合</span><br><span class="line">int select (int n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>select 函数监视的文件描述符分 3 类，分别是 writefds、readfds、和 exceptfds。调用后 select 函数会阻塞，直到有描述副就绪（有数据 可读、可写、或者有 except），或者超时（timeout 指定等待时间，如果立即返回设为 null 即可），函数返回。当 select 函数返回后，可以 通过遍历 fdset，来找到就绪的描述符。</p>
+</blockquote>
+<blockquote>
+<p>select 目前几乎在所有的平台上支持，其良好跨平台支持也是它的一个优点。select 的一 个缺点在于单个进程能够监视的文件描述符的数量存在最大限制，在 Linux 上一般为 1024，可以通过修改宏定义甚至重新编译内核的方式提升这一限制，但 是这样也会造成效率的降低。</p>
+</blockquote>
+<p>poll 的 api</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int poll (struct pollfd *fds, unsigned int nfds, int timeout);</span><br><span class="line"></span><br><span class="line">struct pollfd &#123;</span><br><span class="line">    int fd; /* file descriptor */</span><br><span class="line">    short events; /* requested events to watch */</span><br><span class="line">    short revents; /* returned events witnessed */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>pollfd 结构包含了要监视的 event 和发生的 event，不再使用 select“参数-值”传递的方式。同时，pollfd 并没有最大数量限制（但是数量过大后性能也是会下降）。和 select 函数一样，poll 返回后，需要轮询 pollfd 来获取就绪的描述符。</p>
+</blockquote>
+<blockquote>
+<p>从上面看，select 和 poll 都需要在返回后，通过遍历文件描述符来获取已经就绪的 socket。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降。</p>
+</blockquote>
+<p><strong>从本质来说：IO 多路复用中，select()&#x2F;poll()&#x2F;epoll_wait()这几个函数对应第一阶段；read()&#x2F;recvfrom()对应第二阶段</strong></p>
+<h4 id="4-2IO-多路复用第一版的过程"><a href="#4-2IO-多路复用第一版的过程" class="headerlink" title="4.2IO 多路复用第一版的过程"></a>4.2IO 多路复用第一版的过程</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEbPaUbbrbibQsCw9xPib0FfZXfOKQ6OdekEicBSyr5micL6iaUAIQqRrDqAA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="4-3IO-多路复用第一版的优点"><a href="#4-3IO-多路复用第一版的优点" class="headerlink" title="4.3IO 多路复用第一版的优点"></a>4.3IO 多路复用第一版的优点</h4><p><strong>IO 多路复用，主要在于复用，通过 select()或者 poll()将多个 socket fds 批量通过系统调用传递给内核，由内核进行循环遍历判断哪些 fd 上数据就绪了，然后将就绪的 readyfds 返回给用户。再由用户进行挨个遍历就绪好的 fd，读取或者写入数据。</strong></p>
+<p><strong>所以通过 IO 多路复用+非阻塞 IO，一方面降低了系统调用次数，另一方面可以用极少的线程来处理多个网络连接。</strong></p>
+<h4 id="4-4IO-多路复用第一版的缺点"><a href="#4-4IO-多路复用第一版的缺点" class="headerlink" title="4.4IO 多路复用第一版的缺点"></a>4.4IO 多路复用第一版的缺点</h4><p>虽然第一版 IO 多路复用解决了之前提到的频繁的系统调用次数，但同时引入了新的问题：<strong>用户需要每次将海量的 socket fds 集合从用户态传递到内核态，让内核态去检测哪些网络连接数据就绪了</strong></p>
+<p><strong>但这个地方会出现频繁的将海量 fd 集合从用户态传递到内核态，再从内核态拷贝到用户态。所以，这个地方开销也挺大。</strong></p>
+<p>既然还有这个问题，那我们继续开始解决这个问题，因此就引出了第二版的 IO 多路复用。</p>
+<p><strong>其实思路也挺简单，既然需要拷贝，那就想办法，不拷贝。既然不拷贝，那就在内核开辟一段区域咯</strong></p>
+<h4 id="4-5IO-多路复用第一版的区别"><a href="#4-5IO-多路复用第一版的区别" class="headerlink" title="4.5IO 多路复用第一版的区别"></a>4.5IO 多路复用第一版的区别</h4><p><strong>select 和 poll 的区别</strong></p>
+<ol>
+<li>select 能处理的最大连接，默认是 1024 个，可以通过修改配置来改变，但终究是有限个；而 poll 理论上可以支持无限个</li>
+<li>select 和 poll 在管理海量的连接时，会频繁的从用户态拷贝到内核态，比较消耗资源。</li>
+</ol>
+<h3 id="5-IO-多路复用第二版"><a href="#5-IO-多路复用第二版" class="headerlink" title="5.IO 多路复用第二版"></a>5.IO 多路复用第二版</h3><p>IO 多路复用第二版主要指 epoll，epoll 的出现也是随着内核版本迭代才诞生的，在网上到处看到，epoll 是内核 2.6 以后开始支持的</p>
+<p><strong>epoll 的出现是为了解决前面提到的 IO 多路复用第一版的问题</strong></p>
+<h4 id="5-1IO-多路复用第二版的概念"><a href="#5-1IO-多路复用第二版的概念" class="headerlink" title="5.1IO 多路复用第二版的概念"></a>5.1IO 多路复用第二版的概念</h4><p>epoll 提供的 api</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">//创建epollFd，底层是在内核态分配一段区域，底层数据结构红黑树+双向链表</span><br><span class="line">int epoll_create(int size)；//创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大</span><br><span class="line"></span><br><span class="line">//往红黑树中增加、删除、更新管理的socket fd</span><br><span class="line">int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；</span><br><span class="line"></span><br><span class="line">//这个api是用来在第一阶段阻塞，等待就绪的fd。</span><br><span class="line">int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);</span><br><span class="line">1. int epoll_create(int size);</span><br><span class="line">创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大，这个参数不同于select()中的第一个参数，给出最大监听的fd+1的值，参数size并不是限制了epoll所能监听的描述符最大个数，只是对内核初始分配内部数据结构的一个建议。</span><br><span class="line">当创建好epoll句柄后，它就会占用一个fd值，在linux下如果查看/proc/进程id/fd/，是能够看到这个fd的，所以在使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽。</span><br><span class="line"></span><br><span class="line">2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；</span><br><span class="line">函数是对指定描述符fd执行op操作。</span><br><span class="line">- epfd：是epoll_create()的返回值。</span><br><span class="line">- op：表示op操作，用三个宏来表示：添加EPOLL_CTL_ADD，删除EPOLL_CTL_DEL，修改EPOLL_CTL_MOD。分别添加、删除和修改对fd的监听事件。</span><br><span class="line">- fd：是需要监听的fd（文件描述符）</span><br><span class="line">- epoll_event：是告诉内核需要监听什么事，struct epoll_event结构如下：</span><br><span class="line"></span><br><span class="line">struct epoll_event &#123;</span><br><span class="line">  __uint32_t events;  /* Epoll events */</span><br><span class="line">  epoll_data_t data;  /* User data variable */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//events可以是以下几个宏的集合：</span><br><span class="line">EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；</span><br><span class="line">EPOLLOUT：表示对应的文件描述符可以写；</span><br><span class="line">EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；</span><br><span class="line">EPOLLERR：表示对应的文件描述符发生错误；</span><br><span class="line">EPOLLHUP：表示对应的文件描述符被挂断；</span><br><span class="line">EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。</span><br><span class="line">EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里</span><br><span class="line"></span><br><span class="line">3. int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);</span><br><span class="line">等待epfd上的io事件，最多返回maxevents个事件。</span><br><span class="line">参数events用来从内核得到事件的集合，maxevents告之内核这个events有多大，这个maxevents的值不能大于创建epoll_create()时的size，参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）。该函数返回需要处理的事件数目，如返回0表示已超时。</span><br></pre></td></tr></table></figure>
+
+<p>二 工作模式</p>
+<p>epoll 对文件描述符的操作有两种模式：LT（level trigger）和 ET（edge trigger）。LT 模式是默认模式，LT 模式与 ET 模式的区别如下：　　 LT 模式：当 epoll_wait 检测到描述符事件发生并将此事件通知应用程序，应用程序可以不立即处理该事件。下次调用 epoll_wait 时，会再次响应应用程序并通知此事件。　　 ET 模式：当 epoll_wait 检测到描述符事件发生并将此事件通知应用程序，应用程序必须立即处理该事件。如果不处理，下次调用 epoll_wait 时，不会再次响应应用程序并通知此事件。</p>
+<ol>
+<li>LT 模式</li>
+</ol>
+<p>LT(level triggered)是缺省的工作方式，并且同时支持 block 和 no-block socket.在这种做法中，内核告诉你一个文件描述符是否就绪了，然后你可以对这个就绪的 fd 进行 IO 操作。如果你不作任何操作，内核还是会继续通知你的。</p>
+<ol>
+<li>ET 模式</li>
+</ol>
+<p>ET(edge-triggered)是高速工作方式，只支持 no-block socket。在这种模式下，当描述符从未就绪变为就绪时，内核通过 epoll 告诉你。然后它会假设你知道文件描述符已经就绪，并且不会再为那个文件描述符发送更多的就绪通知，直到你做了某些操作导致那个文件描述符不再为就绪状态了(比如，你在发送，接收或者接收请求，或者发送接收的数据少于一定量时导致了一个 EWOULDBLOCK 错误）。但是请注意，如果一直不对这个 fd 作 IO 操作(从而导致它再次变成未就绪)，内核不会发送更多的通知(only once)</p>
+<p>ET 模式在很大程度上减少了 epoll 事件被重复触发的次数，因此效率要比 LT 模式高。epoll 工作在 ET 模式的时候，必须使用非阻塞套接口，以避免由于一个文件句柄的阻塞读&#x2F;阻塞写操作把处理多个文件描述符的任务饿死。</p>
+<h4 id="5-2IO-多路复用第二版的过程"><a href="#5-2IO-多路复用第二版的过程" class="headerlink" title="5.2IO 多路复用第二版的过程"></a>5.2IO 多路复用第二版的过程</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEbPaUbbrbibQsCw9xPib0FfZXfOKQ6OdekEicBSyr5micL6iaUAIQqRrDqAA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>当 epoll_wait()调用后会阻塞，然后完了当返回时，会返回了哪些 fd 的数据就绪了，用户只需要遍历就绪的 fd 进行读写即可。</p>
+<h4 id="5-3IO-多路复用第二版的优点"><a href="#5-3IO-多路复用第二版的优点" class="headerlink" title="5.3IO 多路复用第二版的优点"></a>5.3IO 多路复用第二版的优点</h4><p><strong>IO 多路复用第二版 epoll 的优点在于：</strong></p>
+<p>一开始就在内核态分配了一段空间，来存放管理的 fd,所以在每次连接建立后，交给 epoll 管理时，需要将其添加到原先分配的空间中，后面再管理时就不需要频繁的从用户态拷贝管理的 fd 集合。通通过这种方式大大的提升了性能。</p>
+<p>所以现在的 IO 多路复用主要指 epoll</p>
+<h4 id="5-4IO-多路复用第二版的缺点"><a href="#5-4IO-多路复用第二版的缺点" class="headerlink" title="5.4IO 多路复用第二版的缺点"></a>5.4IO 多路复用第二版的缺点</h4><p><strong>个人猜想：</strong> 如何降低占用的空间</p>
+<h3 id="6-异步-IO"><a href="#6-异步-IO" class="headerlink" title="6.异步 IO"></a>6.异步 IO</h3><h4 id="6-1-异步-IO-的过程"><a href="#6-1-异步-IO-的过程" class="headerlink" title="6.1 异步 IO 的过程"></a>6.1 异步 IO 的过程</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEXGYke8ibPkbXEkaQ861CSg8YvQ3qFdvGcXicAicyrD9Vaicx77liakCLBnA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>前面介绍的所有网络 IO 都是同步 IO，因为当数据在内核态就绪时，在内核态拷贝用用户态的过程中，仍然会有短暂时间的阻塞等待。而异步 IO 指：<strong>内核态拷贝数据到用户态这种方式也是交给系统线程来实现，不由用户线程完成</strong>，目前只有 windows 系统的 IOCP 是属于异步 IO。</p>
+<h3 id="7-网络-IO-各种模型"><a href="#7-网络-IO-各种模型" class="headerlink" title="7.网络 IO 各种模型"></a>7.网络 IO 各种模型</h3><h4 id="7-1-reactor-模型"><a href="#7-1-reactor-模型" class="headerlink" title="7.1 reactor 模型"></a>7.1 reactor 模型</h4><p>目前 reactor 模型有以下几种实现方案：</p>
+<p><strong>1. 单 reactor 单线程模型</strong><br><strong>2. 单 reactor 多线程模型</strong><br><strong>3. multi-reactor 多线程模型</strong><br><strong>4. multi-reactor 多进程模型</strong></p>
+<blockquote>
+<p>下文网络模型的图，均摘自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95662364">这篇文章</a></p>
+</blockquote>
+<h5 id="7-1-1-单-reactor-单线程模型"><a href="#7-1-1-单-reactor-单线程模型" class="headerlink" title="7.1.1 单 reactor 单线程模型"></a>7.1.1 单 reactor 单线程模型</h5><p>此种模型，通常是只有一个 epoll 对象，所有的<strong>接收客户端连接</strong>、<strong>客户端读取</strong>、<strong>客户端写入</strong>操作都包含在一个线程内。该种模型也有一些中间件在用，比如 redis</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEibnlbqiclVmzSkNpIym8ibYaXOAAnn2cZSibDr7fiaHXGjypWk0iacO7kkdA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<blockquote>
+<p>但在目前的单线程 Reactor 模式中，不仅 I&#x2F;O 操作在该 Reactor 线程上，连非 I&#x2F;O 的业务操作也在该线程上进行处理了，这可能会大大延迟 I&#x2F;O 请求的响应。所以我们应该将非 I&#x2F;O 的业务逻辑操作从 Reactor 线程上卸载，以此来加速 Reactor 线程对 I&#x2F;O 请求的响应。</p>
+</blockquote>
+<h5 id="7-1-2-单-reactor-多线程模型"><a href="#7-1-2-单-reactor-多线程模型" class="headerlink" title="7.1.2 单 reactor 多线程模型"></a>7.1.2 单 reactor 多线程模型</h5><p>该模型主要是通过将，前面的模型进行改造，将读写的业务逻辑交给具体的线程池来实现，这样可以显示 reactor 线程对 IO 的响应，以此提升系统性能<img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEvzbIZnWXH0HUWLgUZTRzHGzNsRK0F2JC0bxHmia6XG02wocUUvianoIQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<blockquote>
+<p>在工作者线程池模式中，虽然非 I&#x2F;O 操作交给了线程池来处理，但是所有的 I&#x2F;O 操作依然由 Reactor 单线程执行，在高负载、高并发或大数据量的应用场景，依然较容易成为瓶颈。所以，对于 Reactor 的优化，又产生出下面的多线程模式。</p>
+</blockquote>
+<h5 id="7-1-3-multi-reactor-多线程模型"><a href="#7-1-3-multi-reactor-多线程模型" class="headerlink" title="7.1.3 multi-reactor 多线程模型"></a>7.1.3 multi-reactor 多线程模型</h5><p>在这种模型中，主要分为两个部分：mainReactor、subReactors。mainReactor 主要负责接收客户端的连接，然后将建立的客户端连接通过负载均衡的方式分发给 subReactors，</p>
+<p>subReactors 来负责具体的每个连接的读写</p>
+<p>对于非 IO 的操作，依然交给工作线程池去做，对逻辑进行解耦</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEJ1BVQvZoIJB0xqBLxNvCOcOWkTknoMP4t1XkUgHfsoN7J2jzClJuaw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<blockquote>
+<p>mainReactor 对应 Netty 中配置的 BossGroup 线程组，主要负责接受客户端连接的建立。一般只暴露一个服务端口，BossGroup 线程组一般一个线程工作即可 subReactor 对应 Netty 中配置的 WorkerGroup 线程组，BossGroup 线程组接受并建立完客户端的连接后，将网络 socket 转交给 WorkerGroup 线程组，然后在 WorkerGroup 线程组内选择一个线程，进行 I&#x2F;O 的处理。WorkerGroup 线程组主要处理 I&#x2F;O，一般设置 2*CPU 核数个线程</p>
+</blockquote>
+<h4 id="7-2-proactor-模型"><a href="#7-2-proactor-模型" class="headerlink" title="7.2 proactor 模型"></a>7.2 proactor 模型</h4><p>proactor 主要是通过对异步 IO 的封装的一种模型，它需要底层操作系统的支持，目前只有 windows 的 IOCP 支持的比较好。详细的介绍可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95662364">这篇文章</a></p>
+<h4 id="7-3-主流的中间件所采用的网络模型"><a href="#7-3-主流的中间件所采用的网络模型" class="headerlink" title="7.3 主流的中间件所采用的网络模型"></a>7.3 主流的中间件所采用的网络模型</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/j3gficicyOvauhvQxpibL7I3CeEZPcaA1HEiaTnSvliaMcYCEDmUiaDlbRQTlURhaKHY8N0qwsgLuXZpkOgeJ3UtXMlQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="7-4-主流网络框架"><a href="#7-4-主流网络框架" class="headerlink" title="7.4 主流网络框架"></a>7.4 主流网络框架</h4><ul>
+<li>netty</li>
+<li>gnet</li>
+<li>libevent</li>
+<li>evio(golang)</li>
+<li>ACE(c++)</li>
+<li>boost::asio(c++)</li>
+<li>muduo （linux only)</li>
+</ul>
+<p>关于c++和c的上述几个库对比，感兴趣的话大家可以自行搜索资料或者阅读<a target="_blank" rel="noopener" href="https://www.cnblogs.com/leijiangtao/p/5197566.html">这篇文章</a>。</p>
+<h3 id="8-参考资料"><a href="#8-参考资料" class="headerlink" title="8.参考资料"></a>8.参考资料</h3></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://xtt5241.github.io">Xtt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://xtt5241.github.io/2024/05/01/networkProgramming/">http://xtt5241.github.io/2024/05/01/networkProgramming/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://xtt5241.github.io" target="_blank">Xtt的碎碎念</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/01/ffmpeg/" title="FFMPEG"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">FFMPEG</div></div></a></div><div class="next-post pull-right"><a href="/2024/04/24/Tips/" title="一些技巧和踩坑"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">一些技巧和踩坑</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xtt</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog<i class="fas fa-bullhorn card-announcement-animation"></i></div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80-%E9%9D%A2%E8%AF%95"><span class="toc-number">1.1.</span> <span class="toc-text">基础+面试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-x2F-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">I&#x2F;O多路复用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket"><span class="toc-number">1.3.</span> <span class="toc-text">Socket</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Winsock"><span class="toc-number">1.3.1.</span> <span class="toc-text">Winsock</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1. 发展历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">2. 功能特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">3. 常用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">4. 使用步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">5. 示例代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.2.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI%E5%92%8CTCP-x2F-IP%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.3.</span> <span class="toc-text">OSI和TCP&#x2F;IP对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Socker%E5%B1%82%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.3.4.</span> <span class="toc-text">Socker层位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.5.</span> <span class="toc-text">客户端代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.6.</span> <span class="toc-text">服务端代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.3.7.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-number">1.3.8.</span> <span class="toc-text">API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%A5%97%E6%8E%A5%E5%AD%97%E2%94%80%E2%94%80socket"><span class="toc-number">1.3.8.1.</span> <span class="toc-text">创建套接字──socket()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%A5%97%E6%8E%A5%E5%AD%97%E9%80%89%E9%A1%B9%E2%80%94%E2%80%94setsockopt"><span class="toc-number">1.3.8.2.</span> <span class="toc-text">设置套接字选项——setsockopt()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SOCKADDR-IN%E2%80%94%E2%80%94%E5%AE%9A%E4%B9%89%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.3.8.3.</span> <span class="toc-text">SOCKADDR_IN——定义地址结构体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80%E2%94%80%E2%94%80bind"><span class="toc-number">1.3.8.4.</span> <span class="toc-text">指定本地地址──bind()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E8%BF%9E%E6%8E%A5%E2%94%80%E2%94%80listen"><span class="toc-number">1.3.8.5.</span> <span class="toc-text">监听连接──listen()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%A5%97%E6%8E%A5%E5%AD%97%E8%BF%9E%E6%8E%A5%E2%94%80%E2%94%80connect-%E4%B8%8Eaccept"><span class="toc-number">1.3.8.6.</span> <span class="toc-text">建立套接字连接──connect()与accept()</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#connect"><span class="toc-number">1.3.8.6.1.</span> <span class="toc-text">connect()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#accept"><span class="toc-number">1.3.8.6.2.</span> <span class="toc-text">accept()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E2%94%80%E2%94%80send-%E4%B8%8Erecv"><span class="toc-number">1.3.8.7.</span> <span class="toc-text">数据传输──send()与recv()</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#send"><span class="toc-number">1.3.8.7.1.</span> <span class="toc-text">send()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#recv"><span class="toc-number">1.3.8.7.2.</span> <span class="toc-text">recv()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-x2F-%E8%BE%93%E5%87%BA%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E2%94%80%E2%94%80select"><span class="toc-number">1.3.8.8.</span> <span class="toc-text">输入&#x2F;输出多路复用──select()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E5%A5%97%E6%8E%A5%E5%AD%97%E2%94%80%E2%94%80closesocket"><span class="toc-number">1.3.8.9.</span> <span class="toc-text">关闭套接字──closesocket()</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IO%E5%BE%85%E6%95%B4%E5%90%88"><span class="toc-number">2.</span> <span class="toc-text">IO待整合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C-IO-%E6%BC%94%E5%8F%98%E5%8F%91%E5%B1%95%E8%BF%87%E7%A8%8B%E5%92%8C%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">网络 IO 演变发展过程和模型介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C-IO-%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-number">3.0.1.</span> <span class="toc-text">1.网络 IO 的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E7%BD%91%E7%BB%9C-IO-%E7%9A%84%E5%90%84%E4%B8%AA%E5%8F%91%E5%B1%95%E9%98%B6%E6%AE%B5"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">1.1 网络 IO 的各个发展阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E9%98%BB%E5%A1%9E-IO-%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E-IO-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">1.3 阻塞 IO 和非阻塞 IO 的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E5%90%8C%E6%AD%A5-IO-%E5%92%8C%E5%BC%82%E6%AD%A5-IO-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.0.1.3.</span> <span class="toc-text">1.4 同步 IO 和异步 IO 的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%98%BB%E5%A1%9E-IO"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.阻塞 IO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E9%98%BB%E5%A1%9E-IO-%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.0.2.1.</span> <span class="toc-text">2.1 阻塞 IO 的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E9%98%BB%E5%A1%9E-IO-%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">3.0.2.2.</span> <span class="toc-text">2.2 阻塞 IO 的过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E9%98%BB%E5%A1%9E-IO-%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">3.0.2.3.</span> <span class="toc-text">2.3 阻塞 IO 的缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%9D%9E%E9%98%BB%E5%A1%9E-IO"><span class="toc-number">3.0.3.</span> <span class="toc-text">3.非阻塞 IO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E9%9D%9E%E9%98%BB%E5%A1%9E-IO-%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.0.3.1.</span> <span class="toc-text">3.1 非阻塞 IO 的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E9%9D%9E%E9%98%BB%E5%A1%9E-IO-%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">3.0.3.2.</span> <span class="toc-text">3.2 非阻塞 IO 的过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E9%9D%9E%E9%98%BB%E5%A1%9E-IO-%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">3.0.3.3.</span> <span class="toc-text">3.3 非阻塞 IO 的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E9%9D%9E%E9%98%BB%E5%A1%9E-IO-%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">3.0.3.4.</span> <span class="toc-text">3.4 非阻塞 IO 的缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%B8%80%E7%89%88"><span class="toc-number">3.0.4.</span> <span class="toc-text">4.IO 多路复用第一版</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%B8%80%E7%89%88%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.0.4.1.</span> <span class="toc-text">4.1IO 多路复用第一版的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%B8%80%E7%89%88%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">3.0.4.2.</span> <span class="toc-text">4.2IO 多路复用第一版的过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%B8%80%E7%89%88%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">3.0.4.3.</span> <span class="toc-text">4.3IO 多路复用第一版的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%B8%80%E7%89%88%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">3.0.4.4.</span> <span class="toc-text">4.4IO 多路复用第一版的缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%B8%80%E7%89%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.0.4.5.</span> <span class="toc-text">4.5IO 多路复用第一版的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%BA%8C%E7%89%88"><span class="toc-number">3.0.5.</span> <span class="toc-text">5.IO 多路复用第二版</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%BA%8C%E7%89%88%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.0.5.1.</span> <span class="toc-text">5.1IO 多路复用第二版的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%BA%8C%E7%89%88%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">3.0.5.2.</span> <span class="toc-text">5.2IO 多路复用第二版的过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%BA%8C%E7%89%88%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">3.0.5.3.</span> <span class="toc-text">5.3IO 多路复用第二版的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4IO-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%AC%AC%E4%BA%8C%E7%89%88%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">3.0.5.4.</span> <span class="toc-text">5.4IO 多路复用第二版的缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%BC%82%E6%AD%A5-IO"><span class="toc-number">3.0.6.</span> <span class="toc-text">6.异步 IO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-%E5%BC%82%E6%AD%A5-IO-%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">3.0.6.1.</span> <span class="toc-text">6.1 异步 IO 的过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%BD%91%E7%BB%9C-IO-%E5%90%84%E7%A7%8D%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.0.7.</span> <span class="toc-text">7.网络 IO 各种模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-reactor-%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.0.7.1.</span> <span class="toc-text">7.1 reactor 模型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#7-1-1-%E5%8D%95-reactor-%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.0.7.1.1.</span> <span class="toc-text">7.1.1 单 reactor 单线程模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-1-2-%E5%8D%95-reactor-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.0.7.1.2.</span> <span class="toc-text">7.1.2 单 reactor 多线程模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-1-3-multi-reactor-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.0.7.1.3.</span> <span class="toc-text">7.1.3 multi-reactor 多线程模型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2-proactor-%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.0.7.2.</span> <span class="toc-text">7.2 proactor 模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-3-%E4%B8%BB%E6%B5%81%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%89%80%E9%87%87%E7%94%A8%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.0.7.3.</span> <span class="toc-text">7.3 主流的中间件所采用的网络模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-4-%E4%B8%BB%E6%B5%81%E7%BD%91%E7%BB%9C%E6%A1%86%E6%9E%B6"><span class="toc-number">3.0.7.4.</span> <span class="toc-text">7.4 主流网络框架</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">3.0.8.</span> <span class="toc-text">8.参考资料</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/04/CMake/" title="CMake">CMake</a><time datetime="2024-05-04T14:57:48.000Z" title="发表于 2024-05-04 22:57:48">2024-05-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/04/usefulFuncion/" title="常用函数">常用函数</a><time datetime="2024-05-04T14:57:48.000Z" title="发表于 2024-05-04 22:57:48">2024-05-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/01/av/" title="音视频开发合集">音视频开发合集</a><time datetime="2024-05-01T14:57:48.000Z" title="发表于 2024-05-01 22:57:48">2024-05-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/01/ffmpeg/" title="FFMPEG">FFMPEG</a><time datetime="2024-05-01T14:57:48.000Z" title="发表于 2024-05-01 22:57:48">2024-05-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/01/networkProgramming/" title="网络编程">网络编程</a><time datetime="2024-05-01T14:57:48.000Z" title="发表于 2024-05-01 22:57:48">2024-05-01</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/background.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Xtt</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Be Happy</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-20},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>

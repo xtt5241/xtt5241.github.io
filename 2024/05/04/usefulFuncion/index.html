@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>常用函数 | Xtt的碎碎念</title><meta name="author" content="Xtt"><meta name="copyright" content="Xtt"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="常用函数ntohs()ntohs函数是用于将16位整数从网络字节序（big-endian字节序）转换为主机字节序（机器的本地字节序）的函数。下面是关于ntohs函数的解释：  函数原型： 1uint16_t ntohs(uint16_t netshort);   netshort：表示网络字节序中的16位整数值，即需要进行转换的数值。   函数功能：  ntohs函数的作用是将16位整数从网络字节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用函数">
+<meta property="og:url" content="http://xtt5241.github.io/2024/05/04/usefulFuncion/index.html">
+<meta property="og:site_name" content="Xtt的碎碎念">
+<meta property="og:description" content="常用函数ntohs()ntohs函数是用于将16位整数从网络字节序（big-endian字节序）转换为主机字节序（机器的本地字节序）的函数。下面是关于ntohs函数的解释：  函数原型： 1uint16_t ntohs(uint16_t netshort);   netshort：表示网络字节序中的16位整数值，即需要进行转换的数值。   函数功能：  ntohs函数的作用是将16位整数从网络字节">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xtt5241.github.io/img/avatar.png">
+<meta property="article:published_time" content="2024-05-04T14:57:48.000Z">
+<meta property="article:modified_time" content="2024-05-04T10:26:30.885Z">
+<meta property="article:author" content="Xtt">
+<meta property="article:tag" content="Function">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xtt5241.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://xtt5241.github.io/2024/05/04/usefulFuncion/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '常用函数',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-04 18:26:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> XTT</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 目录</span></a></div></div></div></div><div class="canvas-container" id="canvas"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Xtt的碎碎念"><span class="site-name">Xtt的碎碎念</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> XTT</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 目录</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">常用函数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-04T14:57:48.000Z" title="发表于 2024-05-04 22:57:48">2024-05-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-04T10:26:30.885Z" title="更新于 2024-05-04 18:26:30">2024-05-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="常用函数"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h3 id="ntohs"><a href="#ntohs" class="headerlink" title="ntohs()"></a>ntohs()</h3><p><code>ntohs</code>函数是用于将16位整数从网络字节序（big-endian字节序）转换为主机字节序（机器的本地字节序）的函数。下面是关于<code>ntohs</code>函数的解释：</p>
+<ol>
+<li><p><strong>函数原型</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint16_t</span> <span class="title function_">ntohs</span><span class="params">(<span class="type">uint16_t</span> netshort)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>netshort</code>：表示网络字节序中的16位整数值，即需要进行转换的数值。</li>
+</ul>
+</li>
+<li><p><strong>函数功能</strong>：</p>
+<ul>
+<li><code>ntohs</code>函数的作用是将16位整数从网络字节序（大端字节序）转换为主机字节序（机器的本地字节序）。</li>
+<li>在网络通信中，不同的计算机体系结构使用的字节序可能不同。大部分网络协议规定使用网络字节序（即big-endian字节序）进行数据传输，因此在接收数据时，需要将网络字节序转换为本地字节序以便进行处理。</li>
+</ul>
+</li>
+<li><p><strong>参数说明</strong>：</p>
+<ul>
+<li><code>netshort</code>：表示一个16位整数值，它在网络字节序中，需要转换为主机字节序。</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：</p>
+<ul>
+<li><code>ntohs</code>函数返回一个16位整数值，表示转换后的主机字节序中的数值。</li>
+<li>返回的值是以主机字节序表示的原始网络字节序中的整数值。</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：</p>
+<ul>
+<li>在网络编程中，当从网络中接收到一个16位整数时，通常需要使用<code>ntohs</code>函数将其转换为主机字节序，以便在本地进行处理。</li>
+<li>同样，在需要将本地数据发送到网络时，也可以使用<code>htons</code>函数将主机字节序转换为网络字节序后再发送。</li>
+</ul>
+</li>
+</ol>
+<p>总之，<code>ntohs</code>函数在网络编程中扮演着重要的角色，用于处理网络数据的字节序转换，确保数据在不同主机之间的正确传输和解释。</p>
+<h3 id="recv"><a href="#recv" class="headerlink" title="recv()"></a>recv()</h3><p><code>recv</code>函数是用于接收数据的系统调用函数，常用于网络编程中的套接字通信。以下是关于<code>recv</code>函数的解释：</p>
+<ol>
+<li><p><strong>函数原型</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">recv</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">void</span> *buf, <span class="type">size_t</span> len, <span class="type">int</span> flags)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>sockfd</code>：指定接收数据的套接字描述符，即需要从哪个套接字接收数据。</li>
+<li><code>buf</code>：用于接收数据的缓冲区指针，接收到的数据会被存储到这个缓冲区中。</li>
+<li><code>len</code>：指定接收数据的最大长度，即缓冲区的大小。</li>
+<li><code>flags</code>：接收标志，可以指定一些接收数据的选项，通常设置为0。</li>
+</ul>
+</li>
+<li><p><strong>函数功能</strong>：</p>
+<ul>
+<li><code>recv</code>函数用于从已连接套接字（如TCP套接字）或无连接套接字（如UDP套接字）接收数据。</li>
+<li>当有数据到达时，<code>recv</code>函数会将数据读取到指定的缓冲区<code>buf</code>中，并返回接收到的字节数。</li>
+<li>如果没有数据可接收，且对方已关闭连接，则<code>recv</code>函数可能返回0（表示对端已关闭连接）。</li>
+<li>如果发生错误，<code>recv</code>函数返回-1，并设置全局变量<code>errno</code>以指示错误的具体原因。</li>
+</ul>
+</li>
+<li><p><strong>参数说明</strong>：</p>
+<ul>
+<li><code>sockfd</code>通常是通过<code>socket</code>函数创建的套接字描述符。</li>
+<li><code>buf</code>是一个指向存储接收数据的内存缓冲区的指针。</li>
+<li><code>len</code>指定了缓冲区的大小，用于限制接收数据的最大长度。</li>
+<li><code>flags</code>通常设置为0，表示普通的接收操作。</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：</p>
+<ul>
+<li>成功接收数据时，返回接收到的字节数（大于0）。</li>
+<li>对方已关闭连接时，返回0。</li>
+<li>出现错误时，返回-1，并设置<code>errno</code>以指示具体的错误类型。</li>
+</ul>
+</li>
+</ol>
+<p>在网络编程中，<code>recv</code>函数通常与<code>send</code>函数配对使用，用于实现数据的收发功能。要注意处理返回值，特别是处理接收到的数据长度以及错误情况，确保程序能够正确地处理数据和连接状态。</p>
+<h3 id="strtok"><a href="#strtok" class="headerlink" title="strtok()"></a>strtok()</h3><p><code>strtok</code>函数是C语言标准库中的字符串处理函数，用于将字符串分割成一系列子字符串。下面是关于<code>strtok</code>函数的解释：</p>
+<ol>
+<li><p><strong>函数原型</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">strtok</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *delim)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>str</code>：指向要分割的字符串的指针，第一次调用时传入需要分割的字符串，后续调用时传入NULL，用于继续从上次停止的地方继续分割。</li>
+<li><code>delim</code>：指定分割字符串的分隔符字符集合，即用于确定分割位置的字符。</li>
+</ul>
+</li>
+<li><p><strong>函数功能</strong>：</p>
+<ul>
+<li><code>strtok</code>函数将字符串<code>str</code>分割成一系列子字符串，每个子字符串由分隔符<code>delim</code>分隔。</li>
+<li>第一次调用时，将<code>str</code>指向的字符串进行分割，并返回第一个子字符串的指针。</li>
+<li>后续调用时，将<code>str</code>参数设为<code>NULL</code>，<code>strtok</code>将继续从上次停止的位置继续分割，直到遇到新的分隔符或字符串结束。</li>
+<li>当没有更多的子字符串可供分割时，<code>strtok</code>返回NULL，表示分割结束。</li>
+</ul>
+</li>
+<li><p><strong>注意事项</strong>：</p>
+<ul>
+<li><code>strtok</code>函数会修改传入的字符串，即将分隔符替换为NULL字符。因此，原始字符串会被修改。</li>
+<li>如果需要保留原始字符串，可以将其复制到另一个缓冲区中进行分割操作。</li>
+<li>在多线程环境下使用<code>strtok</code>函数可能会出现问题，因为它使用了静态变量来记录分割位置。</li>
+</ul>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[] = <span class="string">&quot;Hello, world! This is a test.&quot;</span>;</span><br><span class="line">    <span class="type">char</span> *token = strtok(str, <span class="string">&quot; ,.!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (token != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, token);</span><br><span class="line">        token = strtok(<span class="literal">NULL</span>, <span class="string">&quot; ,.!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello</span><br><span class="line">world</span><br><span class="line">This</span><br><span class="line">is</span><br><span class="line">a</span><br><span class="line">test</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这样，<code>strtok</code>函数可以方便地用于将字符串按照指定的分隔符进行分割，常用于解析文本数据或处理用户输入。</p>
+<h3 id="sscanf"><a href="#sscanf" class="headerlink" title="sscanf()"></a>sscanf()</h3><p><code>sscanf</code> 函数是C语言标准库 <code>&lt;stdio.h&gt;</code> 中的格式化输入函数，用于从字符串中按照指定格式解析数据并赋值给变量。下面是关于 <code>sscanf</code> 函数的解释：</p>
+<p><strong>函数原型</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sscanf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>str</code>：要解析的输入字符串。</li>
+<li><code>format</code>：格式化字符串，指定了 <code>str</code> 中要解析的数据格式。</li>
+<li><code>...</code>：可变参数，用于存储解析出的数据，根据 <code>format</code> 中指定的格式，依次对应输出参数。</li>
+</ul>
+<p><strong>函数功能</strong>：</p>
+<ul>
+<li><code>sscanf</code> 函数从字符串 <code>str</code> 中读取数据，并按照 <code>format</code> 中的格式进行解析。</li>
+<li>解析过程会根据 <code>format</code> 中的格式说明符，从输入字符串中提取数据，然后将解析出的数据存储到相应的变量中。</li>
+</ul>
+<p><strong>返回值</strong>：</p>
+<ul>
+<li>返回成功匹配并赋值的参数个数。<ul>
+<li>如果成功匹配了所有指定的格式说明符并成功赋值，则返回成功赋值的参数个数；</li>
+<li>如果发生解析错误或无法匹配所有指定的格式说明符，则返回匹配成功的参数个数，可能小于指定的参数个数。</li>
+</ul>
+</li>
+</ul>
+<p><strong>常用的格式说明符</strong>：</p>
+<ul>
+<li><code>%d</code>：解析一个十进制整数。</li>
+<li><code>%f</code>、<code>%lf</code>：解析一个浮点数，<code>%f</code> 表示 <code>float</code> 类型，<code>%lf</code> 表示 <code>double</code> 类型。</li>
+<li><code>%c</code>：解析一个字符。</li>
+<li><code>%s</code>：解析一个字符串，遇到空白字符（空格、制表符等）时停止。</li>
+<li><code>%x</code>、<code>%X</code>：解析一个十六进制整数。</li>
+<li><code>%o</code>：解析一个八进制整数。</li>
+<li><code>%u</code>：解析一个无符号十进制整数。</li>
+<li><code>%[^delimiter]</code>：解析一段字符序列，直到遇到指定的分隔符为止。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[] = <span class="string">&quot;John 25 3.14&quot;</span>;</span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">float</span> pi;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 解析字符串 str 中的数据</span></span><br><span class="line">    <span class="type">int</span> result = <span class="built_in">sscanf</span>(str, <span class="string">&quot;%s %d %f&quot;</span>, name, &amp;age, &amp;pi);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (result == <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Name: %s\n&quot;</span>, name);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Age: %d\n&quot;</span>, age);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;PI: %.2f\n&quot;</span>, pi);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Parsing failed.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li><code>sscanf</code> 函数与 <code>scanf</code> 函数类似，但 <code>sscanf</code> 从字符串中读取数据，而 <code>scanf</code> 从标准输入流（键盘）中读取数据。</li>
+<li>使用 <code>sscanf</code> 函数时要确保 <code>format</code> 字符串和 <code>str</code> 字符串的格式匹配，否则可能导致解析失败或数据错误。</li>
+<li>如果 <code>sscanf</code> 解析失败或无法匹配所有指定的格式说明符，会返回解析成功的参数个数，这个值可能小于指定的参数个数。</li>
+</ul>
+<p>总之，<code>sscanf</code> 函数是用于从字符串中解析数据的强大工具，可根据指定的格式将字符串中的数据提取出来并存储到相应的变量中。</p>
+<h3 id="sprintf"><a href="#sprintf" class="headerlink" title="sprintf()"></a>sprintf()</h3><p><code>sprintf</code> 是C语言标准库 <code>&lt;stdio.h&gt;</code> 中的一个函数，用于将格式化的数据写入字符串中。下面是关于 <code>sprintf</code> 函数的解释：</p>
+<p><strong>函数原型</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>str</code>：要写入的目标字符串的地址。</li>
+<li><code>format</code>：格式化字符串，指定了要写入到 <code>str</code> 中的内容和格式。</li>
+<li><code>...</code>：可变参数，用于替换格式字符串中的占位符。</li>
+</ul>
+<p><strong>函数功能</strong>：</p>
+<ul>
+<li><code>sprintf</code> 函数根据格式化字符串 <code>format</code> 中的格式说明符，将后续的参数替换并写入到目标字符串 <code>str</code> 中。</li>
+<li>它的功能类似于 <code>printf</code> 函数，但是 <code>printf</code> 函数是将格式化的数据输出到标准输出流（通常是控制台），而 <code>sprintf</code> 函数将格式化的数据输出到字符串中。</li>
+<li><code>sprintf</code> 函数会在目标字符串的末尾添加一个 null 结束符，以表示字符串的结束。</li>
+</ul>
+<p><strong>格式说明符</strong>：</p>
+<ul>
+<li>格式说明符以百分号 <code>%</code> 开始，后面跟着一个字符，用于指定要写入的数据的类型和格式。</li>
+<li>常见的格式说明符包括 <code>%d</code>（整数）、<code>%f</code>（浮点数）、<code>%s</code>（字符串）等。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[<span class="number">50</span>];</span><br><span class="line">    <span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line">    <span class="type">float</span> fnum = <span class="number">3.14</span>;</span><br><span class="line">    <span class="type">char</span> message[] = <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将格式化的数据写入到字符串中</span></span><br><span class="line">    <span class="built_in">sprintf</span>(str, <span class="string">&quot;Integer: %d, Float: %.2f, String: %s&quot;</span>, num, fnum, message);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印结果字符串</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Formatted string: %s\n&quot;</span>, str);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li>使用 <code>sprintf</code> 函数时要确保目标字符串 <code>str</code> 有足够的空间来容纳格式化后的数据，以避免缓冲区溢出。</li>
+<li>如果不确定格式化后的字符串长度，可以使用 <code>snprintf</code> 函数，它允许指定最大写入字符数，从而避免缓冲区溢出。</li>
+</ul>
+<p>总之，<code>sprintf</code> 函数用于将格式化的数据写入到字符串中，提供了一种方便的方式来构建格式化的字符串。</p>
+<h3 id="strstr"><a href="#strstr" class="headerlink" title="strstr()"></a>strstr()</h3><p><code>strstr</code> 函数是C语言标准库 <code>&lt;string.h&gt;</code> 中的函数，用于在一个字符串中搜索指定子串的位置。下面是关于 <code>strstr</code> 函数的解释：</p>
+<p><strong>函数原型</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">strstr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *haystack, <span class="type">const</span> <span class="type">char</span> *needle)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>haystack</code>：要在其中搜索的字符串，也就是被搜索的源字符串。</li>
+<li><code>needle</code>：要搜索的子串，也就是需要在源字符串中寻找的目标子串。</li>
+</ul>
+<p><strong>函数功能</strong>：</p>
+<ul>
+<li><code>strstr</code> 函数在字符串 <code>haystack</code> 中搜索子串 <code>needle</code>，如果找到了，则返回第一次出现该子串的位置的指针；如果未找到，则返回 <code>NULL</code>。</li>
+<li>如果 <code>needle</code> 是空字符串（即 <code>needle</code> 的第一个字符为终止符 <code>\0</code>），则 <code>strstr</code> 返回 <code>haystack</code> 的指针。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> haystack[] = <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> needle[] = <span class="string">&quot;world&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在 haystack 中搜索 needle</span></span><br><span class="line">    <span class="type">char</span> *result = <span class="built_in">strstr</span>(haystack, needle);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (result != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Found \&quot;%s\&quot; in \&quot;%s\&quot; at position %ld.\n&quot;</span>, needle, haystack, result - haystack);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;&#x27;%s&#x27; not found in &#x27;%s&#x27;.\n&quot;</span>, needle, haystack);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li><code>strstr</code> 函数返回的指针指向 <code>haystack</code> 中第一次出现 <code>needle</code> 的位置，如果 <code>needle</code> 在 <code>haystack</code> 中多次出现，则返回的是第一次出现的位置。</li>
+<li>如果 <code>needle</code> 是空字符串，<code>strstr</code> 返回 <code>haystack</code> 的指针。</li>
+<li>如果 <code>needle</code> 不在 <code>haystack</code> 中，<code>strstr</code> 返回 <code>NULL</code>。</li>
+<li><code>strstr</code> 函数执行的是区分大小写的搜索。如果需要进行大小写不敏感的搜索，可以使用 <code>strcasestr</code> 函数（部分系统支持）或自己实现大小写不敏感的搜索逻辑。</li>
+</ul>
+<p>总之，<code>strstr</code> 函数是用于在一个字符串中搜索指定子串的位置的函数，它可以帮助我们快速判断某个子串是否存在于另一个字符串中，并且获取到其在字符串中的位置。</p>
+<h3 id="strncmp"><a href="#strncmp" class="headerlink" title="strncmp()"></a>strncmp()</h3><p><code>strncmp</code> 函数是C语言标准库 <code>&lt;string.h&gt;</code> 中的函数，用于比较两个字符串的前n个字符是否相等。下面是关于 <code>strncmp</code> 函数的解释：</p>
+<p><strong>函数原型</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">strncmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str1, <span class="type">const</span> <span class="type">char</span> *str2, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>str1</code>：要比较的第一个字符串。</li>
+<li><code>str2</code>：要比较的第二个字符串。</li>
+<li><code>n</code>：要比较的最大字符数。</li>
+</ul>
+<p><strong>函数功能</strong>：</p>
+<ul>
+<li><code>strncmp</code> 函数比较两个字符串 <code>str1</code> 和 <code>str2</code> 的前 <code>n</code> 个字符。</li>
+<li>如果两个字符串在前 <code>n</code> 个字符上完全相等，则返回值为 0。</li>
+<li>如果两个字符串在前 <code>n</code> 个字符上不相等，则返回值为它们第一个不相等字符的 ASCII 码差值。</li>
+<li>如果 <code>n</code> 大于两个字符串中较短的字符串的长度，则比较长度会被限制为两个字符串的实际长度。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> str1[] = <span class="string">&quot;apple&quot;</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> str2[] = <span class="string">&quot;banana&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> result = <span class="built_in">strncmp</span>(str1, str2, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (result == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The first 3 characters of str1 and str2 are equal.\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (result &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The first 3 characters of str1 are less than the first 3 characters of str2.\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The first 3 characters of str1 are greater than the first 3 characters of str2.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li><code>strncmp</code> 函数比较的是字符串的前 <code>n</code> 个字符，如果要比较整个字符串是否相等，可以将 <code>n</code> 设置为两个字符串中较长的那个字符串的长度。</li>
+<li>如果两个字符串的前 <code>n</code> 个字符都相等，但其中一个字符串长度小于 <code>n</code>，则被认为小的字符串更小。</li>
+<li><code>strncmp</code> 函数是区分大小写的，如果需要进行大小写不敏感的比较，可以使用 <code>strncasecmp</code> 函数（部分系统支持）或者将两个字符串都转换为统一的大小写后再进行比较。</li>
+</ul>
+<p>总之，<code>strncmp</code> 函数是用于比较两个字符串的前 <code>n</code> 个字符是否相等的函数，它可以帮助我们在需要比较部分字符串的情况下进行比较。</p>
+<h3 id="memcpy"><a href="#memcpy" class="headerlink" title="memcpy()"></a>memcpy()</h3><p><code>memcpy()</code> 函数是 C 语言标准库 <code>&lt;string.h&gt;</code> 中的函数，用于在内存之间进行数据拷贝。下面是关于 <code>memcpy()</code> 函数的解释：</p>
+<p><strong>函数原型</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">memcpy</span><span class="params">(<span class="type">void</span> *dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>dest</code>：指向目标内存地址的指针，表示数据将要被拷贝到的位置。</li>
+<li><code>src</code>：指向源内存地址的指针，表示数据将要被拷贝的起始位置。</li>
+<li><code>n</code>：要拷贝的字节数。</li>
+</ul>
+<p><strong>函数功能</strong>：</p>
+<ul>
+<li><code>memcpy()</code> 函数将源地址 <code>src</code> 中的数据拷贝到目标地址 <code>dest</code> 中，拷贝的字节数由参数 <code>n</code> 指定。</li>
+<li>如果目标地址和源地址重叠，<code>memcpy()</code> 函数能够保证拷贝的结果是正确的，不会因为重叠而导致数据损坏。</li>
+<li><code>memcpy()</code> 拷贝的是连续的内存块，不会考虑数据的类型和内容，只是简单地按字节进行拷贝。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> src[] = <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    <span class="type">char</span> dest[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在 src 中拷贝数据到 dest</span></span><br><span class="line">    <span class="built_in">memcpy</span>(dest, src, <span class="built_in">strlen</span>(src) + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Source: %s\n&quot;</span>, src);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Destination: %s\n&quot;</span>, dest);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li><code>memcpy()</code> 函数执行的是字节级别的拷贝，不会关注数据的类型。</li>
+<li>使用 <code>memcpy()</code> 函数时，要确保目标地址有足够的空间来容纳源数据，以防止发生缓冲区溢出等问题。</li>
+<li>如果需要在内存块之间复制数据，而不关心数据的类型，可以使用 <code>memcpy()</code> 函数。</li>
+<li>对于结构体或其他复杂数据类型的拷贝，应该考虑使用 <code>memcpy()</code> 的替代函数，例如 <code>memmove()</code>，它能够处理重叠的内存区域，确保数据安全拷贝。</li>
+</ul>
+<h3 id="memmove"><a href="#memmove" class="headerlink" title="memmove()"></a>memmove()</h3><p><code>memmove()</code> 函数也是 C 语言标准库 <code>&lt;string.h&gt;</code> 中的函数，与 <code>memcpy()</code> 类似，用于在内存之间进行数据拷贝。但是，与 <code>memcpy()</code> 不同的是，<code>memmove()</code> 能够处理源内存区域和目标内存区域重叠的情况，从而确保数据的安全拷贝。</p>
+<p>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">memmove</span><span class="params">(<span class="type">void</span> *dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>dest</code>：指向目标内存地址的指针，表示数据将要被拷贝到的位置。</li>
+<li><code>src</code>：指向源内存地址的指针，表示数据将要被拷贝的起始位置。</li>
+<li><code>n</code>：要拷贝的字节数。</li>
+</ul>
+<p>函数功能：</p>
+<ul>
+<li><code>memmove()</code> 函数将源地址 <code>src</code> 中的数据拷贝到目标地址 <code>dest</code> 中，拷贝的字节数由参数 <code>n</code> 指定。</li>
+<li>与 <code>memcpy()</code> 不同的是，<code>memmove()</code> 能够处理源内存区域和目标内存区域重叠的情况。如果重叠发生，<code>memmove()</code> 会以一种安全的方式执行拷贝，确保拷贝的结果是正确的。</li>
+<li><code>memmove()</code> 拷贝的是连续的内存块，不会考虑数据的类型和内容，只是简单地按字节进行拷贝。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[] = <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    <span class="comment">// 在 str 中将 &quot;Hello&quot; 移动到 &quot;world&quot; 前面</span></span><br><span class="line">    memmove(str + <span class="number">6</span>, str, <span class="number">5</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Result: %s\n&quot;</span>, str);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意事项：</p>
+<ul>
+<li><code>memmove()</code> 函数与 <code>memcpy()</code> 函数功能相似，但能够处理源内存区域和目标内存区域重叠的情况，因此更为安全。</li>
+<li>当需要在可能重叠的内存区域之间进行数据拷贝时，应该优先选择使用 <code>memmove()</code> 函数，以确保数据的正确性和安全性。</li>
+<li>与 <code>memcpy()</code> 不同，<code>memmove()</code> 的执行效率可能会稍低，因为它需要额外的逻辑来处理重叠的内存区域。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://xtt5241.github.io">Xtt</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://xtt5241.github.io/2024/05/04/usefulFuncion/">http://xtt5241.github.io/2024/05/04/usefulFuncion/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://xtt5241.github.io" target="_blank">Xtt的碎碎念</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Function/">Function</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/04/CMake/" title="CMake"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CMake</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/01/av/" title="音视频开发合集"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">音视频开发合集</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xtt</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog<i class="fas fa-bullhorn card-announcement-animation"></i></div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">常用函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ntohs"><span class="toc-number">1.0.1.</span> <span class="toc-text">ntohs()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#recv"><span class="toc-number">1.0.2.</span> <span class="toc-text">recv()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strtok"><span class="toc-number">1.0.3.</span> <span class="toc-text">strtok()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sscanf"><span class="toc-number">1.0.4.</span> <span class="toc-text">sscanf()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sprintf"><span class="toc-number">1.0.5.</span> <span class="toc-text">sprintf()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strstr"><span class="toc-number">1.0.6.</span> <span class="toc-text">strstr()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strncmp"><span class="toc-number">1.0.7.</span> <span class="toc-text">strncmp()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#memcpy"><span class="toc-number">1.0.8.</span> <span class="toc-text">memcpy()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#memmove"><span class="toc-number">1.0.9.</span> <span class="toc-text">memmove()</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/04/CMake/" title="CMake">CMake</a><time datetime="2024-05-04T14:57:48.000Z" title="发表于 2024-05-04 22:57:48">2024-05-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/04/usefulFuncion/" title="常用函数">常用函数</a><time datetime="2024-05-04T14:57:48.000Z" title="发表于 2024-05-04 22:57:48">2024-05-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/01/av/" title="音视频开发合集">音视频开发合集</a><time datetime="2024-05-01T14:57:48.000Z" title="发表于 2024-05-01 22:57:48">2024-05-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/01/ffmpeg/" title="FFMPEG">FFMPEG</a><time datetime="2024-05-01T14:57:48.000Z" title="发表于 2024-05-01 22:57:48">2024-05-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/01/networkProgramming/" title="网络编程">网络编程</a><time datetime="2024-05-01T14:57:48.000Z" title="发表于 2024-05-01 22:57:48">2024-05-01</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/background.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Xtt</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Be Happy</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/nico.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-20},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
