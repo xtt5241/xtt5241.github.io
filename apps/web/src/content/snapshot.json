@@ -1,0 +1,140 @@
+{
+  "generatedAt": "2026-08-11T10:22:59.455Z",
+  "posts": [
+    {
+      "id": 3,
+      "title": "test",
+      "slug": "text",
+      "excerpt": "试试试试",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "xtt最帅",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "是大多数都是颠三倒四、、、",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "type": "upload",
+              "version": 3,
+              "format": "",
+              "id": "6a7aef92e80c6d3115479d5e",
+              "fields": {},
+              "relationTo": "media",
+              "value": {
+                "id": 4,
+                "alt": null,
+                "caption": null,
+                "updatedAt": "2026-08-11T09:46:58.107Z",
+                "createdAt": "2026-08-11T09:46:58.107Z",
+                "url": "/api/media/file/image-3.png",
+                "thumbnailURL": "/api/media/file/image-3-960x600.png",
+                "filename": "image-3.png",
+                "mimeType": "image/png",
+                "filesize": 33837,
+                "width": 1515,
+                "height": 248,
+                "focalX": 50,
+                "focalY": 50,
+                "sizes": {
+                  "card": {
+                    "url": "/api/media/file/image-3-960x600.png",
+                    "width": 960,
+                    "height": 600,
+                    "mimeType": "image/png",
+                    "filesize": 37709,
+                    "filename": "image-3-960x600.png"
+                  },
+                  "wide": {
+                    "url": null,
+                    "width": null,
+                    "height": null,
+                    "mimeType": null,
+                    "filesize": null,
+                    "filename": null
+                  }
+                }
+              }
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": null,
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "cover": null,
+      "category": null,
+      "tags": [],
+      "publishedAt": "2026-08-11T08:50:57.699Z",
+      "featured": true,
+      "readingMinutes": 1,
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "updatedAt": "2026-08-11T09:47:12.820Z",
+      "createdAt": "2026-08-11T08:50:39.340Z",
+      "_status": "published"
+    }
+  ],
+  "profile": {
+    "links": []
+  }
+}

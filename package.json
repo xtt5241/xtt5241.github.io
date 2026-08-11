@@ -1,0 +1,17 @@
+{
+  "name": "xtt-blog",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.16.0",
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "pnpm --parallel --filter web --filter cms dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:cms": "pnpm --filter cms dev",
+    "export:content": "node scripts/export-static-content.mjs",
+    "build:pages": "NEXT_PUBLIC_STATIC_EXPORT=true NEXT_PUBLIC_BASE_PATH=/xtt_blog NEXT_PUBLIC_SITE_URL=https://xtt5241.github.io/xtt_blog pnpm --filter web build",
+    "build": "pnpm --filter cms build && pnpm --filter web build",
+    "lint": "pnpm --filter cms lint && pnpm --filter web lint",
+    "typecheck": "pnpm --filter cms typecheck && pnpm --filter web typecheck"
+  }
+}

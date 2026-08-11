@@ -1,0 +1,7 @@
+.template-default__wrap {
+  max-width: 1480px;
+}
+.bulk-upload--file-manager.quick-upload--submitting {
+  opacity: 0;
+  pointer-events: none;
+}
