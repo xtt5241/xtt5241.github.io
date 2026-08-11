@@ -116,10 +116,10 @@ pnpm build:pages  # 本地验证 GitHub Pages 静态产物
 
 ## 六、发布到 GitHub Pages
 
-公开测试站点由 `xtt5241/xtt_blog` 仓库的 GitHub Actions 发布，地址为：
+公开站点由 `xtt5241/xtt5241.github.io` 仓库的 GitHub Actions 发布，地址为：
 
 ```text
-https://xtt5241.github.io/xtt_blog/
+https://xtt5241.github.io/
 ```
 
 GitHub Pages 只托管静态文件，因此后台点击 Publish 只会更新本地 CMS。发布或删除文章后，在 CMS 运行期间执行：

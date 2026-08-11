@@ -43,8 +43,8 @@ jobs:
         run: pnpm --filter web build
         env:
           NEXT_PUBLIC_STATIC_EXPORT: "true"
-          NEXT_PUBLIC_BASE_PATH: /xtt_blog
-          NEXT_PUBLIC_SITE_URL: https://xtt5241.github.io/xtt_blog
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_URL: https://xtt5241.github.io
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
