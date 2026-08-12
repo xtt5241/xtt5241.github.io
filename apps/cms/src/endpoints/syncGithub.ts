@@ -6,6 +6,12 @@ import type { Endpoint } from "payload";
 
 const execFileAsync = promisify(execFile);
 const publicPaths = ["apps/web/src/content/snapshot.json", "apps/web/public/media"];
+let activeSync: Promise<SyncResult> | undefined;
+
+type SyncResult = {
+  changed: boolean;
+  message: string;
+};
 
 function findRepositoryRoot() {
   const candidates = [
@@ -32,6 +38,22 @@ function errorMessage(error: unknown) {
   return (detail.stderr || detail.stdout || detail.message || "同步失败").trim().slice(-1600);
 }
 
+async function syncPublishedContent(): Promise<SyncResult> {
+  const repositoryRoot = findRepositoryRoot();
+  await run("pnpm", ["export:content"], repositoryRoot);
+
+  const status = await run("git", ["status", "--short", "--", ...publicPaths], repositoryRoot);
+  if (!status.stdout.trim()) {
+    return { changed: false, message: "公开内容没有变化。" };
+  }
+
+  await run("git", ["add", "-A", "--", ...publicPaths], repositoryRoot);
+  await run("git", ["commit", "-m", "Update published blog content"], repositoryRoot);
+  await run("git", ["push", "origin", "main"], repositoryRoot);
+
+  return { changed: true, message: "已推送到 GitHub，Pages 正在部署。" };
+}
+
 export const syncGithub: Endpoint = {
   path: "/sync-github",
   method: "post",
@@ -41,19 +63,11 @@ export const syncGithub: Endpoint = {
     }
 
     try {
-      const repositoryRoot = findRepositoryRoot();
-      await run("pnpm", ["export:content"], repositoryRoot);
-
-      const status = await run("git", ["status", "--short", "--", ...publicPaths], repositoryRoot);
-      if (!status.stdout.trim()) {
-        return Response.json({ ok: true, changed: false, message: "公开内容没有变化。" });
-      }
-
-      await run("git", ["add", "-A", "--", ...publicPaths], repositoryRoot);
-      await run("git", ["commit", "-m", "Update published blog content"], repositoryRoot);
-      await run("git", ["push", "origin", "main"], repositoryRoot);
-
-      return Response.json({ ok: true, changed: true, message: "已推送到 GitHub，Pages 正在部署。" });
+      const sync = activeSync ?? (activeSync = syncPublishedContent().finally(() => {
+        activeSync = undefined;
+      }));
+      const result = await sync;
+      return Response.json({ ok: true, ...result });
     } catch (error) {
       console.error("GitHub Pages sync failed", error);
       return Response.json({ error: errorMessage(error) }, { status: 500 });
