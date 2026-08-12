@@ -4,10 +4,12 @@ import { Button, toast, useDocumentInfo } from "@payloadcms/ui";
 import { useState } from "react";
 
 export default function SyncGithubButton() {
-  const { hasPublishedDoc, id } = useDocumentInfo();
+  const { collectionSlug, globalSlug, hasPublishedDoc, id } = useDocumentInfo();
   const [syncing, setSyncing] = useState(false);
 
-  if (!id || !hasPublishedDoc) return null;
+  const isProfile = globalSlug === "profile";
+  const isPublishedPost = collectionSlug === "posts" && Boolean(id) && hasPublishedDoc;
+  if (!isProfile && !isPublishedPost) return null;
 
   const sync = async () => {
     if (syncing) return;

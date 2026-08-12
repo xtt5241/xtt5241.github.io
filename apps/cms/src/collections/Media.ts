@@ -1,10 +1,15 @@
 import type { CollectionConfig } from "payload";
+import { syncAfterPublicContentChange, syncAfterPublicContentDelete } from "@/hooks/syncAfterPublicContentChange";
 
 export const Media: CollectionConfig = {
   slug: "media",
   labels: { singular: "图片", plural: "媒体库" },
   admin: { group: "内容" },
   access: { read: () => true },
+  hooks: {
+    afterChange: [syncAfterPublicContentChange],
+    afterDelete: [syncAfterPublicContentDelete],
+  },
   upload: {
     staticDir: "media",
     imageSizes: [
