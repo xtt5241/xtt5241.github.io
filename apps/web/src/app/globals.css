@@ -140,6 +140,32 @@ img { display: block; }
 .topic-links strong { color: #f4c76b; font-size: 13px; }
 .topic-links a:hover span { color: #f4c76b; }
 
+.guestbook-section { background: var(--paper-raised); }
+.guestbook-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; align-items: center; }
+.guestbook-layout h2 { margin: 0; font-family: var(--font-serif), serif; font-size: 36px; line-height: 1.25; }
+.guestbook-layout > div > p:last-child { max-width: 360px; margin: 16px 0 0; color: var(--muted); line-height: 1.8; }
+.guestbook-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.guestbook-action {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
+  min-height: 112px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  background: var(--paper);
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+.guestbook-action:hover { border-color: var(--forest); transform: translateY(-2px); background: color-mix(in srgb, var(--forest) 6%, var(--paper)); }
+.guestbook-action--primary { border-color: var(--forest); color: #f5fbf7; background: var(--forest); }
+.guestbook-action--primary:hover { color: #fff; background: var(--forest-strong); }
+.guestbook-action span { display: grid; gap: 5px; min-width: 0; }
+.guestbook-action strong { font-size: 15px; }
+.guestbook-action small { color: var(--muted); font-size: 12px; line-height: 1.45; }
+.guestbook-action--primary small { color: rgba(255,255,255,.72); }
+
 .page-shell { min-height: 70vh; padding-block: 92px 120px; }
 .narrow-shell { max-width: 860px; }
 .page-heading { max-width: 760px; margin-bottom: 60px; }
@@ -307,6 +333,9 @@ img { display: block; }
   .post-row h3 { font-size: 21px; }
   .row-arrow { grid-column: 2; grid-row: 2; width: 34px; height: 34px; }
   .topic-grid { grid-template-columns: 1fr; gap: 36px; }
+  .guestbook-layout { grid-template-columns: 1fr; gap: 34px; }
+  .guestbook-actions { grid-template-columns: 1fr; }
+  .guestbook-action { min-height: 88px; }
   .page-shell { padding-block: 60px 88px; }
   .page-heading { margin-bottom: 40px; }
   .page-heading h1 { font-size: 42px; }

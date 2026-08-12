@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, BookOpen, Rss } from "lucide-react";
 import { PostCard } from "@/components/post-card";
+import { GuestbookPanel } from "@/components/guestbook-panel";
 import { siteConfig } from "@/config/site";
 import { getPosts } from "@/lib/content";
 import { withBasePath } from "@/lib/media";
@@ -75,6 +76,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <GuestbookPanel />
     </>
   );
 }
