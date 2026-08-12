@@ -144,7 +144,11 @@ git push
 ```dotenv
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_CMS_URL=http://localhost:3001
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 ```
+
+首页的喜欢与留言使用 Supabase。创建项目后，在 SQL Editor 执行 `supabase/home-interactions.sql`，并在 Authentication → Providers 开启 Anonymous Sign-Ins。将项目 URL 与 publishable key 填入 `apps/web/.env.local`；GitHub Pages 部署时，同名值应配置为仓库 Actions variables。
 
 CMS 配置位于 `apps/cms/.env`：
 
