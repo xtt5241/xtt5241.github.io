@@ -1,6 +1,8 @@
 -- Run this once in Supabase Dashboard -> SQL Editor.
 -- Also enable Authentication -> Providers -> Anonymous Sign-Ins.
 
+create extension if not exists pgcrypto;
+
 create table if not exists public.page_reactions (
   page_key text not null,
   visitor_id uuid not null references auth.users(id) on delete cascade,
@@ -20,8 +22,22 @@ create table if not exists public.guestbook_comments (
 create index if not exists guestbook_comments_page_created_at_idx
   on public.guestbook_comments (page_key, created_at desc);
 
+grant usage on schema public to anon, authenticated;
+grant select, insert, delete on public.page_reactions to authenticated;
+grant select, insert on public.guestbook_comments to authenticated;
+
 alter table public.page_reactions enable row level security;
 alter table public.guestbook_comments enable row level security;
+
+create or replace function public.get_page_reaction_count(target_page_key text)
+returns bigint
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select count(*) from public.page_reactions where page_key = target_page_key;
+$$;
 
 create or replace function public.can_leave_guestbook_comment()
 returns boolean
@@ -36,11 +52,15 @@ as $$
   );
 $$;
 
+revoke all on function public.get_page_reaction_count(text) from public;
+grant execute on function public.get_page_reaction_count(text) to anon, authenticated;
+
 revoke all on function public.can_leave_guestbook_comment() from public;
 grant execute on function public.can_leave_guestbook_comment() to authenticated;
 
-create policy "Anyone can read reaction totals"
-  on public.page_reactions for select using (true);
+create policy "Authenticated visitors can read their own reaction"
+  on public.page_reactions for select to authenticated
+  using (visitor_id = auth.uid());
 
 create policy "Authenticated visitors can add their own reaction"
   on public.page_reactions for insert to authenticated
@@ -50,8 +70,8 @@ create policy "Authenticated visitors can remove their own reaction"
   on public.page_reactions for delete to authenticated
   using (visitor_id = auth.uid());
 
-create policy "Anyone can read guestbook comments"
-  on public.guestbook_comments for select using (true);
+create policy "Authenticated visitors can read guestbook comments"
+  on public.guestbook_comments for select to authenticated using (true);
 
 create policy "Authenticated visitors can leave a guestbook comment"
   on public.guestbook_comments for insert to authenticated

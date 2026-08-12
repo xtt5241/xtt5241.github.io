@@ -39,14 +39,14 @@ export function GuestbookPanel() {
       const { data: authData } = await client.auth.getUser();
       const user = authData.user ?? (await client.auth.signInAnonymously()).data.user;
       const [reactionResult, commentResult, ownReactionResult] = await Promise.all([
-        client.from("page_reactions").select("*", { count: "exact", head: true }).eq("page_key", pageKey),
+        client.rpc("get_page_reaction_count", { target_page_key: pageKey }),
         client.from("guestbook_comments").select("id, author_name, body, created_at").eq("page_key", pageKey).order("created_at", { ascending: false }).limit(6),
         user
           ? client.from("page_reactions").select("visitor_id").eq("page_key", pageKey).eq("visitor_id", user.id).maybeSingle()
           : Promise.resolve({ data: null }),
       ]);
 
-      setReactionCount(reactionResult.count ?? 0);
+      setReactionCount(Number(reactionResult.data ?? 0));
       setComments((commentResult.data ?? []) as Comment[]);
       setReacted(Boolean(ownReactionResult.data));
       setLoading(false);
