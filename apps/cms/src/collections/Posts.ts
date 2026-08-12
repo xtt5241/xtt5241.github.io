@@ -20,6 +20,7 @@ export const Posts: CollectionConfig = {
     components: {
       edit: {
         PublishButton: "@/components/PublishButton",
+        beforeDocumentControls: ["@/components/SyncGithubButton"],
       },
     },
     description: "撰写、保存草稿并发布文章。Slug、摘要、阅读时间和首次发布时间都可以自动生成。",

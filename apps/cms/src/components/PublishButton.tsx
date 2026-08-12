@@ -13,6 +13,7 @@ import {
   useTranslation,
 } from "@payloadcms/ui";
 import { ScheduleDrawer } from "@payloadcms/ui/elements/PublishButton/ScheduleDrawer";
+import { toast } from "@payloadcms/ui";
 
 export default function PublishButton() {
   const {
@@ -84,6 +85,18 @@ export default function PublishButton() {
       setUnpublishedVersionCount(0);
       setMostRecentVersionIsAutosaved(false);
       setHasPublishedDoc(true);
+
+      try {
+        const response = await fetch("/api/sync-github", {
+          method: "POST",
+          credentials: "include",
+        });
+        const data = await response.json() as { message?: string; error?: string };
+        if (!response.ok) throw new Error(data.error || "GitHub Pages 同步失败。");
+        toast.success(data.message || "已发布并同步到 GitHub Pages。");
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : "文章已发布，但 GitHub Pages 同步失败。");
+      }
     }
   };
 

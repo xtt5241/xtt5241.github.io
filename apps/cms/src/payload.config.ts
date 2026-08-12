@@ -10,6 +10,7 @@ import { Posts } from "@/collections/Posts";
 import { Tags } from "@/collections/Tags";
 import { Users } from "@/collections/Users";
 import { Profile } from "@/globals/Profile";
+import { syncGithub } from "@/endpoints/syncGithub";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -27,6 +28,7 @@ export default buildConfig({
   },
   collections: [Users, Posts, Categories, Tags, Media],
   globals: [Profile],
+  endpoints: [syncGithub],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "local-development-secret-change-me",
   serverURL: cmsUrl,
