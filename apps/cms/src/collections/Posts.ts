@@ -9,6 +9,7 @@ import {
 import type { CollectionConfig } from "payload";
 import { publishedOrAuthenticated } from "@/access/publishedOrAuthenticated";
 import { preparePost } from "@/utilities/content";
+import { syncAfterPostDelete } from "@/hooks/syncAfterPostDelete";
 
 export const Posts: CollectionConfig = {
   slug: "posts",
@@ -38,7 +39,7 @@ export const Posts: CollectionConfig = {
     drafts: { autosave: { interval: 1500, showSaveDraftButton: true }, schedulePublish: true },
     maxPerDoc: 30,
   },
-  hooks: { beforeValidate: [preparePost] },
+  hooks: { beforeValidate: [preparePost], afterDelete: [syncAfterPostDelete] },
   fields: [
     { name: "title", label: "标题", type: "text", required: true },
     { name: "slug", label: "网址标识", type: "text", required: true, unique: true, index: true, admin: { description: "可留空，将根据标题自动生成。发布后不建议修改。" } },

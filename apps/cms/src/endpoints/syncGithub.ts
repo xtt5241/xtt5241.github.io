@@ -38,7 +38,7 @@ function errorMessage(error: unknown) {
   return (detail.stderr || detail.stdout || detail.message || "同步失败").trim().slice(-1600);
 }
 
-async function syncPublishedContent(): Promise<SyncResult> {
+export async function syncPublishedContent(): Promise<SyncResult> {
   const repositoryRoot = findRepositoryRoot();
   await run("pnpm", ["export:content"], repositoryRoot);
 
@@ -54,6 +54,13 @@ async function syncPublishedContent(): Promise<SyncResult> {
   return { changed: true, message: "已推送到 GitHub，Pages 正在部署。" };
 }
 
+export function syncPublishedContentOnce() {
+  const sync = activeSync ?? (activeSync = syncPublishedContent().finally(() => {
+    activeSync = undefined;
+  }));
+  return sync;
+}
+
 export const syncGithub: Endpoint = {
   path: "/sync-github",
   method: "post",
@@ -63,10 +70,7 @@ export const syncGithub: Endpoint = {
     }
 
     try {
-      const sync = activeSync ?? (activeSync = syncPublishedContent().finally(() => {
-        activeSync = undefined;
-      }));
-      const result = await sync;
+      const result = await syncPublishedContentOnce();
       return Response.json({ ok: true, ...result });
     } catch (error) {
       console.error("GitHub Pages sync failed", error);

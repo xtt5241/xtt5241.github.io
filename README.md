@@ -124,7 +124,7 @@ pnpm build:pages  # 本地验证 GitHub Pages 静态产物
 https://xtt5241.github.io/
 ```
 
-GitHub Pages 只托管静态文件。后台文章点击 **Publish changes** 后，会自动导出公开内容并推送到 GitHub，随后由 GitHub Actions 更新 Pages。文章编辑页也提供 **同步到 GitHub Pages** 按钮，可用于手动重试。
+GitHub Pages 只托管静态文件。后台文章点击 **Publish changes** 后，会自动导出公开内容并推送到 GitHub，随后由 GitHub Actions 更新 Pages。删除文章时也会自动同步删除线上文章。文章编辑页还提供 **同步到 GitHub Pages** 按钮，可用于手动重试。
 
 如果自动同步暂时失败，也可以在 CMS 运行期间执行：
 
