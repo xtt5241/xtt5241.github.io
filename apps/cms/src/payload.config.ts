@@ -11,6 +11,7 @@ import { Tags } from "@/collections/Tags";
 import { Users } from "@/collections/Users";
 import { Profile } from "@/globals/Profile";
 import { syncGithub } from "@/endpoints/syncGithub";
+import { deleteInteractionComment, getInteractions } from "@/endpoints/interactions";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -24,11 +25,18 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     components: {
       providers: ["@/components/QuickUploadProvider"],
+      afterNavLinks: ["@/components/InteractionsNavLink"],
+      views: {
+        interactions: {
+          path: "/interactions",
+          Component: "@/views/InteractionsView",
+        },
+      },
     },
   },
   collections: [Users, Posts, Categories, Tags, Media],
   globals: [Profile],
-  endpoints: [syncGithub],
+  endpoints: [syncGithub, getInteractions, deleteInteractionComment],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "local-development-secret-change-me",
   serverURL: cmsUrl,

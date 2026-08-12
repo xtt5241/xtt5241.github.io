@@ -150,6 +150,8 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 
 首页的喜欢与留言使用 Supabase。创建项目后，在 SQL Editor 执行 `supabase/home-interactions.sql`，并在 Authentication → Providers 开启 Anonymous Sign-Ins。将项目 URL 与 publishable key 填入 `apps/web/.env.local`；GitHub Pages 部署时，同名值应配置为仓库 Actions variables。
 
+后台的“站点互动”页会显示总点赞与全部留言，并可直接删除留言。它还需要在 `apps/cms/.env` 中配置同一个项目的 `SUPABASE_URL` 与仅限服务器使用的 `SUPABASE_ADMIN_KEY`；不要把该密钥放进前台环境变量或提交到 Git。
+
 CMS 配置位于 `apps/cms/.env`：
 
 ```dotenv
@@ -157,6 +159,8 @@ DATABASE_URI=file:./xtt-blog.db
 PAYLOAD_SECRET=由 pnpm setup 自动生成
 WEB_URL=http://localhost:3000
 CMS_URL=http://localhost:3001
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ADMIN_KEY=仅限本机 CMS 使用的 Supabase secret key
 ```
 
 当前 GitHub Pages 使用公开内容快照，不需要部署 CMS，也不会读取仓库中的环境变量。

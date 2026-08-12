@@ -25,6 +25,8 @@ create index if not exists guestbook_comments_page_created_at_idx
 grant usage on schema public to anon, authenticated;
 grant select, insert, delete on public.page_reactions to authenticated;
 grant select, insert on public.guestbook_comments to authenticated;
+grant select on public.page_reactions to service_role;
+grant select, delete on public.guestbook_comments to service_role;
 
 alter table public.page_reactions enable row level security;
 alter table public.guestbook_comments enable row level security;
