@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T13:29:06.014Z",
+  "generatedAt": "2026-08-13T13:29:40.098Z",
   "posts": [
     {
       "id": 5,
@@ -785,66 +785,6 @@
                   "format": 0,
                   "mode": "normal",
                   "style": "",
-                  "text": "这是这个博客重新开张后的第一篇文章。",
-                  "type": "text",
-                  "version": 1
-                }
-              ],
-              "direction": null,
-              "format": "",
-              "indent": 0,
-              "type": "paragraph",
-              "version": 1,
-              "textFormat": 0,
-              "textStyle": ""
-            },
-            {
-              "children": [
-                {
-                  "detail": 0,
-                  "format": 0,
-                  "mode": "normal",
-                  "style": "",
-                  "text": "说是“重新开张”，是因为我以前也认真想过要写博客，也搭过一些东西，甚至列过不少想写的主题。但很多时候，博客最后变成了一个被设计得很完整、却没有持续使用的系统：分类、页面、工具都准备好了，真正留下来的内容却不多。",
-                  "type": "text",
-                  "version": 1
-                }
-              ],
-              "direction": null,
-              "format": "",
-              "indent": 0,
-              "type": "paragraph",
-              "version": 1,
-              "textFormat": 0,
-              "textStyle": ""
-            },
-            {
-              "children": [
-                {
-                  "detail": 0,
-                  "format": 0,
-                  "mode": "normal",
-                  "style": "",
-                  "text": "这一次我想简单一点。先写起来，再慢慢让它变成适合我的样子。",
-                  "type": "text",
-                  "version": 1
-                }
-              ],
-              "direction": null,
-              "format": "",
-              "indent": 0,
-              "type": "paragraph",
-              "version": 1,
-              "textFormat": 0,
-              "textStyle": ""
-            },
-            {
-              "children": [
-                {
-                  "detail": 0,
-                  "format": 0,
-                  "mode": "normal",
-                  "style": "",
                   "text": "我是谁",
                   "type": "text",
                   "version": 1
@@ -1369,7 +1309,7 @@
         "title": "重新开张：我想在这里记录什么，以及我是谁",
         "description": "重新开张：我想在这里记录什么，以及我是谁 这是这个博客重新开张后的第一篇文章。 说是“重新开张”，是因为我以前也认真想过要写博客，也搭过一些东西，甚至列过不少想写的主题。但很多时候，博客最后变成了一个被设计得很完整、却没有持续使用的系统：分类、页面、工具都准备好了，真正留下来的内容却不多。 这一次我想简单一点。先写起来"
       },
-      "updatedAt": "2026-08-12T07:12:47.038Z",
+      "updatedAt": "2026-08-13T13:29:39.970Z",
       "createdAt": "2026-08-12T01:10:52.778Z",
       "_status": "published"
     }
