@@ -10,7 +10,7 @@ import { startBackgroundSync } from "@/endpoints/syncGithub";
 
 async function sync(source: string) {
   try {
-    startBackgroundSync();
+    await startBackgroundSync();
     console.log(`[sync] background sync started after ${source}`);
   } catch (error) {
     console.error(`[sync] failed to start sync after ${source}`, error);
