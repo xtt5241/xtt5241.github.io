@@ -1,18 +1,11 @@
-import { execFile } from "node:child_process";
-import { existsSync } from "node:fs";
-import os from "node:os";
+import { spawn } from "node:child_process";
+import { existsSync, openSync } from "node:fs";
 import path from "node:path";
-import { promisify } from "node:util";
 import type { Endpoint } from "payload";
 
-const execFileAsync = promisify(execFile);
-const publicPaths = ["apps/web/src/content/snapshot.json", "apps/web/public/media"];
-let activeSync: Promise<SyncResult> | undefined;
-
-type SyncResult = {
-  changed: boolean;
-  message: string;
-};
+// 后台同步：导出内容 + git 提交推送 GitHub Pages。
+// 通过分离子进程执行 scripts/sync-github.mjs，避免在请求/hook 内同步等待导致回环卡死。
+// 2026-08-13 重构：原实现在请求内 await export+push，export 又回环请求 CMS 自己，dev server 频繁卡死。
 
 function findRepositoryRoot() {
   const candidates = [
@@ -26,44 +19,19 @@ function findRepositoryRoot() {
   return root;
 }
 
-async function run(command: string, args: string[], cwd: string, extraEnv?: Record<string, string>) {
-  return execFileAsync(command, args, {
-    cwd,
-    env: extraEnv ? { ...process.env, ...extraEnv } : process.env,
-    maxBuffer: 2 * 1024 * 1024,
-  });
-}
-
-function errorMessage(error: unknown) {
-  const detail = error as { stderr?: string; stdout?: string; message?: string };
-  return (detail.stderr || detail.stdout || detail.message || "同步失败").trim().slice(-1600);
-}
-
-export async function syncPublishedContent(): Promise<SyncResult> {
+export function startBackgroundSync(): string {
   const repositoryRoot = findRepositoryRoot();
-  // 直接用 node 跑导出脚本，避免依赖本机 pnpm（2026-08-13 修复）
-  await run("node", ["scripts/export-static-content.mjs"], repositoryRoot);
-
-  const status = await run("git", ["status", "--short", "--", ...publicPaths], repositoryRoot);
-  if (!status.stdout.trim()) {
-    return { changed: false, message: "公开内容没有变化。" };
-  }
-
-  await run("git", ["add", "-A", "--", ...publicPaths], repositoryRoot);
-  await run("git", ["commit", "-m", "Update published blog content"], repositoryRoot);
-  // 指定部署用 SSH key（id_ed25519_xtt_blog），2026-08-13 修复
-  const deployKey = path.join(os.homedir(), ".ssh/id_ed25519_xtt_blog");
-  const gitEnv = { GIT_SSH_COMMAND: `ssh -i ${deployKey} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new` };
-  await run("git", ["push", "origin", "main"], repositoryRoot, gitEnv);
-
-  return { changed: true, message: "已推送到 GitHub，Pages 正在部署。" };
-}
-
-export function syncPublishedContentOnce() {
-  const sync = activeSync ?? (activeSync = syncPublishedContent().finally(() => {
-    activeSync = undefined;
-  }));
-  return sync;
+  const script = path.join(repositoryRoot, "scripts/sync-github.mjs");
+  const logPath = path.join(repositoryRoot, "sync-github.log");
+  const logFd = openSync(logPath, "a");
+  const child = spawn("node", [script], {
+    cwd: repositoryRoot,
+    detached: true,
+    stdio: ["ignore", logFd, logFd],
+    env: process.env,
+  });
+  child.unref();
+  return logPath;
 }
 
 export const syncGithub: Endpoint = {
@@ -75,11 +43,11 @@ export const syncGithub: Endpoint = {
     }
 
     try {
-      const result = await syncPublishedContentOnce();
-      return Response.json({ ok: true, ...result });
+      startBackgroundSync();
+      return Response.json({ ok: true, message: "同步已在后台开始，完成后 Pages 会自动部署。" });
     } catch (error) {
-      console.error("GitHub Pages sync failed", error);
-      return Response.json({ error: errorMessage(error) }, { status: 500 });
+      const message = error instanceof Error ? error.message : "同步启动失败。";
+      return Response.json({ error: message }, { status: 500 });
     }
   },
 };

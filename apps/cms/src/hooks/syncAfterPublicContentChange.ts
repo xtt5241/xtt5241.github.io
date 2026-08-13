@@ -3,32 +3,28 @@ import type {
   CollectionAfterDeleteHook,
   GlobalAfterChangeHook,
 } from "payload";
-import { syncPublishedContentOnce } from "@/endpoints/syncGithub";
+import { startBackgroundSync } from "@/endpoints/syncGithub";
 
-async function sync(req: { payload: { logger: { error: (data: Record<string, unknown>) => void; info: (data: Record<string, unknown>) => void } } }, source: string) {
+// 内容变更（保存/删除文章、修改 profile）后触发后台同步，不阻塞请求。
+// 2026-08-13 重构：原实现 await 同步，export 回环请求 CMS 导致 dev server 卡死。
+
+async function sync(source: string) {
   try {
-    const result = await syncPublishedContentOnce();
-    req.payload.logger.info({
-      ...result,
-      message: `Blog content sync completed after ${source}`,
-    });
+    startBackgroundSync();
+    console.log(`[sync] background sync started after ${source}`);
   } catch (error) {
-    // The CMS change is already persisted. Keep it available for a manual retry.
-    req.payload.logger.error({
-      err: error,
-      message: `Blog content sync failed after ${source}`,
-    });
+    console.error(`[sync] failed to start sync after ${source}`, error);
   }
 }
 
-export const syncAfterPublicContentChange: CollectionAfterChangeHook = async ({ collection, req }) => {
-  await sync(req, `${collection.slug} change`);
+export const syncAfterPublicContentChange: CollectionAfterChangeHook = async ({ collection }) => {
+  await sync(`${collection.slug} change`);
 };
 
-export const syncAfterPublicContentDelete: CollectionAfterDeleteHook = async ({ collection, req }) => {
-  await sync(req, `${collection.slug} deletion`);
+export const syncAfterPublicContentDelete: CollectionAfterDeleteHook = async ({ collection }) => {
+  await sync(`${collection.slug} deletion`);
 };
 
-export const syncAfterProfileChange: GlobalAfterChangeHook = async ({ req }) => {
-  await sync(req, "profile change");
+export const syncAfterProfileChange: GlobalAfterChangeHook = async () => {
+  await sync("profile change");
 };
