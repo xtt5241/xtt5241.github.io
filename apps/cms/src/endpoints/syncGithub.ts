@@ -1,5 +1,6 @@
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
 import type { Endpoint } from "payload";
@@ -25,10 +26,10 @@ function findRepositoryRoot() {
   return root;
 }
 
-async function run(command: string, args: string[], cwd: string) {
+async function run(command: string, args: string[], cwd: string, extraEnv?: Record<string, string>) {
   return execFileAsync(command, args, {
     cwd,
-    env: process.env,
+    env: extraEnv ? { ...process.env, ...extraEnv } : process.env,
     maxBuffer: 2 * 1024 * 1024,
   });
 }
@@ -40,7 +41,8 @@ function errorMessage(error: unknown) {
 
 export async function syncPublishedContent(): Promise<SyncResult> {
   const repositoryRoot = findRepositoryRoot();
-  await run("pnpm", ["export:content"], repositoryRoot);
+  // 直接用 node 跑导出脚本，避免依赖本机 pnpm（2026-08-13 修复）
+  await run("node", ["scripts/export-static-content.mjs"], repositoryRoot);
 
   const status = await run("git", ["status", "--short", "--", ...publicPaths], repositoryRoot);
   if (!status.stdout.trim()) {
@@ -49,7 +51,10 @@ export async function syncPublishedContent(): Promise<SyncResult> {
 
   await run("git", ["add", "-A", "--", ...publicPaths], repositoryRoot);
   await run("git", ["commit", "-m", "Update published blog content"], repositoryRoot);
-  await run("git", ["push", "origin", "main"], repositoryRoot);
+  // 指定部署用 SSH key（id_ed25519_xtt_blog），2026-08-13 修复
+  const deployKey = path.join(os.homedir(), ".ssh/id_ed25519_xtt_blog");
+  const gitEnv = { GIT_SSH_COMMAND: `ssh -i ${deployKey} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new` };
+  await run("git", ["push", "origin", "main"], repositoryRoot, gitEnv);
 
   return { changed: true, message: "已推送到 GitHub，Pages 正在部署。" };
 }
