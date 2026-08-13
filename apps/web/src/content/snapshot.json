@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T13:08:59.083Z",
+  "generatedAt": "2026-08-13T13:15:30.123Z",
   "posts": [
     {
       "id": 5,
@@ -1410,43 +1410,83 @@
   ],
   "profile": {
     "id": 1,
-    "name": "Uhz_TTX",
-    "headline": "我就是我",
-    "location": null,
+    "name": "Xtt",
+    "headline": "计算机视觉博士生 · 研究第一视角空间智能",
+    "location": "杭州",
     "bio": {
       "root": {
+        "type": "root",
         "children": [
           {
+            "type": "paragraph",
             "children": [
               {
+                "type": "text",
+                "text": "你好，我是 Xtt，计算机视觉方向的博士生。目前的研究主线是第一视角空间智能（Ego 3D）：让智能体从持续的第一视角观察中理解、记忆并推理动态三维世界。目前我也在探索从 360° 全景切入三维空间理解的方向。",
                 "detail": 0,
                 "format": 0,
                 "mode": "normal",
                 "style": "",
-                "text": "我就是我",
-                "type": "text",
                 "version": 1
               }
             ],
-            "direction": null,
+            "direction": "ltr",
             "format": "",
             "indent": 0,
+            "version": 1
+          },
+          {
             "type": "paragraph",
-            "version": 1,
-            "textFormat": 0,
-            "textStyle": ""
+            "children": [
+              {
+                "type": "text",
+                "text": "目前我最看好的载体是 AI 眼镜：摄像头看见、麦克风听见、模型理解、系统在真实世界里给出反应。更远的图景是每个人都能拥有的个人智能管家——长期陪伴、持续感知、有记忆、能行动。我相信这个方向值得押上很长一段时间。",
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "version": 1
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "text": "我依赖 AI 辅助学习与研究，但坚持把 AI 的解释和我自己的理解分开；我相信兴趣驱动，不为写论文而写论文。这个博客记录我的研究、学习和思考。",
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "version": 1
           }
         ],
-        "direction": null,
+        "direction": "ltr",
         "format": "",
         "indent": 0,
-        "type": "root",
         "version": 1
       }
     },
     "avatar": null,
-    "links": [],
-    "updatedAt": "2026-08-12T07:28:11.277Z",
+    "links": [
+      {
+        "id": "6a7dc3723e9aa73eb93249f2",
+        "label": "我的博客",
+        "url": "https://xtt5241.github.io"
+      }
+    ],
+    "updatedAt": "2026-08-13T13:15:30.034Z",
     "createdAt": "2026-08-12T07:28:11.277Z",
     "globalType": "profile"
   }
