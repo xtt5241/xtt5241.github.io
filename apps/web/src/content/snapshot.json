@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-14T06:28:43.335Z",
+  "generatedAt": "2026-08-14T06:30:05.722Z",
   "posts": [
     {
       "id": 6,
@@ -16,7 +16,7 @@
                   "format": 0,
                   "mode": "normal",
                   "style": "",
-                  "text": "这两天我一直在折腾。Reasonix、Zcode、Codex 换了一遍，给本地小x配了远程微信通道，又给 deepseek 外接了一个视觉模型当眼睛。折腾完发现，好像还不如直接用那个视觉模型。",
+                  "text": "这两天我一直在折腾。Reasonix、Zcode、Codex 换了一遍，给本地小x配了远程微信通道，让她能开口说话，又给 deepseek 外接了一个视觉模型当眼睛。折腾完发现，好像还不如直接用那个视觉模型。",
                   "type": "text",
                   "version": 1
                 }
@@ -305,7 +305,7 @@
         "title": null,
         "description": null
       },
-      "updatedAt": "2026-08-14T06:28:42.590Z",
+      "updatedAt": "2026-08-14T06:30:05.596Z",
       "createdAt": "2026-08-14T06:23:28.627Z",
       "_status": "published"
     },
