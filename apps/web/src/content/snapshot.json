@@ -1,6 +1,314 @@
 {
-  "generatedAt": "2026-08-14T06:23:28.799Z",
+  "generatedAt": "2026-08-14T06:28:42.802Z",
   "posts": [
+    {
+      "id": 6,
+      "title": "给 AI 装眼睛的两天",
+      "slug": "two-days-of-ai-eyes",
+      "excerpt": "这两天我一直在折腾：换 AI 助手、给 deepseek 装眼睛，绕了一圈发现好像还不如直接用那个视觉模型。",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "这两天我一直在折腾。Reasonix、Zcode、Codex 换了一遍，给本地小x配了远程微信通道，又给 deepseek 外接了一个视觉模型当眼睛。折腾完发现，好像还不如直接用那个视觉模型。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "为什么当初换 deepseek",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "想法其实挺清楚：支持国产，便宜好用，上下文够长，当管家正合适。我每天跟它聊日记、聊学习、聊各种有的没的，长上下文用起来很舒服，聊到哪它都记得。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "但有一个痛点一直卡着——它看不到图，不是多模态，而且马上要涨价了。我发一张运动记录截图，它只能干瞪眼。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "给 deepseek 装眼睛",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "于是我想了个办法：主脑还是 deepseek，外接一个 gpt-5.6-luna 当眼睛。图片转 base64，发给视觉模型，把描述拿回来再喂给主脑，眼睛装上了，小X能看见了。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "绕了一圈",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "但转念一想，这不对啊。我搭脚本、装 skill、处理安全细节，折腾一整套，最后看图的不还是 luna 吗？那我为什么不直接用 luna 当主脑？",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "理由又绕回来了：luna 上下文太短。当女仆聊天，聊一会儿就要压缩一次上下文，它老忘事。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "现在的情况就是：deepseek 便宜、上下文长、没有眼睛，马上还要涨价；luna 聪明、有眼睛、上下文短、要涨价。我给前者装了眼睛，用起来还是惦记后者。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "时间都去哪了",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "还有个更现实的问题：时间。AI 时代真的太耗时间了。我游戏都不打了，下班回来就是折腾——装环境、配通道、调参数、排错。还花钱，opencode-go 也开了，量确实大，但也是一笔开销。折腾本身成了新的爱好，或者说新的负担。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "写到这儿我还没想清楚该怎么选。可能根本没有最优解，就是看哪一阵子哪个模型更顺眼。先这么用着吧。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "cover": null,
+      "category": {
+        "id": 2,
+        "name": "随笔",
+        "slug": "随笔",
+        "description": null,
+        "updatedAt": "2026-08-12T01:10:52.765Z",
+        "createdAt": "2026-08-12T01:10:52.763Z"
+      },
+      "tags": [
+        {
+          "id": 5,
+          "name": "AI",
+          "slug": "ai",
+          "updatedAt": "2026-08-14T06:23:28.596Z",
+          "createdAt": "2026-08-14T06:23:28.596Z"
+        },
+        {
+          "id": 6,
+          "name": "折腾",
+          "slug": "折腾",
+          "updatedAt": "2026-08-14T06:23:28.615Z",
+          "createdAt": "2026-08-14T06:23:28.615Z"
+        }
+      ],
+      "publishedAt": "2026-08-14T06:28:42.589Z",
+      "featured": false,
+      "readingMinutes": 5,
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "updatedAt": "2026-08-14T06:28:42.590Z",
+      "createdAt": "2026-08-14T06:23:28.627Z",
+      "_status": "published"
+    },
     {
       "id": 5,
       "title": "我的注意力是怎么被“空”掉的",
