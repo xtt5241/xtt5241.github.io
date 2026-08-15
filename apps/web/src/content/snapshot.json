@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T14:00:27.617Z",
+  "generatedAt": "2026-08-15T14:05:51.471Z",
   "posts": [
     {
       "id": 6,
@@ -276,10 +276,10 @@
       "cover": null,
       "category": {
         "id": 2,
-        "name": "随笔",
-        "slug": "随笔",
+        "name": "碎片",
+        "slug": "fragments",
         "description": null,
-        "updatedAt": "2026-08-12T01:10:52.765Z",
+        "updatedAt": "2026-08-15T14:05:51.216Z",
         "createdAt": "2026-08-12T01:10:52.763Z"
       },
       "tags": [
@@ -1045,10 +1045,10 @@
       "cover": null,
       "category": {
         "id": 1,
-        "name": "一日一问",
-        "slug": "daily-question",
+        "name": "临界",
+        "slug": "critical",
         "description": "每天围绕一个问题与 GPT 深度对话，再把真实的思考、分歧和未决问题整理成公开文章。",
-        "updatedAt": "2026-08-12T00:34:35.796Z",
+        "updatedAt": "2026-08-15T14:05:51.292Z",
         "createdAt": "2026-08-12T00:34:35.796Z"
       },
       "tags": [
@@ -1574,10 +1574,10 @@
       "cover": null,
       "category": {
         "id": 2,
-        "name": "随笔",
-        "slug": "随笔",
+        "name": "碎片",
+        "slug": "fragments",
         "description": null,
-        "updatedAt": "2026-08-12T01:10:52.765Z",
+        "updatedAt": "2026-08-15T14:05:51.216Z",
         "createdAt": "2026-08-12T01:10:52.763Z"
       },
       "tags": [
