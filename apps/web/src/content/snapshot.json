@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T10:18:02.376Z",
+  "generatedAt": "2026-08-24T10:18:08.017Z",
   "posts": [
     {
       "id": 10,
@@ -367,6 +367,58 @@
               "version": 1,
               "textFormat": 0,
               "textStyle": ""
+            },
+            {
+              "type": "upload",
+              "version": 3,
+              "format": "",
+              "id": "6a8c1a5a885da7f81429e625",
+              "fields": {},
+              "relationTo": "media",
+              "value": {
+                "id": 1,
+                "alt": null,
+                "caption": null,
+                "updatedAt": "2026-08-24T10:18:02.286Z",
+                "createdAt": "2026-08-24T10:18:02.286Z",
+                "url": "/api/media/file/image.png",
+                "thumbnailURL": "/api/media/file/image-960x600.jpg",
+                "filename": "image.png",
+                "mimeType": "image/png",
+                "filesize": 546986,
+                "width": 1279,
+                "height": 2275,
+                "focalX": 50,
+                "focalY": 50,
+                "sizes": {
+                  "card": {
+                    "url": "/api/media/file/image-960x600.jpg",
+                    "width": 960,
+                    "height": 600,
+                    "mimeType": "image/jpeg",
+                    "filesize": 128409,
+                    "filename": "image-960x600.jpg"
+                  },
+                  "wide": {
+                    "url": "/api/media/file/image-1600x900.jpg",
+                    "width": 1600,
+                    "height": 900,
+                    "mimeType": "image/jpeg",
+                    "filesize": 233451,
+                    "filename": "image-1600x900.jpg"
+                  }
+                }
+              }
+            },
+            {
+              "children": [],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
             }
           ],
           "direction": "ltr",
@@ -393,7 +445,7 @@
         "title": null,
         "description": null
       },
-      "updatedAt": "2026-08-24T10:17:24.680Z",
+      "updatedAt": "2026-08-24T10:18:07.895Z",
       "createdAt": "2026-08-24T10:16:24.798Z",
       "_status": "published"
     },
