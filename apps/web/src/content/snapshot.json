@@ -1,6 +1,463 @@
 {
-  "generatedAt": "2026-08-30T03:11:54.404Z",
+  "generatedAt": "2026-08-30T06:21:44.569Z",
   "posts": [
+    {
+      "id": 12,
+      "title": "观《跟三个搞AI的博士，聊聊近期AI大新闻和真实就业情况》有感",
+      "slug": "end-to-end-or-modular",
+      "excerpt": "一个视频里的三个问题：具身智能端到端还是模块化、AI时代怎么更新知识库、一句过来人的建议。梁文锋对多模态的评论，待补。",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "端到端还是模块化，以及两个老问题",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h4"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "今天刷到一个对话视频，几个人聊 AI，大部分内容我划过去了，但有三个问题停下来想了很久。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "第一个问题：具身智能，端到端还是模块化？",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "问的是：用 AI 做感知 + 传统方法做决策，还是让 AI 端到端打包一切？",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "罗克的回答我很喜欢。他说，大模型在多模态感知、复杂场景的态势综合分析上已经做得很好；但做得好是一方面，真要落地执行，还是需要一套自动化控制的框架去约束它。人工智能有擅长的领域，那就让它待在擅长的领域里，实际做起来更好落地。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "两两说自己在做世界模型的感受，也是把感知和决策分开：感知用多模态，偏统计；决策用传统，偏符号。更透明。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "这个回答对我有特别的意义。我做的全景分割、第一视角空间理解，本质上是\"感知\"这一环，后面迟早要接决策和控制——也就是说，我早晚要面对这个选择。听完我觉得，端到端和模块化不是对错之争，是分工问题：让模型干它擅长的（感知、理解、生成），让可验证的框架干它该干的（约束、执行、兜底）。这比争论\"谁更高级\"有用得多。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "第二个问题：AI 时代怎么更新知识库、怎么规划职业",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "两两还在读博：丰富信息来源，先搜集、再整理归纳；小红书这些媒体要看，跨领域的人也要交流。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "罗克在工作：个人要和平台结合，干中学，在项目里学习；保持对信息的好奇，了解了之后再结合自己的工作学。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "他们俩版本不同，但背后是同一个动作：不要站在原地等知识过期，要主动去\"触\"新信息，再落回自己正在做的事上。光看不算，看了还要整理，整理完还要用。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "第三个问题：一句建议",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "两两：有两条差不多的路，不需要纠结走哪条，选一条，坚定走下去。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "十四：读博需要有个好的身体和心态，积极一点。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "罗克：关注增量市场。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "三个人的回答完全不一样，但放一起恰好是一套：先选一条路，别内耗；再用身体和心态兜底，别崩；最后盯着增量市场，别恋战旧地图。",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "还没补的部分",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "heading",
+              "version": 1,
+              "tag": "h2"
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "视频里还有一段，deepseek 梁文锋对多模态的评论，我还没细看。等看完了，再回来补写感受。",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "type": "linebreak",
+                  "version": 1
+                },
+                {
+                  "type": "linebreak",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "视频链接",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "type": "linebreak",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "【跟三个搞AI的博士，聊聊近期AI大新闻和真实就业情况】",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "type": "linebreak",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": " ",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "type": "autolink",
+                  "children": [
+                    {
+                      "detail": 0,
+                      "format": 0,
+                      "mode": "normal",
+                      "style": "",
+                      "text": "https://www.bilibili.com/video/BV1sS8c6XEFd/?share_source=copy_web&vd_source=19956346bba96c10f44d8aeb30c5edd1",
+                      "type": "text",
+                      "version": 1
+                    }
+                  ],
+                  "direction": null,
+                  "fields": {
+                    "linkType": "custom",
+                    "url": "https://www.bilibili.com/video/BV1sS8c6XEFd/?share_source=copy_web&vd_source=19956346bba96c10f44d8aeb30c5edd1"
+                  },
+                  "format": "",
+                  "indent": 0,
+                  "version": 2
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1,
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "cover": null,
+      "category": {
+        "id": 3,
+        "name": "残响",
+        "slug": "residual",
+        "description": null,
+        "updatedAt": "2026-08-15T14:05:51.326Z",
+        "createdAt": "2026-08-15T13:59:42.886Z"
+      },
+      "tags": [],
+      "publishedAt": "2026-08-30T06:21:44.308Z",
+      "featured": false,
+      "readingMinutes": 3,
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "updatedAt": "2026-08-30T06:21:44.316Z",
+      "createdAt": "2026-08-30T06:03:49.233Z",
+      "_status": "published"
+    },
     {
       "id": 8,
       "title": "玩的时候为什么总在焦虑",
