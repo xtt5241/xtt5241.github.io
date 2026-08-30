@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T03:09:31.023Z",
+  "generatedAt": "2026-08-30T03:11:54.404Z",
   "posts": [
     {
       "id": 8,
@@ -992,13 +992,13 @@
       },
       "tags": [],
       "publishedAt": "2026-08-30T03:09:19.479Z",
-      "featured": false,
+      "featured": true,
       "readingMinutes": 6,
       "seo": {
         "title": null,
         "description": null
       },
-      "updatedAt": "2026-08-30T03:09:19.480Z",
+      "updatedAt": "2026-08-30T03:11:54.269Z",
       "createdAt": "2026-08-15T22:17:06.595Z",
       "_status": "published"
     },
