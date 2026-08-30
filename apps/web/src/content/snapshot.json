@@ -1,6 +1,231 @@
 {
-  "generatedAt": "2026-08-30T03:09:19.748Z",
+  "generatedAt": "2026-08-30T03:09:31.023Z",
   "posts": [
+    {
+      "id": 8,
+      "title": "玩的时候为什么总在焦虑",
+      "slug": "why-do-i-feel-anxious-while-resting-2",
+      "excerpt": "我把自己劈成了两个人，一个在玩，一个在旁边当监工。监工从来不休息，所以我休息时等于在打两份工。",
+      "content": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "昨天傍晚，我瘫在椅子上刷手机，刷到一个小时的时候，心里那股不对劲越来越明显。不是累，是别扭。我明明休息了，却觉得比学习还累。",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "index": 0,
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "我试过给自己讲道理：该放松就放松。没用。脑子里有个声音一直站着批改我——\"这个看完就去看论文\"\"你本来可以学那个的\"\"你在浪费时间\"。我关掉手机躺下，它还在。",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "index": 0,
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "我后来想明白了一件事：",
+                  "version": 1
+                },
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 1,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "我其实把自己劈成了两个人。一个在玩，一个在旁边站着当监工。",
+                  "version": 1
+                },
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "监工从来不休息。所以我休息的时候，是\"一个人在玩 + 一个人在监工\"，等于同时在打两份工。",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "index": 0,
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "这解释了很多东西：为什么我越休息越累。",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "index": 0,
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "人回血靠的是心无挂碍。可我从来没有真正\"下班\"过。我玩的时候惦记着没学完的东西，学的时候又觉得自己状态差。一天下来，玩没玩爽，学也没学进多少。那种\"既没放松又没收获\"的空虚，恰恰是我最怕的那种\"白过了\"。",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "index": 0,
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "再往深一层，这是个循环：我太想变好，所以玩的时候内疚；内疚让我精力被耗空；精力低了状态就差；状态差了，我又更急着变好。一步套一步，越来越紧。最近我总觉得精力在往下掉，白天也昏昏沉沉，我想这里面就有一份是这股内耗的功劳。",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "index": 0,
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "写到这里，我其实没有什么漂亮的解决办法。我只确认了一件事：我的问题可能不是\"懒\"。懒的人玩起来理直气壮，",
+                  "version": 1
+                },
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 1,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "我连玩都不安。",
+                  "version": 1
+                },
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "真正困扰我的，是我从没教过自己\"允许休息\"。",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "index": 0,
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            },
+            {
+              "children": [
+                {
+                  "type": "text",
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "这也是到现在还没想清楚的部分。先记在这里吧。",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "index": 0,
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      },
+      "cover": null,
+      "category": {
+        "id": 3,
+        "name": "残响",
+        "slug": "residual",
+        "description": null,
+        "updatedAt": "2026-08-15T14:05:51.326Z",
+        "createdAt": "2026-08-15T13:59:42.886Z"
+      },
+      "tags": [],
+      "publishedAt": "2026-08-30T03:09:30.881Z",
+      "featured": false,
+      "readingMinutes": 2,
+      "seo": {
+        "title": null,
+        "description": null
+      },
+      "updatedAt": "2026-08-30T03:09:30.881Z",
+      "createdAt": "2026-08-15T14:07:12.963Z",
+      "_status": "published"
+    },
     {
       "id": 9,
       "title": "养好自己，积累选择权",
